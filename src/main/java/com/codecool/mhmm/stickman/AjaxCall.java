@@ -61,10 +61,12 @@ public class AjaxCall extends HttpServlet {
             }
         }
 
-        //resp.getWriter().write(levelToJson(INSERT LIST HERE).toJSONString());
+        if (actionRequired.equals("char")) {
+            resp.getWriter().write(characterToJson(Zsolt).toJSONString());
+        } else {
+            resp.getWriter().write(levelToJson(levelOne.getMap()).toJSONString());
+        }
 
-        resp.getWriter().write(levelToJson(levelOne.getMap()).toJSONString());
-        resp.getWriter().write(characterToJson(Zsolt).toJSONString());
 
     }
 

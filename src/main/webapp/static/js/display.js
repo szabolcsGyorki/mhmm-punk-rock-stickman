@@ -19,6 +19,7 @@ function draw() {
 let imageButton = document.getElementById('test');
 imageButton.onclick = function () {
     requestMap('map');
+    requestCharacter();
 };
 
 let inventoryButton = document.getElementById('inventory_button');
