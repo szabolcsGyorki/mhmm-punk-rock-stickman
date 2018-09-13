@@ -3,10 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.js"></script>
-    <!--<script src="sketch.js"></script>-->
-    <title>Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/addons/p5.dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/addons/p5.sound.min.js"></script>
+    <script src="static/js/display.js" defer></script>
+    <script src="static/js/imageHandler.js" defer></script>
+    <script src="static/js/keyHandlers.js" defer></script>
+    <script src="static/js/ajax.js" defer></script>
+    <script src="static/js/characterStats.js" defer></script>
+    <script src="static/js/inventory.js" defer></script>
+
+    <title>Punk rock stickman</title>
 </head>
 <body>
-    <h1>TEST</h1>
+
+<canvas></canvas>
+
+<div id="character_stats">
+    <ul class="list-group" id="character_stats_list">
+        <!--Character stats loaded from JS, example: -->
+        <!-- <li class="list-group-item">STR: 15</li> -->
+    </ul>
+</div>
+
+<div id="inventory">
+    <div class="row">
+        <div class="col-4">
+            <div class="list-group" id="list-tab" role="tablist">
+                <!--Inventory items loaded from JS, example: -->
+                <!-- <a class="list-group-item list-group-item-action active" id="list-itemname-list" data-toggle="list" href="#list-home" role="tab" aria-controls="itemname">ITEM_NAME</a> -->
+                <button type="button" id="equip_button" class="btn btn-primary btn-lg">Equip</button>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="tab-content" id="nav-tabContent">
+                    <!--Inventory item description loaded from JS, example: -->
+                    <!-- <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-itemname-list">ITEM_DESCRIPTION</div> -->
+                </div>
+        </div>
+    </div>
+</div>
+
+<button id="test">Start</button>
+<button id="inventory_button">Inventory</button>
 </body>
 </html>
