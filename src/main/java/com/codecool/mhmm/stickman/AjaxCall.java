@@ -9,6 +9,10 @@ import com.codecool.mhmm.stickman.Map.Level;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,9 +25,15 @@ import static com.codecool.mhmm.stickman.GameObjects.GameObjectType.*;
 
 @WebServlet(urlPatterns = {"/send"})
 public class AjaxCall extends HttpServlet {
+
     private Player Zsolt;
     private Level levelOne;
     private Boolean demoLoad = false;
+
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("stickman");
+    private EntityManager em = emf.createEntityManager();
+    private EntityTransaction transaction = em.getTransaction();
+
     private void initForDemo(){
         levelOne = new Level(10,10 ,WALL, FLOOR);
         Zsolt = new Player(1,5);
@@ -34,6 +44,12 @@ public class AjaxCall extends HttpServlet {
         levelOne.placeEnemy(1,4,DRAGON,1);
         levelOne.placePlayer(Zsolt);
         demoLoad = true;
+        transaction.begin();
+        em.persist(levelOne);
+        for (GameObject object : levelOne.getMap()) {
+            em.persist(object);
+        }
+        transaction.commit();
     }
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
