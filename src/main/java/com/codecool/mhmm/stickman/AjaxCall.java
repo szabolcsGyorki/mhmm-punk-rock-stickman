@@ -43,19 +43,19 @@ public class AjaxCall extends HttpServlet {
         String actionRequired = req.getHeader("action");
         if (actionRequired.equals("up")
                 && Zsolt.getY() <= levelOne.getHEIGHT()) {
-            levelOne.move(Zsolt.getX(), Zsolt.getY()-1, Zsolt);
+            levelOne.move(Zsolt.getX(), Zsolt.getY()+1, Zsolt);
             }
         if (actionRequired.equals("down")
                 && Zsolt.getY() >= 0) {
-            levelOne.move(Zsolt.getX(), Zsolt.getY()+1, Zsolt);
+            levelOne.move(Zsolt.getX(), Zsolt.getY()-1, Zsolt);
             }
         if (actionRequired.equals("right")
                 && Zsolt.getX() <= levelOne.getWIDTH()) {
-            levelOne.move(Zsolt.getX()-1, Zsolt.getY(), Zsolt);
+            levelOne.move(Zsolt.getX()+1, Zsolt.getY(), Zsolt);
             }
         if (actionRequired.equals("left")
                 && Zsolt.getX() >= 0) {
-            levelOne.move(Zsolt.getX()+1, Zsolt.getY(), Zsolt);
+            levelOne.move(Zsolt.getX()-1, Zsolt.getY(), Zsolt);
             }
         
 
