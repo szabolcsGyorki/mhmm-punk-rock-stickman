@@ -24,3 +24,10 @@ function requestMap(action) {
         draw();
     }, action)
 }
+
+function requestCharacter() {
+    ajax_get('/send', function (data) {
+        mainCharacter = data;
+        draw();
+    }, 'char')
+}
