@@ -2,8 +2,13 @@ package com.codecool.mhmm.stickman.GameObjects.Characters.Enemy;
 
 import com.codecool.mhmm.stickman.GameObjects.GameObjectType;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Dragon extends Enemy {
+
     private int fireBreathTimer;
+
     public Dragon(int X, int Y, int level) {
         super(X, Y, 100 + level*20, 15 + level*5, level);
         armor = 20 + level*3;
@@ -11,6 +16,9 @@ public class Dragon extends Enemy {
         hitChanse = 90;
         fireBreathTimer = 2;
         this.type = GameObjectType.DRAGON;
+    }
+
+    public Dragon() {
     }
 
     @Override

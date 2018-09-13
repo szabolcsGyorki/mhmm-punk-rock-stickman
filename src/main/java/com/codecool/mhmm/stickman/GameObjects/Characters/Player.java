@@ -19,8 +19,6 @@ public class Player extends Character {
     private int strength;
     private int agility;
     private int intelligence;
-    public static int X;
-    public static int Y;
 
     @ManyToOne
     private Armor fullBody;
@@ -38,8 +36,6 @@ public class Player extends Character {
         strength = 3;
         agility = 3;
         intelligence = 3;
-        Player.X = X;
-        Player.Y = Y;
         name = "Roger the don";
     }
 
@@ -128,6 +124,10 @@ public class Player extends Character {
 
     public String getName() {
         return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
 

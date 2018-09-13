@@ -10,7 +10,9 @@ public abstract class GameObject {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
+    @Enumerated(EnumType.STRING)
     protected GameObjectType type;
+
     protected int X;
     protected int Y;
 
