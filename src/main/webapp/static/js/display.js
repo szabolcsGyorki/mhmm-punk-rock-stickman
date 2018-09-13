@@ -20,6 +20,7 @@ let imageButton = document.getElementById('test');
 imageButton.onclick = function () {
     requestMap('map');
     requestCharacter();
+    updateCharacterStats();
 };
 
 let inventoryButton = document.getElementById('inventory_button');
@@ -38,7 +39,6 @@ function drawBoard() {
             case 'LOOT': image(loot_image, object.x*50, object.y*50, height/12, width/12);
                 break;
             case 'MAIN_CHARACTER': image(main_character_image, object.x*50, object.y*50, height/12, width/12);
-                mainCharacter = object;
                 break;
             case 'SKELETON': image(skeleton_image, object.x*50, object.y*50, height/12, width/12);
                 break;
