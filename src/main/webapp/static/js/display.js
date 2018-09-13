@@ -3,31 +3,27 @@ let mainCharacter;
 
 function preload() {
     loadImages();
+
 }
 
 function setup() {
     noLoop();
-    createCanvas(490, 490);
-    background(100);
+    let cnv = createCanvas(490, 490);
+    cnv.parent('canvas');
+    requestMap('map');
+    requestCharacter();
+    updateCharacterStats();
 }
 
 function draw() {
-    drawBoard()
+    clear();
+    drawBoard();
 }
-
-//buttons
-let imageButton = document.getElementById('test');
-imageButton.onclick = function () {
-    requestMap('map');
-    requestCharacter();
-};
 
 let inventoryButton = document.getElementById('inventory_button');
 inventoryButton.onclick = function () {
     //TODO
 };
-
-
 
 function drawBoard() {
     for (let i = 0; mapObjects.length; i++) {
@@ -38,7 +34,6 @@ function drawBoard() {
             case 'LOOT': image(loot_image, object.x*50, object.y*50, height/12, width/12);
                 break;
             case 'MAIN_CHARACTER': image(main_character_image, object.x*50, object.y*50, height/12, width/12);
-                mainCharacter = object;
                 break;
             case 'SKELETON': image(skeleton_image, object.x*50, object.y*50, height/12, width/12);
                 break;
