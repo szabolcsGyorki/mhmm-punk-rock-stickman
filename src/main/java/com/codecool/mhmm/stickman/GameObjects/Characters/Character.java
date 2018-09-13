@@ -2,23 +2,22 @@ package com.codecool.mhmm.stickman.GameObjects.Characters;
 
 import com.codecool.mhmm.stickman.GameObjects.GameObject;
 import com.codecool.mhmm.stickman.GameObjects.GameObjectType;
-import com.codecool.mhmm.stickman.GameObjects.Items.Item;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import java.util.Random;
 
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Character extends GameObject {
+
     protected int level;
     int hitPoint;
     protected int damage;
     protected int dodgeChanse;
     protected int armor;
     protected int hitChanse;
-
-
-
-    private List<Item> items = new ArrayList<>();
     protected GameObjectType type;
 
     public Character(int X, int Y, int hitPoint, int damage) {
@@ -28,6 +27,9 @@ public abstract class Character extends GameObject {
         this.dodgeChanse = 0;
         this.armor = 0;
         this.hitChanse = 100;
+    }
+
+    protected Character() {
     }
 
     public void takeDamage(int damageAmount){
@@ -48,22 +50,7 @@ public abstract class Character extends GameObject {
         return hitPoint;
     }
 
-    public void addItemToInventory(Item item) {
-        items.add(item);
-    }
-
-    public Item getItemById(int id) {
-        return items.stream()
-                .filter(item -> item.getId() == id)
-                .findFirst().orElse(null);
-    }
-
     void setHitPoint(int hitPoint) {
         this.hitPoint = hitPoint;
     }
-
-    public List<Item> getItems() {
-        return items;
-    }
-
 }
