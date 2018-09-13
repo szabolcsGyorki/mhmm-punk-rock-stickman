@@ -3,26 +3,22 @@ let mainCharacter;
 
 function preload() {
     loadImages();
+
 }
 
 function setup() {
     noLoop();
     let cnv = createCanvas(490, 490);
     cnv.parent('canvas');
-    background(100);
-}
-
-function draw() {
-    drawBoard()
-}
-
-//buttons
-let imageButton = document.getElementById('test');
-imageButton.onclick = function () {
     requestMap('map');
     requestCharacter();
     updateCharacterStats();
-};
+}
+
+function draw() {
+    clear();
+    drawBoard();
+}
 
 let inventoryButton = document.getElementById('inventory_button');
 inventoryButton.onclick = function () {

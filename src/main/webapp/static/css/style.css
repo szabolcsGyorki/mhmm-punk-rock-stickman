@@ -17,13 +17,3 @@
     display: inline-block;
     left: 50%;
 }
-
-.list-group {
-    background-color: white;
-    border: 1px solid #000000;
-}
-
-.list-group-item {
-    background-color: white;
-    color: #131313;
-}

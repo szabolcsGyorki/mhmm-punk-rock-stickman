@@ -22,12 +22,14 @@ function requestMap(action) {
     ajax_get('/send', function (data) {
         mapObjects = data;
         draw();
+        requestCharacter();
+        updateCharacterStats();
     }, action)
 }
 
 function requestCharacter() {
     ajax_get('/send', function (data) {
         mainCharacter = data;
-        draw();
+        updateCharacterStats();
     }, 'char')
 }

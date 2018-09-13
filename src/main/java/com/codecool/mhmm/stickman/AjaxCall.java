@@ -41,16 +41,16 @@ public class AjaxCall extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         if (!demoLoad) { initForDemo(); }    // For demo only
         String actionRequired = req.getHeader("action");
-        if (actionRequired.equals("up")
-                && Zsolt.getY() < levelOne.getHEIGHT()) {
+        if (actionRequired.equals("down")
+                && Zsolt.getY() < levelOne.getHEIGHT() -1) {
             levelOne.move(Zsolt.getX(), Zsolt.getY()+1, Zsolt);
             }
-        if (actionRequired.equals("down")
+        if (actionRequired.equals("up")
                 && Zsolt.getY() > 0) {
             levelOne.move(Zsolt.getX(), Zsolt.getY()-1, Zsolt);
             }
         if (actionRequired.equals("right")
-                && Zsolt.getX() < levelOne.getWIDTH()) {
+                && Zsolt.getX() < levelOne.getWIDTH() -1) {
             levelOne.move(Zsolt.getX()+1, Zsolt.getY(), Zsolt);
             }
         if (actionRequired.equals("left")
