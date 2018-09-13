@@ -1,5 +1,7 @@
 package com.codecool.mhmm.stickman.GameObjects;
 
+import com.codecool.mhmm.stickman.Map.Level;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,7 +15,10 @@ public abstract class GameObject {
     @Enumerated(EnumType.STRING)
     protected GameObjectType type;
 
+    @Column(name = "coordinate_x")
     protected int X;
+
+    @Column(name = "coordinate_y")
     protected int Y;
 
     public GameObject(int X, int Y){

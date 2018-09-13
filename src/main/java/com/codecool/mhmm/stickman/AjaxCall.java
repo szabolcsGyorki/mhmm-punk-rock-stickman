@@ -64,7 +64,7 @@ public class AjaxCall extends HttpServlet {
         if (actionRequired.equals("char")) {
             resp.getWriter().write(characterToJson(Zsolt).toJSONString());
         } else {
-            resp.getWriter().write(levelToJson(levelOne.getMap()).toJSONString());
+            resp.getWriter().write(levelToJson((ArrayList<GameObject>) levelOne.getMap()).toJSONString());
         }
 
 

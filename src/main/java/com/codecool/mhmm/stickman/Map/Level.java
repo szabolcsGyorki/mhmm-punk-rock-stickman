@@ -8,10 +8,21 @@ import com.codecool.mhmm.stickman.GameObjects.GameObject;
 import com.codecool.mhmm.stickman.GameObjects.GameObjectType;
 import com.codecool.mhmm.stickman.GameObjects.Wall;
 
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
+@Entity
 public class Level {
-    private ArrayList<GameObject> map = new ArrayList<>();
+
+    @Id
+    @GeneratedValue
+    private long id;
+
+    @ManyToMany
+    @JoinTable(name = "level_content")
+    private List<GameObject> map = new ArrayList<>();
+
     private int WIDTH;
     private int HEIGHT;
     private GameObjectType wall;
@@ -25,7 +36,10 @@ public class Level {
         generateBase();
     }
 
-    public ArrayList<GameObject> getMap() {
+    public Level() {
+    }
+
+    public List<GameObject> getMap() {
         return map;
     }
 

@@ -6,6 +6,7 @@ import com.codecool.mhmm.stickman.GameObjects.Items.Item;
 import com.codecool.mhmm.stickman.GameObjects.Items.Weapon;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public class Player extends Character {
     private Weapon weapon;
 
     @ManyToMany
+    @JoinTable(name = "player_inventory")
     private List<Item> items = new ArrayList<>();
 
 
