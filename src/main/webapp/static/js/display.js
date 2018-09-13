@@ -7,7 +7,8 @@ function preload() {
 
 function setup() {
     noLoop();
-    createCanvas(490, 490);
+    let cnv = createCanvas(490, 490);
+    cnv.parent('canvas');
     background(100);
 }
 
@@ -27,8 +28,6 @@ let inventoryButton = document.getElementById('inventory_button');
 inventoryButton.onclick = function () {
     //TODO
 };
-
-
 
 function drawBoard() {
     for (let i = 0; mapObjects.length; i++) {

@@ -22,5 +22,6 @@ document.onkeydown = function(e) {
         if (handled) {
             e.preventDefault();
         }
+        redraw();
     }
 };
