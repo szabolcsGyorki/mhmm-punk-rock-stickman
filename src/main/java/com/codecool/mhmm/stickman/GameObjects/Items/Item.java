@@ -4,7 +4,6 @@ import com.codecool.mhmm.stickman.GameObjects.Characters.*;
 import com.codecool.mhmm.stickman.GameObjects.GameObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;

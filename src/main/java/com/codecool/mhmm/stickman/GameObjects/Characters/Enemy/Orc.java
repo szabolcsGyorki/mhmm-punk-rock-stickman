@@ -1,7 +1,6 @@
 package com.codecool.mhmm.stickman.GameObjects.Characters.Enemy;
 
 import com.codecool.mhmm.stickman.GameObjects.GameObjectType;
-
 import javax.persistence.Entity;
 
 @Entity

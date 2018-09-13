@@ -1,7 +1,5 @@
 package com.codecool.mhmm.stickman.GameObjects;
 
-import com.codecool.mhmm.stickman.Map.Level;
-
 import javax.persistence.*;
 
 @Entity

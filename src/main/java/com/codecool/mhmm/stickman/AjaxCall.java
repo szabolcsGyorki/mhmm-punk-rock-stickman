@@ -8,19 +8,16 @@ import com.codecool.mhmm.stickman.GameObjects.Items.Weapon;
 import com.codecool.mhmm.stickman.Map.Level;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-
+import java.util.List;
 import static com.codecool.mhmm.stickman.GameObjects.GameObjectType.*;
 
 @WebServlet(urlPatterns = {"/send"})
@@ -72,14 +69,11 @@ public class AjaxCall extends HttpServlet {
             levelOne.move(Zsolt.getX()-1, Zsolt.getY(), Zsolt);
             }
 
-
         if (actionRequired.equals("char")) {
             resp.getWriter().write(characterToJson(Zsolt).toJSONString());
         } else {
-            resp.getWriter().write(levelToJson((ArrayList<GameObject>) levelOne.getMap()).toJSONString());
+            resp.getWriter().write(levelToJson(levelOne.getMap()).toJSONString());
         }
-
-
     }
 
     /**
@@ -87,7 +81,7 @@ public class AjaxCall extends HttpServlet {
      * @return JSONArray with JSONObjects
      */
     @SuppressWarnings("unchecked")
-    private JSONArray levelToJson (ArrayList<GameObject> gameObjects) {
+    private JSONArray levelToJson (List<GameObject> gameObjects) {
         JSONArray gameObjectsJSONArray = new JSONArray();
 
         for (GameObject gameObject: gameObjects) {
@@ -124,9 +118,7 @@ public class AjaxCall extends HttpServlet {
         character.put("str", player.getStrength());
         character.put("agi", player.getAgility());
         character.put("int", player.getIntelligence());
-
         character.put("inventory", characterInventory);
-
         return character;
     }
 }

@@ -6,7 +6,6 @@ import com.codecool.mhmm.stickman.GameObjects.Characters.Enemy.*;
 import com.codecool.mhmm.stickman.GameObjects.GameObject;
 import com.codecool.mhmm.stickman.GameObjects.GameObjectType;
 import com.codecool.mhmm.stickman.GameObjects.Wall;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -120,7 +119,6 @@ public class Level {
                 }
             }
         }
-
     }
 
     private void generateBase(){

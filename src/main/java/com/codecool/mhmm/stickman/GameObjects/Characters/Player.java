@@ -4,7 +4,6 @@ import com.codecool.mhmm.stickman.GameObjects.GameObjectType;
 import com.codecool.mhmm.stickman.GameObjects.Items.Armor;
 import com.codecool.mhmm.stickman.GameObjects.Items.Item;
 import com.codecool.mhmm.stickman.GameObjects.Items.Weapon;
-
 import javax.persistence.Entity;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -30,7 +29,6 @@ public class Player extends Character {
     @ManyToMany
     @JoinTable(name = "player_inventory")
     private List<Item> items = new ArrayList<>();
-
 
     public Player(int X, int Y) {
         super(X, Y, 30, 0);
@@ -58,7 +56,7 @@ public class Player extends Character {
 
     public int attack(){
         Random hit = new Random();
-        if (hit.nextInt() < this.hitChanse) {
+        if (hit.nextInt() < this.hitChance) {
             if (this.weapon == null)
                 return strength;
             return this.weapon.dealDamage() + strength;

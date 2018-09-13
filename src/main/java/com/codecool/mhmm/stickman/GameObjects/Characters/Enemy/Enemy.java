@@ -2,7 +2,6 @@ package com.codecool.mhmm.stickman.GameObjects.Characters.Enemy;
 
 import com.codecool.mhmm.stickman.GameObjects.Characters.Character;
 import com.codecool.mhmm.stickman.GameObjects.Items.Loot;
-
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
