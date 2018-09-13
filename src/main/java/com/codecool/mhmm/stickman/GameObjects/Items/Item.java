@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.Transient;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -14,6 +15,8 @@ public abstract class Item extends GameObject {
 
     private int value;
     private String name;
+
+    @Transient
     private static final Logger logger = LoggerFactory.getLogger(Item.class);
 
     Item(String name, int value) {
