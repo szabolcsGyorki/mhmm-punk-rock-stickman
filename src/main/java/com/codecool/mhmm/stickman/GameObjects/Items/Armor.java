@@ -1,5 +1,8 @@
 package com.codecool.mhmm.stickman.GameObjects.Items;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Armor extends Item {
 
     private int healthIncrease;
@@ -7,6 +10,9 @@ public class Armor extends Item {
     public Armor(String name, int value, int healthIncrease) {
         super(name, value);
         this.healthIncrease = healthIncrease;
+    }
+
+    public Armor() {
     }
 
     public int getHealthIncrease() {
