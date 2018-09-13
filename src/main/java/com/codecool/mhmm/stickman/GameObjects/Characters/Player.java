@@ -15,6 +15,7 @@ import java.util.Random;
 @Entity
 public class Player extends Character {
 
+    private String name;
     private int strength;
     private int agility;
     private int intelligence;
@@ -39,6 +40,7 @@ public class Player extends Character {
         intelligence = 3;
         Player.X = X;
         Player.Y = Y;
+        name = "Roger the don";
     }
 
     public Player() {
@@ -124,5 +126,8 @@ public class Player extends Character {
         return items;
     }
 
+    public String getName() {
+        return this.name;
+    }
 }
 

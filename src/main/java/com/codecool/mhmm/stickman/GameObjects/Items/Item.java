@@ -14,8 +14,6 @@ import javax.persistence.InheritanceType;
 public abstract class Item extends GameObject {
 
     private int value;
-    private int id;
-    private static int nextId;
     private String name;
     private static final Logger logger = LoggerFactory.getLogger(Item.class);
 
@@ -23,7 +21,6 @@ public abstract class Item extends GameObject {
         super(0,0);
         this.value = value;
         this.name = name;
-        this.id = nextId++;
     }
 
     protected Item() {
