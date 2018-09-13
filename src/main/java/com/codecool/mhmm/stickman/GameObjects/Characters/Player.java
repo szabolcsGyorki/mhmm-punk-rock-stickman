@@ -2,18 +2,35 @@ package com.codecool.mhmm.stickman.GameObjects.Characters;
 
 import com.codecool.mhmm.stickman.GameObjects.GameObjectType;
 import com.codecool.mhmm.stickman.GameObjects.Items.Armor;
+import com.codecool.mhmm.stickman.GameObjects.Items.Item;
 import com.codecool.mhmm.stickman.GameObjects.Items.Weapon;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
+@Entity
 public class Player extends Character {
+
+    private String name;
     private int strength;
     private int agility;
     private int intelligence;
-    private Armor fullBody;
-    private Weapon weapon;
     public static int X;
     public static int Y;
+
+    @ManyToOne
+    private Armor fullBody;
+
+    @ManyToOne
+    private Weapon weapon;
+
+    @ManyToMany
+    private List<Item> items = new ArrayList<>();
+
 
     public Player(int X, int Y) {
         super(X, Y, 30, 0);
@@ -23,6 +40,10 @@ public class Player extends Character {
         intelligence = 3;
         Player.X = X;
         Player.Y = Y;
+        name = "Roger the don";
+    }
+
+    public Player() {
     }
 
     public void setFullBody(Armor fullBody) {
@@ -91,5 +112,22 @@ public class Player extends Character {
         return weapon;
     }
 
+    public void addItemToInventory(Item item) {
+        items.add(item);
+    }
+
+    public Item getItemById(int id) {
+        return items.stream()
+                .filter(item -> item.getId() == id)
+                .findFirst().orElse(null);
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public String getName() {
+        return this.name;
+    }
 }
 
