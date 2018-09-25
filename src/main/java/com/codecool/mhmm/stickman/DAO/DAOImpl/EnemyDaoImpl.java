@@ -4,7 +4,6 @@ import com.codecool.mhmm.stickman.DAO.EnemyDao;
 import com.codecool.mhmm.stickman.GameObjects.Characters.Enemy.Enemy;
 import com.codecool.mhmm.stickman.GameObjects.GameObjectType;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.ParameterExpression;
@@ -13,8 +12,8 @@ import java.util.List;
 
 public class EnemyDaoImpl extends BaseDaoImpl implements EnemyDao {
 
-    public EnemyDaoImpl(EntityManagerFactory emf, EntityManager em) {
-        super(emf, em);
+    public EnemyDaoImpl(EntityManager em) {
+        super(em);
     }
 
     @Override
@@ -35,7 +34,7 @@ public class EnemyDaoImpl extends BaseDaoImpl implements EnemyDao {
     }
 
     @Override
-    public void updateEnemy(Enemy enemy, long id) {
+    public void updateEnemy(Enemy enemy) {
 
     }
 
@@ -46,6 +45,8 @@ public class EnemyDaoImpl extends BaseDaoImpl implements EnemyDao {
 
     @Override
     public void saveNewEnemy(Enemy enemy) {
-
+        transaction.begin();
+        em.persist(enemy);
+        transaction.commit();
     }
 }

@@ -1,21 +1,18 @@
 package com.codecool.mhmm.stickman.DAO.DAOImpl;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.criteria.CriteriaBuilder;
 
 class BaseDaoImpl {
 
-    private EntityManagerFactory emf;
     EntityManager em;
-    private EntityTransaction et;
+    EntityTransaction transaction;
     CriteriaBuilder cb;
 
-    BaseDaoImpl(EntityManagerFactory emf, EntityManager em) {
-        this.emf = emf;
+    BaseDaoImpl(EntityManager em) {
         this.em = em;
-        this.et = em.getTransaction();
+        this.transaction = em.getTransaction();
         this.cb = em.getCriteriaBuilder();
     }
 }

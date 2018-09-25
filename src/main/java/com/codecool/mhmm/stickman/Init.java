@@ -4,16 +4,12 @@ import com.codecool.mhmm.stickman.GameObjects.Characters.Enemy.*;
 import com.codecool.mhmm.stickman.GameObjects.Characters.Player;
 import com.codecool.mhmm.stickman.GameObjects.Items.Armor;
 import com.codecool.mhmm.stickman.GameObjects.Items.Weapon;
-
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
-
 
 public class Init {
 
-    public static void init(EntityManagerFactory emf, EntityManager em) {
+    public static void init(EntityManager em) {
 
         Player player = new Player(10, 20);
         Player player1 = new Player(5, 10);
