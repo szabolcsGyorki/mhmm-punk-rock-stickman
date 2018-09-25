@@ -36,6 +36,7 @@ public class AjaxCall extends HttpServlet {
         levelOne.placeEnemy(1,4,DRAGON,1);
         levelOne.placePlayer(Zsolt);
         demoLoad = true;
+        Init.init();
     }
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
