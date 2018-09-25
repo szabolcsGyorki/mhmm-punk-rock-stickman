@@ -97,9 +97,11 @@ public class AjaxCall extends HttpServlet {
 
             jsonItem.put("name", item.getName());
             if (item instanceof Weapon) {
+                jsonItem.put("type", "weapon");
                 jsonItem.put("maxDamage", ((Weapon) item).getMaxDamage());
                 jsonItem.put("minDamage", ((Weapon) item).getMinDamage());
             } else {
+                jsonItem.put("type", "armor");
                 jsonItem.put("healthIncrease", ((Armor) item).getHealthIncrease());
             }
             characterInventory.add(jsonItem);
