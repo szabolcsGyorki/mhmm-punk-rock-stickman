@@ -3,7 +3,6 @@ package com.codecool.mhmm.stickman.DAO.DAOImpl;
 import com.codecool.mhmm.stickman.DAO.EnemyDao;
 import com.codecool.mhmm.stickman.GameObjects.Characters.Enemy.Enemy;
 import com.codecool.mhmm.stickman.GameObjects.GameObjectType;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
@@ -16,6 +15,12 @@ public class EnemyDaoImpl extends BaseDaoImpl implements EnemyDao {
 
     public EnemyDaoImpl(EntityManagerFactory emf, EntityManager em) {
         super(emf, em);
+    }
+
+    @Override
+    public List<Enemy> getAllEnemy() {
+        TypedQuery<Enemy> query = em.createNamedQuery("Enemy.getAll", Enemy.class);
+        return query.getResultList();
     }
 
     @Override

@@ -3,7 +3,11 @@ package com.codecool.mhmm.stickman.DAO;
 import com.codecool.mhmm.stickman.GameObjects.Characters.Enemy.Enemy;
 import com.codecool.mhmm.stickman.GameObjects.GameObjectType;
 
+import java.util.List;
+
 public interface EnemyDao {
+
+    List<Enemy> getAllEnemy();
 
     /**
      * get every field of enemy
