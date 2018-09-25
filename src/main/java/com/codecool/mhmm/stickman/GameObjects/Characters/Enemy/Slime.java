@@ -9,7 +9,7 @@ public class Slime extends com.codecool.mhmm.stickman.GameObjects.Characters.Ene
 
     public Slime(int X, int Y, int level) {
         super(X,Y,12 * level/2,level,level);
-        this.hitChanse = 80;
+        this.hitChance = 80;
         this.type = GameObjectType.SLIME;
     }
 
