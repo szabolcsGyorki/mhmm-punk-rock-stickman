@@ -7,7 +7,6 @@ import javax.persistence.Id;
 @Entity
 public class TestHibernate {
 
-
     @Id
     @GeneratedValue
     private long id;
