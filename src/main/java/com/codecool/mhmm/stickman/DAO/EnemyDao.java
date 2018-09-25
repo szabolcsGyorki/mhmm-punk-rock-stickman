@@ -17,7 +17,7 @@ public interface EnemyDao {
     /**
      * update specific enemy with this id
      */
-    void updateEnemy(Enemy enemy);
+    <T> void updateEnemy(Enemy enemy, String field, T value);
 
     /**
      * update every enemy in this type

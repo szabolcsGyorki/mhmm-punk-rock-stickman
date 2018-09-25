@@ -49,7 +49,7 @@ public abstract class Character extends GameObject {
         return hitPoint;
     }
 
-    void setHitPoint(int hitPoint) {
+    public void setHitPoint(int hitPoint) {
         this.hitPoint = hitPoint;
     }
 }

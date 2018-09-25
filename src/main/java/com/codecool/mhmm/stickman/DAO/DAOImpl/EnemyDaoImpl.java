@@ -4,8 +4,10 @@ import com.codecool.mhmm.stickman.DAO.EnemyDao;
 import com.codecool.mhmm.stickman.GameObjects.Characters.Enemy.Enemy;
 import com.codecool.mhmm.stickman.GameObjects.GameObjectType;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 import java.util.List;
@@ -34,8 +36,15 @@ public class EnemyDaoImpl extends BaseDaoImpl implements EnemyDao {
     }
 
     @Override
-    public void updateEnemy(Enemy enemy) {
-
+    public <T> void updateEnemy(Enemy enemy, String field, T value) {
+        transaction.begin();
+        CriteriaUpdate<Enemy> update = cb.createCriteriaUpdate(Enemy.class);
+        Root<Enemy> enemyRoot = update.from(Enemy.class);
+        update.set(field, value)
+                .where(cb.equal(enemyRoot.get("id"), enemy.getId()));
+        Query query = em.createQuery(update);
+        query.executeUpdate();
+        transaction.commit();
     }
 
     @Override
