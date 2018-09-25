@@ -9,9 +9,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class Main {
 
-    public static void main(String[] args) {
+public class Init {
+
+    public static void init() {
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("stickman");
         EntityManager em = emf.createEntityManager();
@@ -60,7 +61,5 @@ public class Main {
         System.out.println("Hit points: " + foundPlayer.getHitPoint());
         System.out.println("Damage: " + foundPlayer.getDamage());
 
-        em.close();
-        emf.close();
     }
 }

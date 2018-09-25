@@ -12,7 +12,7 @@ public class Armor extends Item {
         this.healthIncrease = healthIncrease;
     }
 
-    public Armor() {
+    protected Armor() {
     }
 
     public int getHealthIncrease() {
