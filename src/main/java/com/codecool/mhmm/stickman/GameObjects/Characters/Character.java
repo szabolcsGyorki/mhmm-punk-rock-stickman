@@ -2,7 +2,6 @@ package com.codecool.mhmm.stickman.GameObjects.Characters;
 
 import com.codecool.mhmm.stickman.GameObjects.GameObject;
 import com.codecool.mhmm.stickman.GameObjects.GameObjectType;
-
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -15,18 +14,18 @@ public abstract class Character extends GameObject {
     protected int level;
     int hitPoint;
     protected int damage;
-    protected int dodgeChanse;
+    protected int dodgeChance;
     protected int armor;
-    protected int hitChanse;
+    protected int hitChance;
     protected GameObjectType type;
 
     public Character(int X, int Y, int hitPoint, int damage) {
         super(X, Y);
         this.hitPoint = hitPoint;
         this.damage = damage;
-        this.dodgeChanse = 0;
+        this.dodgeChance = 0;
         this.armor = 0;
-        this.hitChanse = 100;
+        this.hitChance = 100;
     }
 
     protected Character() {
@@ -34,7 +33,7 @@ public abstract class Character extends GameObject {
 
     public void takeDamage(int damageAmount){
         Random dodge = new Random();
-        if (dodge.nextInt(100)>this.dodgeChanse)
+        if (dodge.nextInt(100)>this.dodgeChance)
             this.hitPoint -= damageAmount;
     }
 

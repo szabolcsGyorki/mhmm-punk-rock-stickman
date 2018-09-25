@@ -5,7 +5,7 @@
 
     <Call name="setAttribute">
         <Arg>org.eclipse.jetty.server.webapp.WebInfIncludeJarPattern</Arg>
-        <Arg>.*\.jar$|.*/classes/.*</Arg>
+        <Arg>.*/java/.*</Arg>
     </Call>
 
 </Configure>

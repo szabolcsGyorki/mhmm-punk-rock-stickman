@@ -3,29 +3,41 @@ package com.codecool.mhmm.stickman.Map;
 import com.codecool.mhmm.stickman.GameObjects.Characters.*;
 import com.codecool.mhmm.stickman.GameObjects.Characters.Character;
 import com.codecool.mhmm.stickman.GameObjects.Characters.Enemy.*;
-import com.codecool.mhmm.stickman.GameObjects.Floor;
 import com.codecool.mhmm.stickman.GameObjects.GameObject;
 import com.codecool.mhmm.stickman.GameObjects.GameObjectType;
 import com.codecool.mhmm.stickman.GameObjects.Wall;
-
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
+@Entity
 public class Level {
-    private ArrayList<GameObject> map = new ArrayList<>();
+
+    @Id
+    @GeneratedValue
+    private long id;
+
+    @ManyToMany
+    @JoinTable(name = "level_content")
+    private List<GameObject> map = new ArrayList<>();
+
     private int WIDTH;
     private int HEIGHT;
-    private GameObjectType wall;
-    private GameObjectType floor;
+    private GameObjectType wallImage;
+    private GameObjectType floorImage;
 
     public Level(int width, int height, GameObjectType wall, GameObjectType floor) {
         this.WIDTH=width;
         this.HEIGHT=height;
-        this.wall = wall;
-        this.floor = floor;
+        this.wallImage = wall;
+        this.floorImage = floor;
         generateBase();
     }
 
-    public ArrayList<GameObject> getMap() {
+    public Level() {
+    }
+
+    public List<GameObject> getMap() {
         return map;
     }
 
@@ -37,17 +49,18 @@ public class Level {
         return WIDTH;
     }
 
-    public GameObjectType getFloor() {
-        return floor;
+    public GameObjectType getFloorImage() {
+        return floorImage;
     }
 
     public void placeWall(int X,int Y){
-        map.add(new Wall(X,Y,this.wall));
+        map.add(new Wall(X,Y,this.wallImage));
     }
 
     public void placePlayer(Player player){
         map.add(player);
     }
+
     public void placeEnemy(int X,int Y, GameObjectType type, int level) {
         switch (type) {
             case SLIME:
@@ -106,17 +119,16 @@ public class Level {
                 }
             }
         }
-
     }
 
     private void generateBase(){
-        for(int i = 0; i< WIDTH-1; i++){
-            map.add(new Wall(i,0,this.wall));
-            map.add(new Wall(i,HEIGHT-1,this.wall));
+        for(int i = 0; i< WIDTH; i++){
+            map.add(new Wall(i,0,this.wallImage));
+            map.add(new Wall(i,HEIGHT-1,this.wallImage));
         }
-        for(int i = 1; i< HEIGHT-2; i++){
-            map.add(new Wall(0,i,this.wall));
-            map.add(new Wall(WIDTH-1,i,this.wall));
+        for(int i = 1; i< HEIGHT-1; i++){
+            map.add(new Wall(0,i,this.wallImage));
+            map.add(new Wall(WIDTH-1,i,this.wallImage));
         }
     }
 }

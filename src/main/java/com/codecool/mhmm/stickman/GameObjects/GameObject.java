@@ -10,8 +10,13 @@ public abstract class GameObject {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
+    @Enumerated(EnumType.STRING)
     protected GameObjectType type;
+
+    @Column(name = "coordinate_x")
     protected int X;
+
+    @Column(name = "coordinate_y")
     protected int Y;
 
     public GameObject(int X, int Y){
