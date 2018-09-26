@@ -3,7 +3,7 @@ function ajax_get(url, callback, action) {
     xmlhttp.onreadystatechange = function() {
         let data;
         if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-            console.log('responseText:' + xmlhttp.responseText);
+            //console.log('responseText:' + xmlhttp.responseText);
             try {
                 data = JSON.parse(xmlhttp.responseText);
             } catch(err) {
@@ -14,16 +14,18 @@ function ajax_get(url, callback, action) {
         }
     };
     xmlhttp.open("GET", url, true);
-    xmlhttp.setRequestHeader('action', action);
+    xmlhttp.setRequestHeader("action", action);
     xmlhttp.send();
 }
 
 function requestMap(action) {
     ajax_get('/send', function (data) {
-        mapObjects = data;
+        mapObjects = data[0];
+        mainCharacter = data[1][0];
         draw();
-        requestCharacter();
         updateCharacterStats();
+        updateInventory();
+
     }, action)
 }
 
@@ -31,5 +33,15 @@ function requestCharacter() {
     ajax_get('/send', function (data) {
         mainCharacter = data;
         updateCharacterStats();
-    }, 'char')
+    },"action", "char");
 }
+
+function requestEquip(item_name) {
+    ajax_get('/send', function (data) {
+        mainCharacter = data;
+        updateCharacterStats();
+    },"equip", item_name)
+}
+
+
+

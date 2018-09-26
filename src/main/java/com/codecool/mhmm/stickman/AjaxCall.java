@@ -40,6 +40,8 @@ public class AjaxCall extends HttpServlet {
         levelOne.placeEnemy(1,3,ORC,1);
         levelOne.placeEnemy(1,4,DRAGON,1);
         levelOne.placePlayer(Zsolt);
+        Zsolt.addItemToInventory(new Weapon("Super Sword", 1, 50, 25));
+        Zsolt.addItemToInventory(new Armor("Super Armor", 1, 50));
         demoLoad = true;
         transaction.begin();
         em.persist(levelOne);
@@ -51,7 +53,9 @@ public class AjaxCall extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         if (!demoLoad) { initForDemo(); }    // For demo only
+
         String actionRequired = req.getHeader("action");
+
         if (actionRequired.equals("down")
                 && Zsolt.getY() < levelOne.getHEIGHT() -1) {
             levelOne.move(Zsolt.getX(), Zsolt.getY()+1, Zsolt);
@@ -69,11 +73,14 @@ public class AjaxCall extends HttpServlet {
             levelOne.move(Zsolt.getX()-1, Zsolt.getY(), Zsolt);
             }
 
-        if (actionRequired.equals("char")) {
-            resp.getWriter().write(characterToJson(Zsolt).toJSONString());
-        } else {
-            resp.getWriter().write(levelToJson(levelOne.getMap()).toJSONString());
-        }
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.add(levelToJson(levelOne.getMap()));
+
+        JSONArray charArray = new JSONArray();
+        charArray.add(characterToJson(Zsolt));
+        jsonArray.add(charArray);
+
+        resp.getWriter().write(jsonArray.toJSONString());
     }
 
     /**

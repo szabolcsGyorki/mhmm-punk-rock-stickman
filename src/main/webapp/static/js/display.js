@@ -7,12 +7,8 @@ function preload() {
 }
 
 function setup() {
-    noLoop();
     let cnv = createCanvas(490, 490);
     cnv.parent('canvas');
-    requestMap('map');
-    requestCharacter();
-    updateCharacterStats();
 }
 
 function draw() {
@@ -20,13 +16,8 @@ function draw() {
     drawBoard();
 }
 
-let inventoryButton = document.getElementById('inventory_button');
-inventoryButton.onclick = function () {
-    //TODO
-};
-
 function drawBoard() {
-    for (let i = 0; mapObjects.length; i++) {
+    for (let i = 0; i < mapObjects.length; i++) {
         let object = mapObjects[i];
         switch (object.name) {
             case 'DRAGON': image(dragon_image, object.x*50, object.y*50, height/12, width/12);
