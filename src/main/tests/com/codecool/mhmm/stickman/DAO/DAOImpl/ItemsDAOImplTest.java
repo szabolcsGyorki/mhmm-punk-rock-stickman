@@ -2,11 +2,13 @@ package com.codecool.mhmm.stickman.DAO.DAOImpl;
 
 import com.codecool.mhmm.stickman.GameObjects.Items.Armor;
 import com.codecool.mhmm.stickman.GameObjects.Items.Item;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,6 +24,11 @@ class ItemsDAOImplTest {
     @BeforeAll
     static void init() {
         armor1 = new Armor("Sacred Armor", 800, 40);
+
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        em.persist(armor1);
+        transaction.commit();
     }
 
     @Test
@@ -36,5 +43,9 @@ class ItemsDAOImplTest {
         assertEquals(armor1, item);
     }
 
-
+    @AfterAll
+    static void close() {
+        em.close();
+        emf.close();
+    }
 }

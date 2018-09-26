@@ -17,7 +17,7 @@ public class ItemsDAOImpl extends BaseDaoImpl implements ItemsDAO {
 
     @Override
     public Item getItem(long itemID) {
-        return new Armor("Armor", 3, 20);
+        return em.find(Item.class, itemID);
     }
 
     @Override
