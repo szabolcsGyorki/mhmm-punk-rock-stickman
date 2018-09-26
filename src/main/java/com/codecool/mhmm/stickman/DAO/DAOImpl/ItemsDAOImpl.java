@@ -1,8 +1,7 @@
 package com.codecool.mhmm.stickman.DAO.DAOImpl;
 
 import com.codecool.mhmm.stickman.DAO.ItemsDAO;
-import com.codecool.mhmm.stickman.GameObjects.Characters.Enemy.Enemy;
-import com.codecool.mhmm.stickman.GameObjects.Items.Armor;
+import com.codecool.mhmm.stickman.GameObjects.GameObjectType;
 import com.codecool.mhmm.stickman.GameObjects.Items.Item;
 
 import javax.persistence.EntityManager;
@@ -36,7 +35,9 @@ public class ItemsDAOImpl extends BaseDaoImpl implements ItemsDAO {
 
     @Override
     public void saveNewItem(Item item) {
-
+        transaction.begin();
+        em.persist(item);
+        transaction.commit();
     }
 
     @Override
@@ -52,6 +53,17 @@ public class ItemsDAOImpl extends BaseDaoImpl implements ItemsDAO {
     @Override
     public List<Item> getAllItems() {
         TypedQuery<Item> query = em.createNamedQuery("Item.getAll", Item.class);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Item> getAllItems(GameObjectType type) {
+        CriteriaQuery<Item> criteriaQuery = cb.createQuery(Item.class);
+        Root<Item> itemRoot = criteriaQuery.from(Item.class);
+        ParameterExpression p = cb.parameter(GameObjectType.class);
+        criteriaQuery.select(itemRoot).where(cb.equal(itemRoot.get("type"), p));
+        TypedQuery<Item> query = em.createQuery(criteriaQuery);
+        query.setParameter(p, type);
         return query.getResultList();
     }
 }

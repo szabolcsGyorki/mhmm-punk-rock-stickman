@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@NamedQuery(name="Item.getAll", query="SELECT e FROM Item e")
+@NamedQuery(name="Item.getAll", query="SELECT i FROM Item i")
 public abstract class Item extends GameObject {
 
     private int value;
