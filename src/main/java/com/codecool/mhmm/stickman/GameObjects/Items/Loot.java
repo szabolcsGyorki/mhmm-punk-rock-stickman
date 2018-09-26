@@ -40,7 +40,8 @@ public class Loot extends Item {
     private void fillUpLoot(int numberOfLoots) {
         for (int i = 0; i < numberOfLoots; i++) {
             Random random = new Random();
-            GameObject item = itemsList.getItem(random.nextInt(itemsList.getAllItems().size));
+            int itemNumber = random.nextInt(itemsList.getAllItems().size);
+            GameObject item = itemsList.getItem(itemNumber);
             if (item instanceof Item) {
                 loot.add((Item) item);
             }
