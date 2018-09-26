@@ -1,9 +1,11 @@
 package com.codecool.mhmm.stickman.DAO.DAOImpl;
 
 import com.codecool.mhmm.stickman.DAO.LevelDAO;
+import com.codecool.mhmm.stickman.GameObjects.GameObject;
 import com.codecool.mhmm.stickman.Map.Level;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 
 public class LevelDAOImpl extends BaseDaoImpl implements LevelDAO {
 
@@ -17,7 +19,7 @@ public class LevelDAOImpl extends BaseDaoImpl implements LevelDAO {
     }
 
     @Override
-    public Level getLevelObjects(long id) {
+    public List<GameObject> getLevelObjects(long id) {
         return null;
     }
 

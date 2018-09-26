@@ -61,6 +61,10 @@ public class Level {
         map.add(player);
     }
 
+    public void addContent(GameObject content) {
+        map.add(content);
+    }
+
     public void placeEnemy(int X,int Y, GameObjectType type, int level) {
         switch (type) {
             case SLIME:

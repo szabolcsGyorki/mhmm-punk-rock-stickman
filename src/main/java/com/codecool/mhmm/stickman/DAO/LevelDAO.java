@@ -1,6 +1,9 @@
 package com.codecool.mhmm.stickman.DAO;
 
+import com.codecool.mhmm.stickman.GameObjects.GameObject;
 import com.codecool.mhmm.stickman.Map.Level;
+
+import java.util.List;
 
 public interface LevelDAO {
 
@@ -16,7 +19,7 @@ public interface LevelDAO {
      * get ONLY objects in level
      * @param id
      */
-    Level getLevelObjects(long id);
+    List<GameObject> getLevelObjects(long id);
 
     /**
      * check name duplication!
