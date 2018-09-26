@@ -31,29 +31,29 @@ public class AjaxCall extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-                String actionRequired = req.getHeader("action");
+        String actionRequired = req.getHeader("action");
         Game game = Game.getInstance();
         if (demoload) {
             game.initForDemo();
-            System.out.println("demo loaded");
+            demoload = false;
         }
 
         HttpSession session = req.getSession(true);
         Player player = game.getPlayer(session);
-        System.out.println("player IN");
         Level level = game.getLevel(session);
-        System.out.println("level IN");
         game.move(player,level,actionRequired);
-        System.out.println("Move done");
 
         game.setPlayer(session, player);
         game.setLevel(session, level);
 
-        if (actionRequired.equals("char")) {
-            resp.getWriter().write(characterToJson(player).toJSONString());
-        } else {
-            resp.getWriter().write(levelToJson(level.getMap()).toJSONString());
-        }
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.add(levelToJson(level.getMap()));
+
+        JSONArray charArray = new JSONArray();
+        charArray.add(characterToJson(player));
+        jsonArray.add(charArray);
+
+        resp.getWriter().write(jsonArray.toJSONString());
     }
 
     /**
@@ -102,4 +102,3 @@ public class AjaxCall extends HttpServlet {
         return character;
     }
 }
-
