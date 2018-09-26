@@ -16,63 +16,43 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 import static com.codecool.mhmm.stickman.GameObjects.GameObjectType.*;
 
 @WebServlet(urlPatterns = {"/send"})
 public class AjaxCall extends HttpServlet {
-
-    private Player Zsolt;
-    private Level levelOne;
-    private Boolean demoLoad = false;
+    private boolean demoload = true;
 
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("stickman");
     private EntityManager em = emf.createEntityManager();
     private EntityTransaction transaction = em.getTransaction();
 
-    private void initForDemo(){
-        levelOne = new Level(10,10 ,WALL, FLOOR);
-        Zsolt = new Player(1,5);
-        levelOne.placeWall(2,2);
-        levelOne.placeEnemy(1,1,SLIME,1);
-        levelOne.placeEnemy(1,2,SKELETON,1);
-        levelOne.placeEnemy(1,3,ORC,1);
-        levelOne.placeEnemy(1,4,DRAGON,1);
-        levelOne.placePlayer(Zsolt);
-        demoLoad = true;
-        transaction.begin();
-        em.persist(levelOne);
-        for (GameObject object : levelOne.getMap()) {
-            em.persist(object);
-        }
-        transaction.commit();
-    }
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        if (!demoLoad) { initForDemo(); }    // For demo only
-        String actionRequired = req.getHeader("action");
-        if (actionRequired.equals("down")
-                && Zsolt.getY() < levelOne.getHEIGHT() -1) {
-            levelOne.move(Zsolt.getX(), Zsolt.getY()+1, Zsolt);
-            }
-        if (actionRequired.equals("up")
-                && Zsolt.getY() > 0) {
-            levelOne.move(Zsolt.getX(), Zsolt.getY()-1, Zsolt);
-            }
-        if (actionRequired.equals("right")
-                && Zsolt.getX() < levelOne.getWIDTH() -1) {
-            levelOne.move(Zsolt.getX()+1, Zsolt.getY(), Zsolt);
-            }
-        if (actionRequired.equals("left")
-                && Zsolt.getX() > 0) {
-            levelOne.move(Zsolt.getX()-1, Zsolt.getY(), Zsolt);
-            }
+                String actionRequired = req.getHeader("action");
+        Game game = Game.getInstance();
+        if (demoload) {
+            game.initForDemo();
+            System.out.println("demo loaded");
+        }
+
+        HttpSession session = req.getSession(true);
+        Player player = game.getPlayer(session);
+        System.out.println("player IN");
+        Level level = game.getLevel(session);
+        System.out.println("level IN");
+        game.move(player,level,actionRequired);
+        System.out.println("Move done");
+
+        game.setPlayer(session, player);
+        game.setLevel(session, level);
 
         if (actionRequired.equals("char")) {
-            resp.getWriter().write(characterToJson(Zsolt).toJSONString());
+            resp.getWriter().write(characterToJson(player).toJSONString());
         } else {
-            resp.getWriter().write(levelToJson(levelOne.getMap()).toJSONString());
+            resp.getWriter().write(levelToJson(level.getMap()).toJSONString());
         }
     }
 
