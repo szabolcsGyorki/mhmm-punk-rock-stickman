@@ -23,47 +23,76 @@
     <script src="static/js/ajax.js" defer></script>
     <script src="static/js/characterStats.js" defer></script>
     <script src="static/js/inventory.js" defer></script>
+    <script src="static/js/buttonHandler.js" defer></script>
+
     <link rel="stylesheet" type="text/css" href="static/css/style.css">
 
     <title>Punk rock stickman</title>
 </head>
 <body>
 
-<div class="w3-container" id="game-container">
+    <div class="w3-container" id="game-container">
 
-    <div id="canvas"></div>
+        <div id="canvas"></div>
 
-    <div id="character_stats">
-        <ul class="list-group" id="character_stats_list">
-            <!--Character stats loaded from JS, example: -->
-            <!-- <li class="list-group-item">STR: 15</li> -->
-        </ul>
-    </div>
-
-    <div id="inventory">
-        <div class="row">
-
-            <div class="col-4">
-                <div class="list-group" id="list-tab" role="tablist">
-                    <!--Inventory items loaded from JS, example: -->
-                    <!-- <a class="list-group-item list-group-item-action active" id="list-itemname-list" data-toggle="list" href="#list-home" role="tab" aria-controls="itemname">ITEM_NAME</a> -->
-
-                </div>
-            </div>
-
-            <div class="col-8">
-                <div class="tab-content" id="nav-tabContent">
-                    <!--Inventory item description loaded from JS, example: -->
-                    <!-- <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-itemname-list">ITEM_DESCRIPTION</div> -->
-                </div>
-            </div>
-
+        <div id="character_stats">
+            <ul class="list-group" id="character_stats_list">
+                <!--Character stats loaded from JS, example: -->
+                <!-- <li class="list-group-item">STR: 15</li> -->
+            </ul>
         </div>
+
+
+        <!-- Button to trigger inventory modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong" id="inventory_button">
+            Inventory
+        </button>
+
+        <!-- Inventory modal -->
+        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Inventory</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <!-- Inventory modal body -->
+                        <div id="inventory">
+                            <div class="row">
+
+                                <div class="col-4">
+                                    <div class="list-group" id="list-tab" role="tablist">
+                                        <!--Inventory items loaded from JS, example: -->
+                                        <!-- <a class="list-group-item list-group-item-action active" id="list-itemname-list" data-toggle="list" href="#list-home" role="tab" aria-controls="itemname">ITEM_NAME</a> -->
+
+                                    </div>
+                                </div>
+
+                                <div class="col-8">
+                                    <div class="tab-content" id="nav-tabContent">
+                                        <!--Inventory item descriptions loaded from JS, example: -->
+                                        <!-- <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-itemname-list">ITEM_DESCRIPTION</div> -->
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="equip_button">Equip</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 
-</div>
-
-<button id="inventory_button">Inventory</button>
-<button id="equip_button">Equip</button>
 </body>
 </html>
