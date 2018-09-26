@@ -40,6 +40,12 @@ class EnemyDaoImplTest {
     }
 
     @Test
+    void testInstanceCreated() {
+        EnemyDaoImpl dao = new EnemyDaoImpl(em);
+        assertNotNull(dao);
+    }
+
+    @Test
     void testGetEnemyById() {
         Enemy enemy = edi.getEnemy(3);
         assertNotNull(enemy);

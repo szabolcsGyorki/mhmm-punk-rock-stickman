@@ -8,19 +8,21 @@ public interface LevelDAO {
      * get Height, Width
      * get Wall, Floor type
      * get Object List
+     * @param id
      */
-    Level getLevel(int id);
+    Level getLevel(long id);
 
     /**
      * get ONLY objects in level
+     * @param id
      */
-    Level getLevelObjects(int id);
+    Level getLevelObjects(long id);
 
     /**
      * check name duplication!
      */
     void createNewLevel(Level level);
 
-    void updateLevel(Level level, int id);
+    void updateLevel(Level level, long id);
 
 }

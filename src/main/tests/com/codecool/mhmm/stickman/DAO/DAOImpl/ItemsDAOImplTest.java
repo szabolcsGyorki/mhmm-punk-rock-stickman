@@ -1,11 +1,13 @@
 package com.codecool.mhmm.stickman.DAO.DAOImpl;
 
+import com.codecool.mhmm.stickman.DAO.ItemsDAO;
 import com.codecool.mhmm.stickman.GameObjects.GameObjectType;
 import com.codecool.mhmm.stickman.GameObjects.Items.Armor;
 import com.codecool.mhmm.stickman.GameObjects.Items.Item;
 import com.codecool.mhmm.stickman.GameObjects.Items.Weapon;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import javax.persistence.EntityManager;
@@ -37,6 +39,12 @@ class ItemsDAOImplTest {
         em.persist(armor1);
         em.persist(armor2);
         transaction.commit();
+    }
+
+    @Test
+    void testInstanceCreated() {
+        ItemsDAOImpl dao = new ItemsDAOImpl(em);
+        assertNotNull(dao);
     }
 
     @Test
@@ -117,7 +125,6 @@ class ItemsDAOImplTest {
     }
 
     @RepeatedTest(20)
-    @Test
     void testGetRandomItem() {
         Item item = itemsDAO.getRandomItem();
         assertNotNull(item);
