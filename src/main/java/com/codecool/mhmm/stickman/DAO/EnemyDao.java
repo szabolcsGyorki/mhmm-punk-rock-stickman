@@ -2,25 +2,33 @@ package com.codecool.mhmm.stickman.DAO;
 
 import com.codecool.mhmm.stickman.GameObjects.Characters.Enemy.Enemy;
 import com.codecool.mhmm.stickman.GameObjects.GameObjectType;
-import com.codecool.mhmm.stickman.Map.Level;
+
+import java.util.List;
 
 public interface EnemyDao {
+
+    List<Enemy> getAllEnemy();
 
     /**
      * get every field of enemy
      */
-    Enemy getEnemy(int id);
+    Enemy getEnemy(long id);
 
     /**
-     * update specific enemy with this id
+     * Update single enemy
+     * @param enemy: enemy object to be updated
+     * @param field: name of the field that is updated
+     * @param value: the new value (generic type)
      */
-    void updateEnemy(Enemy enemy, int id);
+    <T> void updateEnemy(Enemy enemy, String field, T value);
 
     /**
      * update every enemy in this type
      * !!! Handle different lvl !!!
      */
-    void updateEnemy(Enemy enemy, GameObjectType enemyType);
+    <T> void updateEnemy(GameObjectType enemyType, String field, T value);
 
     void saveNewEnemy(Enemy enemy);
+
+    List<Enemy> getEnemiesByType(GameObjectType gameObjectType);
 }
