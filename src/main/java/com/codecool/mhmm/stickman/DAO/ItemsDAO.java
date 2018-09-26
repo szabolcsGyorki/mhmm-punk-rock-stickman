@@ -2,13 +2,16 @@ package com.codecool.mhmm.stickman.DAO;
 
 import com.codecool.mhmm.stickman.GameObjects.Items.Item;
 
+import java.util.List;
+
 public interface ItemsDAO {
 
     /**
      * get value, name
      * get specific Type fields
+     * @param itemID
      */
-    Item getItem(int itemID);
+    Item getItem(long itemID);
 
     /**
      * get value, name
@@ -21,10 +24,12 @@ public interface ItemsDAO {
     /**
      * update specific item with this id
      */
-    void updateNewItem(Item item, int id);
+    void updateItem(Item item, long id);
 
     /**
      * update every item with this name
      */
-    void updateNewItem(Item item, String name);
+    void updateItem(Item item, String name);
+
+    List<Item> getAllItems();
 }
