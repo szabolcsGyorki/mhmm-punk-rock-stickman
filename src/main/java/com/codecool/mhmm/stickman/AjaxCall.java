@@ -31,17 +31,27 @@ public class AjaxCall extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String actionRequired = req.getHeader("action");
         Game game = Game.getInstance();
         if (demoload) {
             game.initForDemo();
             demoload = false;
         }
 
+
         HttpSession session = req.getSession(true);
         Player player = game.getPlayer(session);
+        player.addItemToInventory(new Weapon("Foskard", 0, 50, 25));
+        player.addItemToInventory(new Armor("Fosarmor", 0, 50));
         Level level = game.getLevel(session);
-        game.move(player,level,actionRequired);
+
+        String actionRequired = null;
+        if (req.getHeader("map") != null) {
+            actionRequired = req.getHeader("map");
+            game.move(player,level,actionRequired);
+        } else if (req.getHeader("equip") != null) {
+            actionRequired = req.getHeader("equip");
+            // jatekos.equip(actionRequired) JÁNOS HELP
+        }
 
         game.setPlayer(session, player);
         game.setLevel(session, level);

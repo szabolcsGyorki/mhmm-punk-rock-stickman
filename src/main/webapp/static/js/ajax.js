@@ -5,7 +5,7 @@ window.addEventListener('load', function() {
     }, 'load');
 });
 
-function ajax_get(url, callback, action) {
+function ajax_get(url, callback, action, value) {
     let xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         let data;
@@ -21,7 +21,7 @@ function ajax_get(url, callback, action) {
         }
     };
     xmlhttp.open("GET", url, true);
-    xmlhttp.setRequestHeader("action", action);
+    xmlhttp.setRequestHeader(action, value);
     xmlhttp.send();
 }
 
@@ -32,14 +32,7 @@ function requestMap(action) {
         updateCharacterStats();
         updateInventory();
 
-    }, action)
-}
-
-function requestCharacter() {
-    ajax_get('/send', function (data) {
-        mainCharacter = data;
-        updateCharacterStats();
-    },"action", "char");
+    }, "map", action)
 }
 
 function requestEquip(item_name) {
