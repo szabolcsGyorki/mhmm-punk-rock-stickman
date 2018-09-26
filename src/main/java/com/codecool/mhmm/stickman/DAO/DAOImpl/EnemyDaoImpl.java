@@ -57,7 +57,7 @@ public class EnemyDaoImpl extends BaseDaoImpl implements EnemyDao {
                 .where(cb.equal(enemyRoot.get("type"), enemyType));
         Query query = em.createQuery(update);
         query.executeUpdate();
-        em.clear();
+        getEnemiesByType(enemyType).forEach(em::refresh);
         transaction.commit();
     }
 
