@@ -1,21 +1,15 @@
 package com.codecool.mhmm.stickman;
 
+import com.codecool.mhmm.stickman.GameObjects.Characters.Enemy.*;
 import com.codecool.mhmm.stickman.GameObjects.Characters.Player;
 import com.codecool.mhmm.stickman.GameObjects.Items.Armor;
 import com.codecool.mhmm.stickman.GameObjects.Items.Weapon;
-
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
-
 
 public class Init {
 
-    public static void init() {
-
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("stickman");
-        EntityManager em = emf.createEntityManager();
+    public static void init(EntityManager em) {
 
         Player player = new Player(10, 20);
         Player player1 = new Player(5, 10);
@@ -40,6 +34,11 @@ public class Init {
         player1.setWeapon(weapon2);
         player1.setFullBody(armor2);
 
+        Enemy enemy1 = new Slime(1,2,1);
+        Enemy enemy2 = new Orc(1,2,1);
+        Enemy enemy3 = new Dragon(1,2,1);
+        Enemy enemy4 = new Skeleton(1,2,1);
+
 
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
@@ -54,12 +53,11 @@ public class Init {
         em.persist(weapon4);
         em.persist(player);
         em.persist(player1);
+        em.persist(enemy1);
+        em.persist(enemy2);
+        em.persist(enemy3);
+        em.persist(enemy4);
         transaction.commit();
-
-        Player foundPlayer = em.find(Player.class, player.getId());
-        System.out.println(foundPlayer.getName());
-        System.out.println("Hit points: " + foundPlayer.getHitPoint());
-        System.out.println("Damage: " + foundPlayer.getDamage());
 
     }
 }
