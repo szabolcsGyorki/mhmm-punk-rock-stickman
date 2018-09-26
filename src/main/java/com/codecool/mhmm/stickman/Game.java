@@ -28,8 +28,22 @@ public class Game {
 
     public void initForDemo(){
         levelOne = new Level(10,10 ,WALL, FLOOR);
-        Zsolt = new Player(1,5);
+        Zsolt = new Player(1,1);
+        levelOne.placeWall(1,2);
         levelOne.placeWall(2,2);
+        levelOne.placeWall(3,2);
+        levelOne.placeWall(4,2);
+        levelOne.placeWall(5,2);
+        levelOne.placeWall(7,2);
+        levelOne.placeWall(9,2);
+
+        levelOne.placeWall(1,5);
+        levelOne.placeWall(2,1);
+        levelOne.placeWall(3,1);
+        levelOne.placeWall(4,1);
+        levelOne.placeWall(5,1);
+        levelOne.placeWall(6,1);
+
         levelOne.placeEnemy(1,1,SLIME,1);
         levelOne.placeEnemy(1,2,SKELETON,1);
         levelOne.placeEnemy(1,3,ORC,1);
