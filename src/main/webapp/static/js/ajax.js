@@ -1,3 +1,10 @@
+window.addEventListener('load', function() {
+    ajax_get("/send", function (data) {
+        mapObjects = data[0];
+        mainCharacter = data[1][0];
+    }, 'load');
+});
+
 function ajax_get(url, callback, action) {
     let xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
@@ -22,7 +29,6 @@ function requestMap(action) {
     ajax_get('/send', function (data) {
         mapObjects = data[0];
         mainCharacter = data[1][0];
-        draw();
         updateCharacterStats();
         updateInventory();
 
