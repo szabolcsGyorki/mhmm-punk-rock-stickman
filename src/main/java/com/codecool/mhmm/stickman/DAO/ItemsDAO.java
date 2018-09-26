@@ -22,16 +22,6 @@ public interface ItemsDAO {
 
     void saveNewItem(Item item);
 
-    /**
-     * update specific item with this id
-     */
-    void updateItem(Item item, long id);
-
-    /**
-     * update every item with this name
-     */
-    void updateItem(Item item, String name);
-
     List<Item> getAllItems();
     List<Item> getAllItems(GameObjectType type);
 }

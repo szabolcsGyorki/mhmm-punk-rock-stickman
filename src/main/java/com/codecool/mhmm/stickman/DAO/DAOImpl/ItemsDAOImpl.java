@@ -41,16 +41,6 @@ public class ItemsDAOImpl extends BaseDaoImpl implements ItemsDAO {
     }
 
     @Override
-    public void updateItem(Item item, long id) {
-
-    }
-
-    @Override
-    public void updateItem(Item item, String name) {
-
-    }
-
-    @Override
     public List<Item> getAllItems() {
         TypedQuery<Item> query = em.createNamedQuery("Item.getAll", Item.class);
         return query.getResultList();
