@@ -46,11 +46,14 @@ public class AjaxCall extends HttpServlet {
         game.setPlayer(session, player);
         game.setLevel(session, level);
 
-        if (actionRequired.equals("char")) {
-            resp.getWriter().write(characterToJson(player).toJSONString());
-        } else {
-            resp.getWriter().write(levelToJson(level.getMap()).toJSONString());
-        }
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.add(levelToJson(level.getMap()));
+
+        JSONArray charArray = new JSONArray();
+        charArray.add(characterToJson(player));
+        jsonArray.add(charArray);
+
+        resp.getWriter().write(jsonArray.toJSONString());
     }
 
     /**
@@ -99,4 +102,3 @@ public class AjaxCall extends HttpServlet {
         return character;
     }
 }
-
