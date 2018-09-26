@@ -10,6 +10,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 import java.util.List;
+import java.util.Random;
 
 public class ItemsDAOImpl extends BaseDaoImpl implements ItemsDAO {
 
@@ -31,6 +32,14 @@ public class ItemsDAOImpl extends BaseDaoImpl implements ItemsDAO {
         TypedQuery<Item> query = em.createQuery(q);
         query.setParameter(p, name);
         return query.getSingleResult();
+    }
+
+    @Override
+    public Item getRandomItem() {
+        Random random = new Random();
+        List<Item> items = getAllItems();
+        int id = random.nextInt(items.size());
+        return items.get(id);
     }
 
     @Override

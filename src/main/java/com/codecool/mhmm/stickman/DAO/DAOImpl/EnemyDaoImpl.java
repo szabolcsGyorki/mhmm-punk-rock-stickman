@@ -26,13 +26,7 @@ public class EnemyDaoImpl extends BaseDaoImpl implements EnemyDao {
 
     @Override
     public Enemy getEnemy(long id) {
-        CriteriaQuery<Enemy> q = cb.createQuery(Enemy.class);
-        Root<Enemy> enemy = q.from(Enemy.class);
-        ParameterExpression p = cb.parameter(long.class);
-        q.select(enemy).where(cb.equal(enemy.get("id"), p));
-        TypedQuery<Enemy> query = em.createQuery(q);
-        query.setParameter(p, id);
-        return query.getSingleResult();
+        return em.find(Enemy.class, id);
     }
 
     @Override

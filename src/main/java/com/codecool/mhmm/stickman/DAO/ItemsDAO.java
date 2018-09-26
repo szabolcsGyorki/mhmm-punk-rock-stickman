@@ -19,6 +19,7 @@ public interface ItemsDAO {
      * get specific Type fields
      */
     Item getItem(String name);
+    Item getRandomItem();
 
     void saveNewItem(Item item);
 

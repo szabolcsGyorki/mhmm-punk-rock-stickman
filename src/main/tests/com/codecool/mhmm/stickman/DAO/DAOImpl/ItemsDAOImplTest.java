@@ -116,6 +116,13 @@ class ItemsDAOImplTest {
         assertTrue(expectedItems.containsAll(items));
     }
 
+    @RepeatedTest(20)
+    @Test
+    void testGetRandomItem() {
+        Item item = itemsDAO.getRandomItem();
+        assertNotNull(item);
+    }
+
     @AfterAll
     static void close() {
         em.close();
