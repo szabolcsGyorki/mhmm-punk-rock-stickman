@@ -7,6 +7,9 @@ import com.codecool.mhmm.stickman.GameObjects.Items.Item;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.ParameterExpression;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 public class ItemsDAOImpl extends BaseDaoImpl implements ItemsDAO {
@@ -22,7 +25,13 @@ public class ItemsDAOImpl extends BaseDaoImpl implements ItemsDAO {
 
     @Override
     public Item getItem(String name) {
-        return null;
+        CriteriaQuery<Item> q = cb.createQuery(Item.class);
+        Root<Item> itemRoot = q.from(Item.class);
+        ParameterExpression p = cb.parameter(String.class);
+        q.select(itemRoot).where(cb.equal(itemRoot.get("name"), p));
+        TypedQuery<Item> query = em.createQuery(q);
+        query.setParameter(p, name);
+        return query.getSingleResult();
     }
 
     @Override

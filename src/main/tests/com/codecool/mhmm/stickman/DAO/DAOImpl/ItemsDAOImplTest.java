@@ -20,14 +20,17 @@ class ItemsDAOImplTest {
     private static ItemsDAOImpl itemsDAO = new ItemsDAOImpl(em);
 
     private static Item armor1;
+    private static Item armor2;
 
     @BeforeAll
     static void init() {
         armor1 = new Armor("Sacred Armor", 800, 40);
+        armor2 = new Armor("Mythic Armor", 1000, 60);
 
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         em.persist(armor1);
+        em.persist(armor2);
         transaction.commit();
     }
 
@@ -38,8 +41,32 @@ class ItemsDAOImplTest {
     }
 
     @Test
+    void testGetItemByIdTwo() {
+        Item item = itemsDAO.getItem(2);
+        assertNotNull(item);
+    }
+
+    @Test
     void testGetItemByIdReturnsCorrectItem() {
         Item item = itemsDAO.getItem(1);
+        assertEquals(armor1, item);
+    }
+
+    @Test
+    void testGetItemByNameOne() {
+        Item item = itemsDAO.getItem("Sacred Armor");
+        assertNotNull(item);
+    }
+
+    @Test
+    void testGetItemByNameTwo() {
+        Item item = itemsDAO.getItem("Mythic Armor");
+        assertNotNull(item);
+    }
+
+    @Test
+    void testGetItemByNameReturnsCorrectItem() {
+        Item item = itemsDAO.getItem("Sacred Armor");
         assertEquals(armor1, item);
     }
 
