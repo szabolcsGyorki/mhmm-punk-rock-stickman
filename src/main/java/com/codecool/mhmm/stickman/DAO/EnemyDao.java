@@ -15,7 +15,10 @@ public interface EnemyDao {
     Enemy getEnemy(long id);
 
     /**
-     * update specific enemy with this id
+     * Update single enemy
+     * @param enemy: enemy object to be updated
+     * @param field: name of the field that is updated
+     * @param value: the new value (generic type)
      */
     <T> void updateEnemy(Enemy enemy, String field, T value);
 
@@ -23,7 +26,9 @@ public interface EnemyDao {
      * update every enemy in this type
      * !!! Handle different lvl !!!
      */
-    void updateEnemy(Enemy enemy, GameObjectType enemyType);
+    <T> void updateEnemy(GameObjectType enemyType, String field, T value);
 
     void saveNewEnemy(Enemy enemy);
+
+    List<Enemy> getEnemiesByType(GameObjectType gameObjectType);
 }

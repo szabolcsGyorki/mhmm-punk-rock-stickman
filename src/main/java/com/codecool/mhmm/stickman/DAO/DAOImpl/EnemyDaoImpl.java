@@ -44,12 +44,21 @@ public class EnemyDaoImpl extends BaseDaoImpl implements EnemyDao {
                 .where(cb.equal(enemyRoot.get("id"), enemy.getId()));
         Query query = em.createQuery(update);
         query.executeUpdate();
+        em.refresh(enemy);
         transaction.commit();
     }
 
     @Override
-    public void updateEnemy(Enemy enemy, GameObjectType enemyType) {
-
+    public <T> void updateEnemy(GameObjectType enemyType, String field, T value) {
+        transaction.begin();
+        CriteriaUpdate<Enemy> update = cb.createCriteriaUpdate(Enemy.class);
+        Root<Enemy> enemyRoot = update.from(Enemy.class);
+        update.set(field, value)
+                .where(cb.equal(enemyRoot.get("type"), enemyType));
+        Query query = em.createQuery(update);
+        query.executeUpdate();
+        em.clear();
+        transaction.commit();
     }
 
     @Override
@@ -57,5 +66,16 @@ public class EnemyDaoImpl extends BaseDaoImpl implements EnemyDao {
         transaction.begin();
         em.persist(enemy);
         transaction.commit();
+    }
+
+    @Override
+    public List<Enemy> getEnemiesByType(GameObjectType gameObjectType) {
+        CriteriaQuery<Enemy> q = cb.createQuery(Enemy.class);
+        Root<Enemy> enemy = q.from(Enemy.class);
+        ParameterExpression p = cb.parameter(long.class);
+        q.select(enemy).where(cb.equal(enemy.get("type"), p));
+        TypedQuery<Enemy> query = em.createQuery(q);
+        query.setParameter(p, gameObjectType);
+        return query.getResultList();
     }
 }
