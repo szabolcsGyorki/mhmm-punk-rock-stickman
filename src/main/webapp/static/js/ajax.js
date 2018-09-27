@@ -4,7 +4,7 @@ function ajax_get(url, callback, action, value) {
     xmlhttp.onreadystatechange = function() {
         let data;
         if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-            //console.log('responseText:' + xmlhttp.responseText);
+            //console.log('resúponseText:' + xmlhttp.responseText);
             try {
                 data = JSON.parse(xmlhttp.responseText);
             } catch(err) {
@@ -31,9 +31,11 @@ function requestMap(action) {
 
 function requestEquip(item_name) {
     ajax_get('/send', function (data) {
-        mainCharacter = data;
+        mapObjects = data[0];
+        mainCharacter = data[1][0];
         mainCharacterHealth = mainCharacter.Health;
         updateCharacterStats();
+        updateInventory();
     },"equip", item_name)
 }
 

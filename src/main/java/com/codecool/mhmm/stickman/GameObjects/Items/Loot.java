@@ -15,7 +15,7 @@ public class Loot extends Item {
 
     @ManyToMany
     @JoinTable(name = "loot_content")
-    private List<Item> lootContent = new ArrayList<>();
+    private List<Item> lootList = new ArrayList<>();
 
     @Transient
     private ItemsDAOImpl itemsList;
@@ -38,7 +38,7 @@ public class Loot extends Item {
     }
 
     public void Pickup(Player player){
-        for(Item item : lootContent)
+        for(Item item : lootList)
             player.addItemToInventory(item);
     }
 
@@ -50,8 +50,8 @@ public class Loot extends Item {
         fillUpLoot(numberOfLoots);
     }
 
-    public void add(ArrayList<Item> items){
-        lootContent = items;
+    public void add(Item item){
+        lootList.add(item);
     }
 
     private void fillUpLoot(int numberOfLoots) {
@@ -60,13 +60,13 @@ public class Loot extends Item {
             long itemNumber = (long) random.nextInt(items.size()) + 1;
             Item item = itemsList.getItem(itemNumber);
             if (item != null) {
-                lootContent.add(item);
+                lootList.add(item);
             }
         }
     }
 
     public List<Item> getItems() {
-        return new ArrayList<>(lootContent);
+        return new ArrayList<>(lootList);
     }
 
     public int getGold() {

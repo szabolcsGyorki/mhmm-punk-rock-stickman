@@ -129,5 +129,13 @@ public class Player extends Character {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getDisplayDamage() {
+        if (this.weapon == null)
+            return String.valueOf(strength);
+        return String.valueOf(this.getWeapon().getMinDamage() + this.strength)
+                + " - "
+                + String.valueOf(this.getWeapon().getMaxDamage() + this.strength);
+    }
 }
 

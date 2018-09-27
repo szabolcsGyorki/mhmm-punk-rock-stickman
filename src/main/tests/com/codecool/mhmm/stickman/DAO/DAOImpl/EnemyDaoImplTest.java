@@ -21,7 +21,7 @@ class EnemyDaoImplTest {
 
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("stickman");
     private static EntityManager em = emf.createEntityManager();
-    private static EnemyDaoImpl edi = new EnemyDaoImpl(em);
+    private static EnemyDAOImpl edi = new EnemyDAOImpl(em);
     private static Enemy enemy1;
     private static Enemy enemy2;
     private static Enemy enemy3;
@@ -47,7 +47,7 @@ class EnemyDaoImplTest {
 
     @Test
     void testInstanceCreated() {
-        EnemyDaoImpl dao = new EnemyDaoImpl(em);
+        EnemyDAOImpl dao = new EnemyDAOImpl(em);
         assertNotNull(dao);
     }
 
