@@ -10,5 +10,5 @@ function loadImages() {
     skeleton_image = loadImage(dir + 'image_skeleton' + ext);
     slime_image = loadImage(dir + 'image_slime' + ext);
     wall_image = loadImage(dir + 'image_wall' + ext);
-    defeat_image = loot_image(dir + 'image_defeat' + ext)
+    defeat_image = loadImage(dir + 'image_defeat' + ext)
 }

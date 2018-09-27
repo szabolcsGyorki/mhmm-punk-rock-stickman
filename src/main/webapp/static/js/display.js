@@ -26,8 +26,7 @@ function draw() {
     clear();
     fill(230);
     drawBoard();
-
-}
+    }
 
 function drawBoard() {
     for (let i = 0; i < mapObjects.length; i++) {
@@ -48,5 +47,5 @@ function drawBoard() {
             case 'ORC': image(orc_image, object.x*50, object.y*50, height/12, width/12)
         }
     }
-
+    defeat();
 }
