@@ -40,8 +40,7 @@ public class AjaxCall extends HttpServlet {
 
         HttpSession session = req.getSession(true);
         Player player = game.getPlayer(session);
-        player.addItemToInventory(new Weapon("Foskard", 0, 50, 25));
-        player.addItemToInventory(new Armor("Fosarmor", 0, 50));
+
         Level level = game.getLevel(session);
 
         String actionRequired = null;
@@ -50,7 +49,7 @@ public class AjaxCall extends HttpServlet {
             game.move(player,level,actionRequired);
         } else if (req.getHeader("equip") != null) {
             actionRequired = req.getHeader("equip");
-            // jatekos.equip(actionRequired) JÁNOS HELP
+            game.equip(player, actionRequired);
         }
 
         game.setPlayer(session, player);
