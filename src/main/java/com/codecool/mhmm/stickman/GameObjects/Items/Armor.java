@@ -15,7 +15,7 @@ public class Armor extends Item {
         this.type = GameObjectType.ARMOR;
     }
 
-    protected Armor() {
+    public Armor() {
     }
 
     public int getHealthIncrease() {
