@@ -5,10 +5,7 @@ import com.codecool.mhmm.stickman.GameObjects.GameObjectType;
 import com.codecool.mhmm.stickman.GameObjects.Items.Armor;
 import com.codecool.mhmm.stickman.GameObjects.Items.Item;
 import com.codecool.mhmm.stickman.GameObjects.Items.Weapon;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -41,6 +38,11 @@ class ItemsDAOImplTest {
         transaction.commit();
     }
 
+    @BeforeEach
+    void clear() {
+        em.clear();
+    }
+
     @Test
     void testInstanceCreated() {
         ItemsDAOImpl dao = new ItemsDAOImpl(em);
@@ -62,7 +64,7 @@ class ItemsDAOImplTest {
     @Test
     void testGetItemByIdReturnsCorrectItem() {
         Item item = itemsDAO.getItem(1);
-        assertEquals(armor1, item);
+        assertEquals("Sacred Armor", item.getName());
     }
 
     @Test
@@ -80,7 +82,7 @@ class ItemsDAOImplTest {
     @Test
     void testGetItemByNameReturnsCorrectItem() {
         Item item = itemsDAO.getItem("Sacred Armor");
-        assertEquals(armor1, item);
+        assertEquals("Sacred Armor", item.getName());
     }
 
     @Test
@@ -101,8 +103,8 @@ class ItemsDAOImplTest {
     @Test
     void testGetItemsByTypeReturnsCorrectItems() {
         List<Item> expectedItems = new ArrayList<>();
-        expectedItems.add(armor1);
-        expectedItems.add(armor2);
+        expectedItems.add(itemsDAO.getItem(1L));
+        expectedItems.add(itemsDAO.getItem(2L));
 
         List<Item> items = itemsDAO.getAllItems(GameObjectType.ARMOR);
         assertTrue(expectedItems.containsAll(items));
@@ -117,8 +119,8 @@ class ItemsDAOImplTest {
     @Test
     void testGetAllItemsReturnsCorrectly() {
         List<Item> expectedItems = new ArrayList<>();
-        expectedItems.add(armor1);
-        expectedItems.add(armor2);
+        expectedItems.add(itemsDAO.getItem(1L));
+        expectedItems.add(itemsDAO.getItem(2L));
 
         List<Item> items = itemsDAO.getAllItems();
         assertTrue(expectedItems.containsAll(items));

@@ -7,6 +7,7 @@ import com.codecool.mhmm.stickman.GameObjects.GameObject;
 import com.codecool.mhmm.stickman.GameObjects.GameObjectType;
 import com.codecool.mhmm.stickman.Map.Level;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javax.persistence.EntityManager;
@@ -47,6 +48,11 @@ class LevelDAOImplTest {
         transaction.commit();
     }
 
+    @BeforeEach
+    void clear() {
+        em.clear();
+    }
+
     @Test
     void testInstanceCreated() {
         LevelDAOImpl dao = new LevelDAOImpl(em);
@@ -84,10 +90,16 @@ class LevelDAOImplTest {
 
     @Test
     void testGetLevelContentIsCorrect() {
-        List<GameObject> expectedContent = new ArrayList<>();
-        expectedContent.add(enemy);
-        expectedContent.add(player);
-        assertTrue(levelDAO.getLevelObjects(level1.getId()).containsAll(expectedContent));
+        List<GameObject> content = levelDAO.getLevelObjects(level1.getId());
+        Player player = (Player) content.stream()
+                .filter(c -> c instanceof Player)
+                .findFirst().orElse(null);
+        Enemy enemy = (Enemy) content.stream()
+                .filter(c -> c instanceof Enemy)
+                .findFirst().orElse(null);
+        assert player != null;
+        assert enemy != null;
+        assertTrue(player.getName().equals("Tirion") && enemy.getType() == GameObjectType.ORC);
     }
 
     @Test

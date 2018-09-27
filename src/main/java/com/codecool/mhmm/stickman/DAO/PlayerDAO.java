@@ -2,7 +2,8 @@ package com.codecool.mhmm.stickman.DAO;
 
 import com.codecool.mhmm.stickman.GameObjects.Characters.Player;
 import com.codecool.mhmm.stickman.GameObjects.GameObject;
-import com.codecool.mhmm.stickman.GameObjects.Items.Item;
+
+import java.util.List;
 
 public interface PlayerDAO {
 
@@ -15,7 +16,7 @@ public interface PlayerDAO {
      * get player Weapon
      * equip player Armor
      * equip player Weapon
-     * @param id
+     * @param id: the id of the player
      */
     Player getPlayer(long id);
 
@@ -39,44 +40,28 @@ public interface PlayerDAO {
      * REEQUIP player Armor
      * REEQUIP player Weapon
      */
-    void updatePlayer(Player player);
+    <T> void updatePlayer(Player player, String field, T value);
 
     /**
      * check if player name exist (character name)
      */
-    void saveNewplayer(Player player);
-
-    /**
-     * load player items
-     */
-    <List> Item getPlayerItems(Player player);
-
-    /**
-     * load player items
-     * @param playerID
-     */
-    <List> Item getPlayerItems(long playerID);
-
-    /**
-     * load player items
-     */
-    <List> Item getPlayerItems(String PlayerName);
+    void saveNewPlayer(Player player);
 
     /**
      * load list of modified elements
      */
-    <List> GameObject getModifiedByPlayer(Player player);
+    List<GameObject> getModifiedByPlayer(Player player);
 
     /**
      * load list of modified elements
      */
-    <List> GameObject getModifiedByPlayer(String playerName);
+    List<GameObject> getModifiedByPlayer(String playerName);
 
     /**
      * load list of modified elements
-     * @param playerID
+     * @param playerID: id of the player
      */
-    <List> GameObject getModifiedByPlayer(long playerID);
+    List<GameObject> getModifiedByPlayer(long playerID);
 
     void updateModifiedByPlayer(Player player);
 
