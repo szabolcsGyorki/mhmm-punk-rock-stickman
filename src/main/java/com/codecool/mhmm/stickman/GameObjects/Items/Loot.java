@@ -1,7 +1,6 @@
 package com.codecool.mhmm.stickman.GameObjects.Items;
 
 import com.codecool.mhmm.stickman.DAO.DAOImpl.ItemsDAOImpl;
-import com.codecool.mhmm.stickman.DAO.ItemsDAO;
 import com.codecool.mhmm.stickman.GameObjects.Characters.Player;
 import com.codecool.mhmm.stickman.GameObjects.GameObject;
 import com.codecool.mhmm.stickman.GameObjects.GameObjectType;
@@ -16,7 +15,7 @@ public class Loot extends Item {
 
     @ManyToMany
     @JoinTable(name = "loot_content")
-    private List<Item> loot = new ArrayList<>();
+    private List<Item> lootList = new ArrayList<>();
 
     @Transient
     private ItemsDAOImpl itemsList;
@@ -39,7 +38,7 @@ public class Loot extends Item {
     }
 
     public void Pickup(Player player){
-        for(Item item : loot)
+        for(Item item : lootList)
             player.addItemToInventory(item);
     }
 
@@ -52,7 +51,7 @@ public class Loot extends Item {
     }
 
     public void add(Item item){
-        loot.add(item);
+        lootList.add(item);
     }
 
     private void fillUpLoot(int numberOfLoots) {
@@ -61,13 +60,13 @@ public class Loot extends Item {
             int itemNumber = random.nextInt(itemsList.getAllItems().size());
             GameObject item = itemsList.getItem(itemNumber);
             if (item instanceof Item) {
-                loot.add((Item) item);
+                lootList.add((Item) item);
             }
         }
     }
 
     public List<Item> getItems() {
-        return new ArrayList<>(loot);
+        return new ArrayList<>(lootList);
     }
 
     public int getGold() {

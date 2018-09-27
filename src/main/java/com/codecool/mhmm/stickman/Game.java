@@ -66,8 +66,8 @@ public class Game {
         levelOne.placeEnemy(2,4,ORC,1);
         levelOne.placeEnemy(6,7,DRAGON,1);
 
-//        levelOne.placeLoot(4, 1, itemsDAO.getItem("Colossus Blade"));
-//        levelOne.placeLoot(1, 4, itemsDAO.getItem("Shadow Plate"));
+        levelOne.placeLoot(4, 1, itemsDAO.getItem("Colossus Blade"));
+        levelOne.placeLoot(1, 4, itemsDAO.getItem("Shadow Plate"));
 
         levelDao.createNewLevel(levelOne);
     }
