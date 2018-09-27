@@ -37,7 +37,7 @@ public class Game {
 
     public void initForDemo(){
         levelOne = new Level(10,10 ,WALL, FLOOR);
-        Zsolt = new Player(1,1);
+        Zsolt = new Player(1,1, "Zsolt");
         levelOne.placePlayer(Zsolt);
 
         Init.init(em);

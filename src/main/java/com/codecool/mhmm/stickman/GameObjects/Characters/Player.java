@@ -30,13 +30,13 @@ public class Player extends Character {
     @JoinTable(name = "player_inventory")
     private List<Item> items = new ArrayList<>();
 
-    public Player(int X, int Y) {
+    public Player(int X, int Y, String name) {
         super(X, Y, 30, 0);
         this.type = GameObjectType.MAIN_CHARACTER;
         strength = 3;
         agility = 3;
         intelligence = 3;
-        name = "Roger the don";
+        this.name = name;
     }
 
     public Player() {

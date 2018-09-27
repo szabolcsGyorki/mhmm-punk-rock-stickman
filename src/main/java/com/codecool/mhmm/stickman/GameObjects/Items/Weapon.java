@@ -1,5 +1,7 @@
 package com.codecool.mhmm.stickman.GameObjects.Items;
 
+import com.codecool.mhmm.stickman.GameObjects.GameObjectType;
+
 import javax.persistence.Entity;
 import java.util.Random;
 
@@ -13,6 +15,7 @@ public class Weapon extends Item {
         super(name, value);
         this.maxDamage = maxDamage;
         this.minDamage = minDamage;
+        this.type = GameObjectType.WEAPON;
     }
 
     public Weapon() {

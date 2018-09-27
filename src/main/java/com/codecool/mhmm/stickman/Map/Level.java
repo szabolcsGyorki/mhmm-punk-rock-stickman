@@ -37,6 +37,10 @@ public class Level {
     public Level() {
     }
 
+    public long getId() {
+        return id;
+    }
+
     public List<GameObject> getMap() {
         return map;
     }
@@ -59,6 +63,10 @@ public class Level {
 
     public void placePlayer(Player player){
         map.add(player);
+    }
+
+    public void addContent(GameObject content) {
+        map.add(content);
     }
 
     public void placeEnemy(int X,int Y, GameObjectType type, int level) {
