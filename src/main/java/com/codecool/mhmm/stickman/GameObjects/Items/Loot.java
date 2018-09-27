@@ -55,12 +55,12 @@ public class Loot extends Item {
     }
 
     private void fillUpLoot(int numberOfLoots) {
+        List<Item> items = itemsList.getAllItems();
         for (int i = 0; i < numberOfLoots; i++) {
-            Random random = new Random();
-            int itemNumber = random.nextInt(itemsList.getAllItems().size());
-            GameObject item = itemsList.getItem(itemNumber);
-            if (item instanceof Item) {
-                lootContent.add((Item) item);
+            long itemNumber = (long) random.nextInt(items.size()) + 1;
+            Item item = itemsList.getItem(itemNumber);
+            if (item != null) {
+                lootContent.add(item);
             }
         }
     }
