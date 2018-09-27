@@ -50,8 +50,8 @@ public class Loot extends Item {
         fillUpLoot(numberOfLoots);
     }
 
-    public void add(ArrayList<Item> items){
-        loot = items;
+    public void add(Item item){
+        loot.add(item);
     }
 
     private void fillUpLoot(int numberOfLoots) {

@@ -16,6 +16,8 @@ import javax.persistence.Persistence;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import java.util.ArrayList;
+
 import static com.codecool.mhmm.stickman.GameObjects.GameObjectType.*;
 import static com.codecool.mhmm.stickman.GameObjects.GameObjectType.DRAGON;
 import static com.codecool.mhmm.stickman.GameObjects.GameObjectType.ORC;
@@ -65,6 +67,10 @@ public class Game {
         levelOne.placeEnemy(8,2,SKELETON,1);
         levelOne.placeEnemy(2,4,ORC,1);
         levelOne.placeEnemy(6,7,DRAGON,1);
+
+        levelOne.placeLoot(4, 1, itemsDAO.getItem("Colossus Blade"));
+        levelOne.placeLoot(1, 4, itemsDAO.getItem("Shadow Plate"));
+
         transaction.begin();
         em.persist(levelOne);
 
@@ -72,12 +78,7 @@ public class Game {
             em.persist(object);
         }
 
-
         transaction.commit();
-        
-        Zsolt.addItemToInventory(itemsDAO.getItem("Foskard"));
-        Zsolt.addItemToInventory(itemsDAO.getItem("Fosarmor"));
-
     }
 
     public static Game getInstance() {

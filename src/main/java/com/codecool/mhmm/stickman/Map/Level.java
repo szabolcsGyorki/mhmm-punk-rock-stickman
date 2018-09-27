@@ -6,6 +6,7 @@ import com.codecool.mhmm.stickman.GameObjects.Characters.Character;
 import com.codecool.mhmm.stickman.GameObjects.Characters.Enemy.*;
 import com.codecool.mhmm.stickman.GameObjects.GameObject;
 import com.codecool.mhmm.stickman.GameObjects.GameObjectType;
+import com.codecool.mhmm.stickman.GameObjects.Items.Item;
 import com.codecool.mhmm.stickman.GameObjects.Items.Loot;
 import com.codecool.mhmm.stickman.GameObjects.Wall;
 import javax.persistence.*;
@@ -69,6 +70,12 @@ public class Level {
 
     public void placePlayer(Player player){
         map.add(player);
+    }
+
+    public void placeLoot(int x, int y, Item item) {
+        Loot loot = new Loot(x, y, this.itemsDAO);
+        loot.add(item);
+        map.add(loot);
     }
 
     public void addContent(GameObject content) {
