@@ -34,7 +34,7 @@ function updateInventory() {
     document.getElementById("list-tab").firstChild.classList.add("active");
 }
 
-function get_selected_item() {
-    let item_name = character_inventory_list.getElementsByClassName("active");
-    return item_name.innerHTML;
+    function get_selected_item() {
+        let item_name = character_inventory_list.getElementsByClassName("active");
+        return item_name.innerHTML;
 }
