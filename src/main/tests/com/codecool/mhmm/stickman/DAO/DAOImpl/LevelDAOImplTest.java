@@ -25,6 +25,7 @@ class LevelDAOImplTest {
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("stickman");
     private static EntityManager em = emf.createEntityManager();
     private static LevelDAOImpl levelDAO = new LevelDAOImpl(em);
+    private static ItemsDAOImpl itemsDAO = new ItemsDAOImpl(em);
 
     private static Level level1;
     private static Level level2;
@@ -33,8 +34,8 @@ class LevelDAOImplTest {
 
     @BeforeAll
     static void init() {
-        level1 = new Level(4, 5, GameObjectType.WALL, GameObjectType.FLOOR);
-        level2 = new Level(3, 4, GameObjectType.WALL, GameObjectType.FLOOR);
+        level1 = new Level(4, 5, GameObjectType.WALL, GameObjectType.FLOOR, itemsDAO);
+        level2 = new Level(3, 4, GameObjectType.WALL, GameObjectType.FLOOR, itemsDAO);
 
         level1.placePlayer(player = new Player(5, 10, "Tirion"));
         level1.addContent(enemy = new Orc(2,3, 1));
@@ -104,7 +105,7 @@ class LevelDAOImplTest {
 
     @Test
     void testCreateNewLevel() {
-        Level newLevel = new Level(2, 4, GameObjectType.WALL, GameObjectType.FLOOR);
+        Level newLevel = new Level(2, 4, GameObjectType.WALL, GameObjectType.FLOOR, itemsDAO);
         levelDAO.createNewLevel(newLevel);
         Level savedLevel = levelDAO.getLevel(newLevel.getId());
         em.remove(newLevel);
@@ -113,7 +114,7 @@ class LevelDAOImplTest {
 
     @Test
     void testCreateNewLevelIsCorrect() {
-        Level newLevel = new Level(2, 4, GameObjectType.WALL, GameObjectType.FLOOR);
+        Level newLevel = new Level(2, 4, GameObjectType.WALL, GameObjectType.FLOOR, itemsDAO);
         levelDAO.createNewLevel(newLevel);
         Level savedLevel = levelDAO.getLevel(newLevel.getId());
         em.remove(newLevel);
