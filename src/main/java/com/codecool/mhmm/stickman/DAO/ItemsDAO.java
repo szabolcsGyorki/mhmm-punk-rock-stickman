@@ -10,7 +10,7 @@ public interface ItemsDAO {
     /**
      * get value, name
      * get specific Type fields
-     * @param itemID
+     * @param itemID: id of the item
      */
     Item getItem(long itemID);
 

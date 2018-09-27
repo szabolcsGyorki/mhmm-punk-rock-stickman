@@ -32,12 +32,12 @@ public class Level {
     private GameObjectType wallImage;
     private GameObjectType floorImage;
 
-    public Level(int width, int height, GameObjectType wall, GameObjectType floor, EntityManager em) {
+    public Level(int width, int height, GameObjectType wall, GameObjectType floor, ItemsDAOImpl itemsDAO) {
         this.WIDTH=width;
         this.HEIGHT=height;
         this.wallImage = wall;
         this.floorImage = floor;
-        this.itemsDAO = new ItemsDAOImpl(em);
+        this.itemsDAO = itemsDAO;
         generateBase();
     }
 

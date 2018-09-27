@@ -5,6 +5,7 @@ import com.codecool.mhmm.stickman.GameObjects.Characters.Enemy.*;
 import com.codecool.mhmm.stickman.GameObjects.GameObjectType;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -39,6 +40,11 @@ class EnemyDaoImplTest {
         transaction.commit();
     }
 
+    @BeforeEach
+    void clear() {
+        em.clear();
+    }
+
     @Test
     void testInstanceCreated() {
         EnemyDaoImpl dao = new EnemyDaoImpl(em);
@@ -54,13 +60,13 @@ class EnemyDaoImplTest {
     @Test
     void testGetEnemyByIdOne() {
         Enemy enemy = edi.getEnemy(1);
-        assertEquals(enemy1, enemy);
+        assertEquals(1, enemy.getId());
     }
 
     @Test
     void testGetEnemyByIdThree() {
         Enemy enemy = edi.getEnemy(3);
-        assertEquals(enemy3, enemy);
+        assertEquals(DRAGON, enemy.getType());
     }
 
     @Test
@@ -72,11 +78,12 @@ class EnemyDaoImplTest {
     @Test
     void testGetAllEnemyReturnsCorrectly() {
         List<Enemy> expected = new ArrayList<>();
-        expected.add(enemy1);
-        expected.add(enemy2);
-        expected.add(enemy3);
+        expected.add(edi.getEnemy(1L));
+        expected.add(edi.getEnemy(2L));
+        expected.add(edi.getEnemy(3L));
+
         List<Enemy> enemies = edi.getAllEnemy();
-        assertTrue(expected.containsAll(enemies));
+        assertTrue(enemies.containsAll(expected));
     }
 
     @Test
@@ -98,14 +105,13 @@ class EnemyDaoImplTest {
         Enemy expectedEnemy = new Orc(5,6, 2);
         edi.saveNewEnemy(expectedEnemy);
         Enemy enemy = edi.getEnemy(expectedEnemy.getId());
-        em.remove(expectedEnemy);
         assertEquals(expectedEnemy, enemy);
     }
 
     @Test
     void testGetEnemiesByType() {
         List<Enemy> enemies = edi.getEnemiesByType(DRAGON);
-        assertEquals(enemy3, enemies.get(0));
+        assertEquals(DRAGON, enemies.get(0).getType());
     }
 
     @AfterAll
