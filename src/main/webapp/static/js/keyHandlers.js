@@ -1,6 +1,6 @@
 document.onkeydown = function(e) {
     let handled;
-    if (e.keyCode !== undefined) {
+    if (e.keyCode !== undefined && !defeat()) {
         switch (e.keyCode) {
             case 37: //left
                 requestMap('left');
@@ -24,5 +24,4 @@ document.onkeydown = function(e) {
             e.preventDefault();
         }
     }
-
 };

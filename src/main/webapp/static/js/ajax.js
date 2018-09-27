@@ -1,11 +1,5 @@
-window.addEventListener('load', function() {
-    ajax_get("/send", function (data) {
-        mapObjects = data[0];
-        mainCharacter = data[1][0];
-    }, 'load');
-});
 
-function ajax_get(url, callback, action) {
+function ajax_get(url, callback, action, value) {
     let xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         let data;
@@ -21,7 +15,7 @@ function ajax_get(url, callback, action) {
         }
     };
     xmlhttp.open("GET", url, true);
-    xmlhttp.setRequestHeader("action", action);
+    xmlhttp.setRequestHeader(action, value);
     xmlhttp.send();
 }
 
@@ -29,22 +23,17 @@ function requestMap(action) {
     ajax_get('/send', function (data) {
         mapObjects = data[0];
         mainCharacter = data[1][0];
+        mainCharacterHealth = mainCharacter.hp;
         updateCharacterStats();
         updateInventory();
 
-    }, action)
-}
-
-function requestCharacter() {
-    ajax_get('/send', function (data) {
-        mainCharacter = data;
-        updateCharacterStats();
-    },"action", "char");
+    }, "map", action)
 }
 
 function requestEquip(item_name) {
     ajax_get('/send', function (data) {
         mainCharacter = data;
+        mainCharacterHealth = mainCharacter.hp;
         updateCharacterStats();
     },"equip", item_name)
 }
