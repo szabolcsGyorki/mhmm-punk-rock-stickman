@@ -50,7 +50,7 @@ public class AjaxCall extends HttpServlet {
             game.move(player,level,actionRequired);
         } else if (req.getHeader("equip") != null) {
             actionRequired = req.getHeader("equip");
-            // jatekos.equip(actionRequired) JÁNOS HELP
+            game.equip(player, actionRequired);
         }
 
         game.setPlayer(session, player);

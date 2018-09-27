@@ -4,6 +4,9 @@ import com.codecool.mhmm.stickman.DAO.DAOImpl.EnemyDaoImpl;
 import com.codecool.mhmm.stickman.DAO.DAOImpl.ItemsDAOImpl;
 import com.codecool.mhmm.stickman.GameObjects.Characters.Player;
 import com.codecool.mhmm.stickman.GameObjects.GameObject;
+import com.codecool.mhmm.stickman.GameObjects.Items.Armor;
+import com.codecool.mhmm.stickman.GameObjects.Items.Item;
+import com.codecool.mhmm.stickman.GameObjects.Items.Weapon;
 import com.codecool.mhmm.stickman.Map.Level;
 
 import javax.persistence.EntityManager;
@@ -121,7 +124,10 @@ public class Game {
     }
 
     void equip(Player player, String itemName){
-
-        player.setFullBody();
+        Item item = itemsDAO.getItem(itemName);
+        if (item instanceof Armor)
+            player.setFullBody((Armor) item);
+        if (item instanceof Weapon)
+            player.setWeapon((Weapon) item);
     }
 }
