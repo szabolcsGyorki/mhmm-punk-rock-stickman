@@ -74,7 +74,7 @@ public class Game {
 
 
         transaction.commit();
-        
+
         Zsolt.addItemToInventory(itemsDAO.getItem("Foskard"));
         Zsolt.addItemToInventory(itemsDAO.getItem("Fosarmor"));
 

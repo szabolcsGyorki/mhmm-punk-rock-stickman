@@ -112,7 +112,7 @@ public class Player extends Character {
         items.add(item);
     }
 
-    public Item getItemById(int id) {
+    public Item getItemById(long id) {
         return items.stream()
                 .filter(item -> item.getId() == id)
                 .findFirst().orElse(null);
