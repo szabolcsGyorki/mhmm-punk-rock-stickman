@@ -40,8 +40,7 @@ public class AjaxCall extends HttpServlet {
 
         HttpSession session = req.getSession(true);
         Player player = game.getPlayer(session);
-        player.addItemToInventory(new Weapon("Foskard", 0, 50, 25));
-        player.addItemToInventory(new Armor("Fosarmor", 0, 50));
+
         Level level = game.getLevel(session);
 
         String actionRequired = null;

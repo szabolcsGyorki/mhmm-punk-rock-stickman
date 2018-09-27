@@ -40,6 +40,9 @@ public class Game {
         Zsolt = new Player(1,1);
         levelOne.placePlayer(Zsolt);
 
+        Zsolt.addItemToInventory(new Weapon("Foskard", 0, 50, 25));
+        Zsolt.addItemToInventory(new Armor("Fosarmor", 0, 50));
+
         Init.init(em);
 
         levelOne.placeWall(1,2);
