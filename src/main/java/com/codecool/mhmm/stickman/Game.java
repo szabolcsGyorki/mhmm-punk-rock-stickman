@@ -36,7 +36,7 @@ public class Game {
     private Level levelOne;
 
     public void initForDemo(){
-        levelOne = new Level(10,10 ,WALL, FLOOR);
+        levelOne = new Level(10,10 ,WALL, FLOOR, em);
         Zsolt = new Player(1,1, "Zsolt");
         levelOne.placePlayer(Zsolt);
 
@@ -74,9 +74,10 @@ public class Game {
 
 
         transaction.commit();
+        
+        Zsolt.addItemToInventory(itemsDAO.getItem("Foskard"));
+        Zsolt.addItemToInventory(itemsDAO.getItem("Fosarmor"));
 
-        Zsolt.addItemToInventory(new Weapon("Foskard", 0, 50, 25));
-        Zsolt.addItemToInventory(new Armor("Fosarmor", 0, 50));
     }
 
     public static Game getInstance() {
