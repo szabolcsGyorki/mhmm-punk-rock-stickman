@@ -35,6 +35,10 @@ function updateInventory() {
 }
 
     function get_selected_item() {
-        let item_name = character_inventory_list.getElementsByClassName("active");
-        return item_name.innerHTML;
+    let items = character_inventory_list.getElementsByClassName("list-group-item list-group-item-action");
+    for (let item of items) {
+        if (item.classList.contains("active")) {
+            return item.innerHTML;
+        }
+    }
 }
