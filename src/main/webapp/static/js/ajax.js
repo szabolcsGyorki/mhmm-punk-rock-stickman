@@ -23,17 +23,16 @@ function requestMap(action) {
     ajax_get('/send', function (data) {
         mapObjects = data[0];
         mainCharacter = data[1][0];
-        mainCharacterHealth = mainCharacter.hp;
+        mainCharacterHealth = mainCharacter.Health;
         updateCharacterStats();
         updateInventory();
-
     }, "map", action)
 }
 
 function requestEquip(item_name) {
     ajax_get('/send', function (data) {
         mainCharacter = data;
-        mainCharacterHealth = mainCharacter.hp;
+        mainCharacterHealth = mainCharacter.Health;
         updateCharacterStats();
     },"equip", item_name)
 }

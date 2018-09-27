@@ -103,10 +103,11 @@ public class AjaxCall extends HttpServlet {
         }
 
         //filling character details
-        character.put("hp", player.getHitPoint());
-        character.put("str", player.getStrength());
-        character.put("agi", player.getAgility());
-        character.put("int", player.getIntelligence());
+        character.put("Health", player.getHitPoint());
+        character.put("Strength", player.getStrength());
+        character.put("Agility", player.getAgility());
+        character.put("Intellect", player.getIntelligence());
+        character.put("Damage", player.getDamage());
         character.put("inventory", characterInventory);
         return character;
     }
