@@ -21,6 +21,10 @@ public class Init {
         Armor armor3 = new Armor("Kraken Shell", 10, 100);
         Armor armor4 = new Armor("Diamond Mail", 80, 20);
 
+        // TEST DATA
+        Weapon weapon5 = new Weapon("Foskard", 0, 50, 25);
+        Armor armor5 = new Armor("Fosarmor", 0, 50);
+
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         em.persist(armor);
@@ -32,6 +36,11 @@ public class Init {
         em.persist(weapon2);
         em.persist(weapon3);
         em.persist(weapon4);
+
+        // TEST DATA
+        em.persist(weapon5);
+        em.persist(armor5);
+
         transaction.commit();
 
     }
