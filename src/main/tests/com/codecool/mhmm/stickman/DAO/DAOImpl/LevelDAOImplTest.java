@@ -32,8 +32,8 @@ class LevelDAOImplTest {
 
     @BeforeAll
     static void init() {
-        level1 = new Level(300, 400, GameObjectType.WALL, GameObjectType.FLOOR);
-        level2 = new Level(350, 350, GameObjectType.WALL, GameObjectType.FLOOR);
+        level1 = new Level(4, 5, GameObjectType.WALL, GameObjectType.FLOOR);
+        level2 = new Level(3, 4, GameObjectType.WALL, GameObjectType.FLOOR);
 
         level1.placePlayer(player = new Player(5, 10));
         level1.addContent(enemy = new Orc(2,3, 1));
@@ -41,7 +41,9 @@ class LevelDAOImplTest {
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         em.persist(level1);
-        em.persist(level2);
+        for (GameObject object : level1.getMap()) {
+            em.persist(object);
+        }
         transaction.commit();
     }
 
@@ -60,13 +62,13 @@ class LevelDAOImplTest {
     @Test
     void testGetLevelWidth() {
         Level level = levelDAO.getLevel(1L);
-        assertEquals(300, level.getWIDTH());
+        assertEquals(4, level.getWIDTH());
     }
 
     @Test
     void testGetLevelHeight() {
         Level level = levelDAO.getLevel(1L);
-        assertEquals(400, level.getHEIGHT());
+        assertEquals(5, level.getHEIGHT());
     }
 
     @Test
@@ -77,10 +79,15 @@ class LevelDAOImplTest {
 
     @Test
     void testGetLevelContent() {
+        assertNotNull(levelDAO.getLevelObjects(1L));
+    }
+
+    @Test
+    void testGetLevelContentIsCorrect() {
         List<GameObject> expectedContent = new ArrayList<>();
         expectedContent.add(enemy);
         expectedContent.add(player);
-        assertTrue(expectedContent.containsAll(levelDAO.getLevelObjects(1L)));
+        assertTrue(levelDAO.getLevelObjects(1L).containsAll(expectedContent));
     }
 
 }

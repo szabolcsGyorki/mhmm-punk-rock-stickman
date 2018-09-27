@@ -19,14 +19,14 @@ public class EnemyDaoImpl extends BaseDaoImpl implements EnemyDao {
     }
 
     @Override
-    public List<Enemy> getAllEnemy() {
-        TypedQuery<Enemy> query = em.createNamedQuery("Enemy.getAll", Enemy.class);
-        return query.getResultList();
+    public Enemy getEnemy(long id) {
+        return em.find(Enemy.class, id);
     }
 
     @Override
-    public Enemy getEnemy(long id) {
-        return em.find(Enemy.class, id);
+    public List<Enemy> getAllEnemy() {
+        TypedQuery<Enemy> query = em.createNamedQuery("Enemy.getAll", Enemy.class);
+        return query.getResultList();
     }
 
     @Override

@@ -25,7 +25,4 @@ public interface LevelDAO {
      * check name duplication!
      */
     void createNewLevel(Level level);
-
-    void updateLevel(Level level, long id);
-
 }

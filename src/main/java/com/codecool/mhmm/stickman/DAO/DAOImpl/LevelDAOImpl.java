@@ -15,12 +15,13 @@ public class LevelDAOImpl extends BaseDaoImpl implements LevelDAO {
 
     @Override
     public Level getLevel(long id) {
-        return null;
+        return em.find(Level.class, id);
     }
 
     @Override
     public List<GameObject> getLevelObjects(long id) {
-        return null;
+        Level level = em.find(Level.class, id);
+        return level.getMap();
     }
 
     @Override
@@ -28,8 +29,4 @@ public class LevelDAOImpl extends BaseDaoImpl implements LevelDAO {
 
     }
 
-    @Override
-    public void updateLevel(Level level, long id) {
-
-    }
 }
