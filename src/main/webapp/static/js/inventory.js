@@ -13,7 +13,7 @@ function updateInventory() {
     for (let item of mainCharacter.inventory) {
         let item_info;
         if (item.type === "weapon") {
-            item_info = item.minDamage + " - " + item.maxDamage;
+            item_info = "+ " + item.minDamage + " - " + item.maxDamage + " damage";
         } else {
             item_info = "+ " + item.healthIncrease + " HP";
         }
@@ -31,7 +31,7 @@ function updateInventory() {
             + item_info + '</div>'
     }
     //setting the first list item selected
-    document.getElementById("list-tab").firstChild.classList.add("active");
+    //document.getElementById("list-tab").firstChild.classList.add("active");
 }
 
     function get_selected_item() {
