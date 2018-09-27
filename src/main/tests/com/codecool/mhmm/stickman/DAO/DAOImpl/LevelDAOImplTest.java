@@ -35,7 +35,7 @@ class LevelDAOImplTest {
         level1 = new Level(4, 5, GameObjectType.WALL, GameObjectType.FLOOR);
         level2 = new Level(3, 4, GameObjectType.WALL, GameObjectType.FLOOR);
 
-        level1.placePlayer(player = new Player(5, 10));
+        level1.placePlayer(player = new Player(5, 10, "Tirion"));
         level1.addContent(enemy = new Orc(2,3, 1));
 
         EntityTransaction transaction = em.getTransaction();

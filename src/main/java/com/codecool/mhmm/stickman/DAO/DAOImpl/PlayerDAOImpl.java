@@ -14,8 +14,8 @@ public class PlayerDAOImpl extends BaseDaoImpl implements PlayerDAO {
     }
 
     @Override
-    public Player getPlayer(int id) {
-        return null;
+    public Player getPlayer(long id) {
+        return em.find(Player.class, id);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class PlayerDAOImpl extends BaseDaoImpl implements PlayerDAO {
     }
 
     @Override
-    public <List> Item getPlayerItems(int playerID) {
+    public <List> Item getPlayerItems(long playerID) {
         return null;
     }
 
@@ -59,7 +59,7 @@ public class PlayerDAOImpl extends BaseDaoImpl implements PlayerDAO {
     }
 
     @Override
-    public <List> GameObject getModifiedByPlayer(int playerID) {
+    public <List> GameObject getModifiedByPlayer(long playerID) {
         return null;
     }
 

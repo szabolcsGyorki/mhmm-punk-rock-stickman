@@ -11,8 +11,8 @@ public class Init {
 
     public static void init(EntityManager em) {
 
-        Player player = new Player(10, 20);
-        Player player1 = new Player(5, 10);
+        Player player = new Player(10, 20, "John");
+        Player player1 = new Player(5, 10, "Sepiroth");
         Armor armor = new Armor("Sacred armor", 40, 50);
         Weapon weapon = new Weapon("Sword of thousand darkness", 80, 234, 165);
         Weapon weapon1 = new Weapon("Mythical Sword", 1000, 120, 1);

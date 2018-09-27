@@ -15,8 +15,9 @@ public interface PlayerDAO {
      * get player Weapon
      * equip player Armor
      * equip player Weapon
+     * @param id
      */
-    Player getPlayer(int id);
+    Player getPlayer(long id);
 
     /**
      * IN ORDER!
@@ -52,8 +53,9 @@ public interface PlayerDAO {
 
     /**
      * load player items
+     * @param playerID
      */
-    <List> Item getPlayerItems(int playerID);
+    <List> Item getPlayerItems(long playerID);
 
     /**
      * load player items
@@ -72,8 +74,9 @@ public interface PlayerDAO {
 
     /**
      * load list of modified elements
+     * @param playerID
      */
-    <List> GameObject getModifiedByPlayer(int playerID);
+    <List> GameObject getModifiedByPlayer(long playerID);
 
     void updateModifiedByPlayer(Player player);
 
