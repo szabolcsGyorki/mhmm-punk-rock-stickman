@@ -1,10 +1,12 @@
 package com.codecool.mhmm.stickman.Map;
 
+import com.codecool.mhmm.stickman.DAO.DAOImpl.ItemsDAOImpl;
 import com.codecool.mhmm.stickman.GameObjects.Characters.*;
 import com.codecool.mhmm.stickman.GameObjects.Characters.Character;
 import com.codecool.mhmm.stickman.GameObjects.Characters.Enemy.*;
 import com.codecool.mhmm.stickman.GameObjects.GameObject;
 import com.codecool.mhmm.stickman.GameObjects.GameObjectType;
+import com.codecool.mhmm.stickman.GameObjects.Items.Loot;
 import com.codecool.mhmm.stickman.GameObjects.Wall;
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -21,16 +23,20 @@ public class Level {
     @JoinTable(name = "level_content")
     private List<GameObject> map = new ArrayList<>();
 
+    @Transient
+    private ItemsDAOImpl itemsDAO;
+
     private int WIDTH;
     private int HEIGHT;
     private GameObjectType wallImage;
     private GameObjectType floorImage;
 
-    public Level(int width, int height, GameObjectType wall, GameObjectType floor) {
+    public Level(int width, int height, GameObjectType wall, GameObjectType floor, EntityManager em) {
         this.WIDTH=width;
         this.HEIGHT=height;
         this.wallImage = wall;
         this.floorImage = floor;
+        this.itemsDAO = new ItemsDAOImpl(em);
         generateBase();
     }
 
@@ -104,7 +110,8 @@ public class Level {
             switch (destination.getType()) {
                 case LOOT: {
                     movingCharacter.place(toX, toY);
-                    // pick up
+                    Loot loot = (Loot) destination;
+                    loot.Pickup((Player)movingCharacter);
                     map.remove(destination);
                     break;
                 }
@@ -120,7 +127,8 @@ public class Level {
                         if (enemy.getHitPoint() <= 0) {
                             map.remove(destination);
                             movingCharacter.place(toX, toY);
-                            //get loot after enemy
+                            Loot loot = new Loot(0,0,itemsDAO);
+                            loot.Pickup(player);
                         }
                         break;
                     }

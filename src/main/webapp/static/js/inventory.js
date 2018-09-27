@@ -34,7 +34,11 @@ function updateInventory() {
     document.getElementById("list-tab").firstChild.classList.add("active");
 }
 
-function get_selected_item() {
-    let item_name = character_inventory_list.getElementsByClassName("active");
-    return item_name.innerHTML;
+    function get_selected_item() {
+    let items = character_inventory_list.getElementsByClassName("list-group-item list-group-item-action");
+    for (let item of items) {
+        if (item.classList.contains("active")) {
+            return item.innerHTML;
+        }
+    }
 }

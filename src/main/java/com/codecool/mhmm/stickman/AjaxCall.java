@@ -31,17 +31,26 @@ public class AjaxCall extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String actionRequired = req.getHeader("action");
         Game game = Game.getInstance();
         if (demoload) {
             game.initForDemo();
             demoload = false;
         }
 
+
         HttpSession session = req.getSession(true);
         Player player = game.getPlayer(session);
+
         Level level = game.getLevel(session);
-        game.move(player,level,actionRequired);
+
+        String actionRequired = null;
+        if (req.getHeader("map") != null) {
+            actionRequired = req.getHeader("map");
+            game.move(player,level,actionRequired);
+        } else if (req.getHeader("equip") != null) {
+            actionRequired = req.getHeader("equip");
+            game.equip(player, actionRequired);
+        }
 
         game.setPlayer(session, player);
         game.setLevel(session, level);
@@ -94,10 +103,11 @@ public class AjaxCall extends HttpServlet {
         }
 
         //filling character details
-        character.put("hp", player.getHitPoint());
-        character.put("str", player.getStrength());
-        character.put("agi", player.getAgility());
-        character.put("int", player.getIntelligence());
+        character.put("Health", player.getHitPoint());
+        character.put("Strength", player.getStrength());
+        character.put("Agility", player.getAgility());
+        character.put("Intellect", player.getIntelligence());
+        character.put("Damage", player.getDamage());
         character.put("inventory", characterInventory);
         return character;
     }

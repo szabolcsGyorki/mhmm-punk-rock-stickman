@@ -1,7 +1,12 @@
 package com.codecool.mhmm.stickman;
 
+import com.codecool.mhmm.stickman.DAO.DAOImpl.EnemyDaoImpl;
+import com.codecool.mhmm.stickman.DAO.DAOImpl.ItemsDAOImpl;
 import com.codecool.mhmm.stickman.GameObjects.Characters.Player;
 import com.codecool.mhmm.stickman.GameObjects.GameObject;
+import com.codecool.mhmm.stickman.GameObjects.Items.Armor;
+import com.codecool.mhmm.stickman.GameObjects.Items.Item;
+import com.codecool.mhmm.stickman.GameObjects.Items.Weapon;
 import com.codecool.mhmm.stickman.Map.Level;
 
 import javax.persistence.EntityManager;
@@ -22,14 +27,20 @@ public class Game {
     private EntityManager em = emf.createEntityManager();
     private EntityTransaction transaction = em.getTransaction();
 
+    private ItemsDAOImpl itemsDAO = new ItemsDAOImpl(em);
+    private EnemyDaoImpl enemyDao = new EnemyDaoImpl(em);
+    // private LevelDaoImpl levelDao = new LevelDaoImpl(em);
+
     //GUEST TRIAL STUFF
     private Player Zsolt;
     private Level levelOne;
 
     public void initForDemo(){
-        levelOne = new Level(10,10 ,WALL, FLOOR);
+        levelOne = new Level(10,10 ,WALL, FLOOR, em);
         Zsolt = new Player(1,1, "Zsolt");
         levelOne.placePlayer(Zsolt);
+
+        Init.init(em);
 
         levelOne.placeWall(1,2);
         levelOne.placeWall(2,2);
@@ -56,10 +67,17 @@ public class Game {
         levelOne.placeEnemy(6,7,DRAGON,1);
         transaction.begin();
         em.persist(levelOne);
+
         for (GameObject object : levelOne.getMap()) {
             em.persist(object);
         }
+
+
         transaction.commit();
+        
+        Zsolt.addItemToInventory(itemsDAO.getItem("Foskard"));
+        Zsolt.addItemToInventory(itemsDAO.getItem("Fosarmor"));
+
     }
 
     public static Game getInstance() {
@@ -107,5 +125,13 @@ public class Game {
                 && movingObject.getX() > 0) {
             level.move(movingObject.getX()-1, movingObject.getY(), (Player) movingObject);
         }
+    }
+
+    void equip(Player player, String itemName){
+        Item item = itemsDAO.getItem(itemName);
+        if (item instanceof Armor)
+            player.setFullBody((Armor) item);
+        if (item instanceof Weapon)
+            player.setWeapon((Weapon) item);
     }
 }
