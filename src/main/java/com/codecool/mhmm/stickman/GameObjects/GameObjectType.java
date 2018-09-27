@@ -9,5 +9,7 @@ public enum GameObjectType {
     WALL,
     FLOOR,
     ENEMY,
+    ARMOR,
+    WEAPON,
     MAIN_CHARACTER
 }

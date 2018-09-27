@@ -14,25 +14,19 @@ import java.util.List;
 
 public class EnemyDaoImpl extends BaseDaoImpl implements EnemyDao {
 
-    EnemyDaoImpl(EntityManager em) {
+    public EnemyDaoImpl(EntityManager em) {
         super(em);
+    }
+
+    @Override
+    public Enemy getEnemy(long id) {
+        return em.find(Enemy.class, id);
     }
 
     @Override
     public List<Enemy> getAllEnemy() {
         TypedQuery<Enemy> query = em.createNamedQuery("Enemy.getAll", Enemy.class);
         return query.getResultList();
-    }
-
-    @Override
-    public Enemy getEnemy(long id) {
-        CriteriaQuery<Enemy> q = cb.createQuery(Enemy.class);
-        Root<Enemy> enemy = q.from(Enemy.class);
-        ParameterExpression p = cb.parameter(long.class);
-        q.select(enemy).where(cb.equal(enemy.get("id"), p));
-        TypedQuery<Enemy> query = em.createQuery(q);
-        query.setParameter(p, id);
-        return query.getSingleResult();
     }
 
     @Override
@@ -57,7 +51,7 @@ public class EnemyDaoImpl extends BaseDaoImpl implements EnemyDao {
                 .where(cb.equal(enemyRoot.get("type"), enemyType));
         Query query = em.createQuery(update);
         query.executeUpdate();
-        em.clear();
+        getEnemiesByType(enemyType).forEach(em::refresh);
         transaction.commit();
     }
 

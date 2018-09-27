@@ -2,6 +2,7 @@ package com.codecool.mhmm.stickman.GameObjects.Items;
 
 import com.codecool.mhmm.stickman.DAO.DAOImpl.ItemsDAOImpl;
 import com.codecool.mhmm.stickman.DAO.ItemsDAO;
+import com.codecool.mhmm.stickman.GameObjects.Characters.Player;
 import com.codecool.mhmm.stickman.GameObjects.GameObject;
 import com.codecool.mhmm.stickman.GameObjects.GameObjectType;
 
@@ -32,8 +33,13 @@ public class Loot extends Item {
         add();
     }
 
-    public void setItemsList(ItemsDAOImpl itemsList) {
+    public void setItemsDao(ItemsDAOImpl itemsList) {
         this.itemsList = itemsList;
+    }
+
+    public void Pickup(Player player){
+        for(Item item : loot)
+            player.addItemToInventory(item);
     }
 
     public Loot() {
