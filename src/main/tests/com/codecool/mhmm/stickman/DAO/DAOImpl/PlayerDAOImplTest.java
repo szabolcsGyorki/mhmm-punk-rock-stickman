@@ -44,4 +44,16 @@ class PlayerDAOImplTest {
         Player player = playerDAO.getPlayer(1L);
         assertEquals("George", player.getName());
     }
+
+    @Test
+    void testGetPlayerByName() {
+        Player player = playerDAO.getPlayer("George");
+        assertNotNull(player);
+    }
+
+    @Test
+    void testGetPlayerByNameIsCorrect() {
+        Player player = playerDAO.getPlayer("George");
+        assertEquals("George", player.getName());
+    }
 }

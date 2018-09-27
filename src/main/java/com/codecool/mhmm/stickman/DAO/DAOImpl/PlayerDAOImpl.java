@@ -6,6 +6,10 @@ import com.codecool.mhmm.stickman.GameObjects.GameObject;
 import com.codecool.mhmm.stickman.GameObjects.Items.Item;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.ParameterExpression;
+import javax.persistence.criteria.Root;
 
 public class PlayerDAOImpl extends BaseDaoImpl implements PlayerDAO {
 
@@ -20,7 +24,13 @@ public class PlayerDAOImpl extends BaseDaoImpl implements PlayerDAO {
 
     @Override
     public Player getPlayer(String name) {
-        return null;
+        CriteriaQuery<Player> cq = cb.createQuery(Player.class);
+        Root<Player> playerRoot = cq.from(Player.class);
+        ParameterExpression p = cb.parameter(String.class);
+        cq.select(playerRoot).where(cb.equal(playerRoot.get("name"), p));
+        TypedQuery<Player> query = em.createQuery(cq);
+        query.setParameter(p, name);
+        return query.getSingleResult();
     }
 
     @Override
