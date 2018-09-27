@@ -23,6 +23,7 @@ function requestMap(action) {
     ajax_get('/send', function (data) {
         mapObjects = data[0];
         mainCharacter = data[1][0];
+        mainCharacterHealth = mainCharacter.hp;
         updateCharacterStats();
         updateInventory();
 
@@ -32,6 +33,7 @@ function requestMap(action) {
 function requestEquip(item_name) {
     ajax_get('/send', function (data) {
         mainCharacter = data;
+        mainCharacterHealth = mainCharacter.hp;
         updateCharacterStats();
     },"equip", item_name)
 }
