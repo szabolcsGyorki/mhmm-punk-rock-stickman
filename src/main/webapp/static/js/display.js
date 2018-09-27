@@ -22,6 +22,8 @@ function setup() {
 
 function draw() {
     clear();
+    fill(230);
+    rect(0, 0, 490, 490);
     drawBoard();
 }
 
