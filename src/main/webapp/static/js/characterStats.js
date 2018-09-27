@@ -1,5 +1,5 @@
 let character_stats_list = document.getElementById("character_stats_list");
-
+let order_of_stats = ["Health", "Damage", "Strength", "Agility",  "Intellect"];
 
 function updateCharacterStats() {
 
@@ -7,13 +7,11 @@ function updateCharacterStats() {
         character_stats_list.removeChild(character_stats_list.firstChild);
     }
 
-    for (let key in mainCharacter) {
-        if (mainCharacter.hasOwnProperty(key) && key !== 'inventory') {
-            let new_list_item = document.createElement('li');
-            new_list_item.classList.add('list-group-item');
-            let new_list_text = document.createTextNode(key + ': ' + mainCharacter[key]);
-            new_list_item.appendChild(new_list_text);
-            character_stats_list.appendChild(new_list_item);
-        }
+    for (let stat of order_of_stats) {
+        let new_list_item = document.createElement('li');
+        new_list_item.classList.add('list-group-item');
+        let new_list_text = document.createTextNode(stat + ': ' + mainCharacter[stat]);
+        new_list_item.appendChild(new_list_text);
+        character_stats_list.appendChild(new_list_item);
     }
 }
