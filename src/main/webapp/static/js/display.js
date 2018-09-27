@@ -1,10 +1,12 @@
 let mapObjects = [];
 let mainCharacter;
+let mainCharacterHealth;
 
 window.addEventListener('load', function() {
     ajax_get("/send", function (data) {
         mapObjects = data[0];
         mainCharacter = data[1][0];
+        mainCharacterHealth = mainCharacter.hp;
         updateCharacterStats();
         updateInventory();
     }, 'load');
@@ -23,9 +25,8 @@ function setup() {
 function draw() {
     clear();
     fill(230);
-    rect(0, 0, 490, 490);
     drawBoard();
-}
+    }
 
 function drawBoard() {
     for (let i = 0; i < mapObjects.length; i++) {
@@ -46,5 +47,5 @@ function drawBoard() {
             case 'ORC': image(orc_image, object.x*50, object.y*50, height/12, width/12)
         }
     }
-
+    defeat();
 }
