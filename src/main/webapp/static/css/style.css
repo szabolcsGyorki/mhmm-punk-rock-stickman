@@ -1,53 +1,19 @@
-body {
-    background-color: #6c8cd5;
+#character_stats {
+    display: inline-block;
+    width: 10%;
+    float: left;
+    left: 50%;
+
 }
 
-#pageHeader {
-    width: 100%;
-    background-color: #1240ab;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-}
+#inventory {
+    display: inline-block;
+    margin-left: 15%;
+    height: 200px;
 
-#pageHeader h1 {
-    padding: 0;
-    margin: 0;
-}
-
-.game-container {
-    display: table;
-    width: auto;
-    box-shadow: 0 0 24px rgba(0, 0, 0, .4);
-    margin: 50px auto;
-}
-
-.game-container:after {
-    content: "";
-    float: none;
-    clear: both;
 }
 
 #canvas {
-    float: left;
-    width: 490px;
-    height: 490px;
-}
-
-#character_stats {
-    box-sizing: border-box;
-    border-left: 2px solid #111;
-    float: left;
-    width: 300px;
-    background-color: rgba(210, 210, 210, 1);
-    height: 490px;
-}
-
-#character_stats .list-group-item {
-    background-color: rgba(210, 210, 210, 1);
-}
-
-#inventory_button {
-    display: table;
-    margin: 20px auto;
+    display: inline-block;
+    left: 50%;
 }
