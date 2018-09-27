@@ -7,6 +7,7 @@ import com.codecool.mhmm.stickman.GameObjects.GameObject;
 import com.codecool.mhmm.stickman.GameObjects.GameObjectType;
 import com.codecool.mhmm.stickman.Map.Level;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javax.persistence.EntityManager;
@@ -24,6 +25,7 @@ class LevelDAOImplTest {
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("stickman");
     private static EntityManager em = emf.createEntityManager();
     private static LevelDAOImpl levelDAO = new LevelDAOImpl(em);
+    private static ItemsDAOImpl itemsDAO = new ItemsDAOImpl(em);
 
     private static Level level1;
     private static Level level2;
@@ -32,8 +34,8 @@ class LevelDAOImplTest {
 
     @BeforeAll
     static void init() {
-        level1 = new Level(4, 5, GameObjectType.WALL, GameObjectType.FLOOR);
-        level2 = new Level(3, 4, GameObjectType.WALL, GameObjectType.FLOOR);
+        level1 = new Level(4, 5, GameObjectType.WALL, GameObjectType.FLOOR, itemsDAO);
+        level2 = new Level(3, 4, GameObjectType.WALL, GameObjectType.FLOOR, itemsDAO);
 
         level1.placePlayer(player = new Player(5, 10, "Tirion"));
         level1.addContent(enemy = new Orc(2,3, 1));
@@ -45,6 +47,11 @@ class LevelDAOImplTest {
             em.persist(object);
         }
         transaction.commit();
+    }
+
+    @BeforeEach
+    void clear() {
+        em.clear();
     }
 
     @Test
@@ -84,15 +91,21 @@ class LevelDAOImplTest {
 
     @Test
     void testGetLevelContentIsCorrect() {
-        List<GameObject> expectedContent = new ArrayList<>();
-        expectedContent.add(enemy);
-        expectedContent.add(player);
-        assertTrue(levelDAO.getLevelObjects(level1.getId()).containsAll(expectedContent));
+        List<GameObject> content = levelDAO.getLevelObjects(level1.getId());
+        Player player = (Player) content.stream()
+                .filter(c -> c instanceof Player)
+                .findFirst().orElse(null);
+        Enemy enemy = (Enemy) content.stream()
+                .filter(c -> c instanceof Enemy)
+                .findFirst().orElse(null);
+        assert player != null;
+        assert enemy != null;
+        assertTrue(player.getName().equals("Tirion") && enemy.getType() == GameObjectType.ORC);
     }
 
     @Test
     void testCreateNewLevel() {
-        Level newLevel = new Level(2, 4, GameObjectType.WALL, GameObjectType.FLOOR);
+        Level newLevel = new Level(2, 4, GameObjectType.WALL, GameObjectType.FLOOR, itemsDAO);
         levelDAO.createNewLevel(newLevel);
         Level savedLevel = levelDAO.getLevel(newLevel.getId());
         em.remove(newLevel);
@@ -101,7 +114,7 @@ class LevelDAOImplTest {
 
     @Test
     void testCreateNewLevelIsCorrect() {
-        Level newLevel = new Level(2, 4, GameObjectType.WALL, GameObjectType.FLOOR);
+        Level newLevel = new Level(2, 4, GameObjectType.WALL, GameObjectType.FLOOR, itemsDAO);
         levelDAO.createNewLevel(newLevel);
         Level savedLevel = levelDAO.getLevel(newLevel.getId());
         em.remove(newLevel);
