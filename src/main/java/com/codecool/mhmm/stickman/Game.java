@@ -1,7 +1,8 @@
 package com.codecool.mhmm.stickman;
 
-import com.codecool.mhmm.stickman.DAO.DAOImpl.EnemyDaoImpl;
+import com.codecool.mhmm.stickman.DAO.DAOImpl.EnemyDAOImpl;
 import com.codecool.mhmm.stickman.DAO.DAOImpl.ItemsDAOImpl;
+import com.codecool.mhmm.stickman.DAO.DAOImpl.LevelDAOImpl;
 import com.codecool.mhmm.stickman.GameObjects.Characters.Player;
 import com.codecool.mhmm.stickman.GameObjects.GameObject;
 import com.codecool.mhmm.stickman.GameObjects.Items.Armor;
@@ -13,7 +14,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import static com.codecool.mhmm.stickman.GameObjects.GameObjectType.*;
@@ -28,8 +28,8 @@ public class Game {
     private EntityTransaction transaction = em.getTransaction();
 
     private ItemsDAOImpl itemsDAO = new ItemsDAOImpl(em);
-    private EnemyDaoImpl enemyDao = new EnemyDaoImpl(em);
-    // private LevelDaoImpl levelDao = new LevelDaoImpl(em);
+    private EnemyDAOImpl enemyDao = new EnemyDAOImpl(em);
+    private LevelDAOImpl levelDao = new LevelDAOImpl(em);
 
     //GUEST TRIAL STUFF
     private Player Zsolt;
@@ -65,19 +65,11 @@ public class Game {
         levelOne.placeEnemy(8,2,SKELETON,1);
         levelOne.placeEnemy(2,4,ORC,1);
         levelOne.placeEnemy(6,7,DRAGON,1);
-        transaction.begin();
-        em.persist(levelOne);
 
-        for (GameObject object : levelOne.getMap()) {
-            em.persist(object);
-        }
+        levelOne.placeLoot(4, 1, itemsDAO.getItem("Colossus Blade"));
+        levelOne.placeLoot(1, 4, itemsDAO.getItem("Shadow Plate"));
 
-
-        transaction.commit();
-        
-        Zsolt.addItemToInventory(itemsDAO.getItem("Foskard"));
-        Zsolt.addItemToInventory(itemsDAO.getItem("Fosarmor"));
-
+        levelDao.createNewLevel(levelOne);
     }
 
     public static Game getInstance() {

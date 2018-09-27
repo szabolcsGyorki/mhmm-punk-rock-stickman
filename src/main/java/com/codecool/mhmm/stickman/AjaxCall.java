@@ -96,8 +96,10 @@ public class AjaxCall extends HttpServlet {
             if (item instanceof Weapon) {
                 jsonItem.put("maxDamage", ((Weapon) item).getMaxDamage());
                 jsonItem.put("minDamage", ((Weapon) item).getMinDamage());
+                jsonItem.put("type", "weapon");
             } else {
                 jsonItem.put("healthIncrease", ((Armor) item).getHealthIncrease());
+                jsonItem.put("type", "armor");
             }
             characterInventory.add(jsonItem);
         }
@@ -107,7 +109,7 @@ public class AjaxCall extends HttpServlet {
         character.put("Strength", player.getStrength());
         character.put("Agility", player.getAgility());
         character.put("Intellect", player.getIntelligence());
-        character.put("Damage", player.getDamage());
+        character.put("Damage", player.getDisplayDamage());
         character.put("inventory", characterInventory);
         return character;
     }

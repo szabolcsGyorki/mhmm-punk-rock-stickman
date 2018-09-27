@@ -19,6 +19,9 @@ public class Init {
         Armor armor6 = new Armor("Flaming Armor", 1300, -10);
         Armor armor7 = new Armor("Invisible Armor", 1300, 0);
 
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+
         em.persist(armor1);
         em.persist(armor2);
         em.persist(armor3);
@@ -33,7 +36,7 @@ public class Init {
         Weapon weapon4 = new Weapon("Healing Wand",100, -10, -100);
         Weapon weapon5 = new Weapon("Flaming Flamingo", 5, 41, 40);
         Weapon weapon6 = new Weapon("Ice Shard", 0, 2,0);
-        Weapon weapon7 = new Weapon("Cthulhu's book of Insanity", 600, 600, -600);
+        Weapon weapon7 = new Weapon("Cthulhus book of Insanity", 600, 600, -600);
         Weapon weapon8 = new Weapon("Forged Sword", 15, 30, 22);
         Weapon weapon9 = new Weapon("Magma Mace", 3010, 55,17);
         Weapon weapon10 = new Weapon("Melted Mace", 10, 15,7);
@@ -43,7 +46,7 @@ public class Init {
         Weapon weapon14 = new Weapon("Basic Sword", 10, 5,3);
         Weapon weapon15 = new Weapon("Cruel Crude Candle", 14, 8, 3);
         Weapon weapon16 = new Weapon("Phoenix Pike", 14, 62, 33);
-        Weapon weapon17 = new Weapon("Gandalf's lost and found staff", 2000, 1,1);
+        Weapon weapon17 = new Weapon("Gandalfs lost and found staff", 2000, 1,1);
         Weapon weapon18 = new Weapon("Purging Pebble", 1, 40,39 );
 
         em.persist(weapon1);
@@ -64,6 +67,8 @@ public class Init {
         em.persist(weapon16);
         em.persist(weapon17);
         em.persist(weapon18);
+
+        transaction.commit();
 
     }
 }
