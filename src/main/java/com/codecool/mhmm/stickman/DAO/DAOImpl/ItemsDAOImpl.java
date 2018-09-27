@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ItemsDAOImpl extends BaseDaoImpl implements ItemsDAO {
 
-    ItemsDAOImpl(EntityManager em) {
+    public ItemsDAOImpl(EntityManager em) {
         super(em);
     }
 

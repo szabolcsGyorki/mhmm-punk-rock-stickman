@@ -30,17 +30,11 @@ function updateInventory() {
             '<div class="tab-pane fade" id="list-' + item.name + '" role="tabpanel" aria-labelledby="list-' + item.name + '-list">'
             + item_info + '</div>'
     }
-
     //setting the first list item selected
-    let first_list_item = document.getElementById("list-tab").firstChild;
-    first_list_item.classList.add("active");
+    document.getElementById("list-tab").firstChild.classList.add("active");
 }
 
 function get_selected_item() {
-    let items = character_inventory_list.getElementsByClassName("list-group-item list-group-item-action");
-    for (let item of items) {
-        if (item.classList.contains("active")) {
-            return item.innerHTML;
-        }
-    }
+    let item_name = character_inventory_list.getElementsByClassName("active");
+    return item_name.innerHTML;
 }
