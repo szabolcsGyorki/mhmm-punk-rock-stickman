@@ -187,4 +187,22 @@ class PlayerTest {
         player.setWeapon(new Weapon("sword", 10, 10, 2));
         assertEquals("2 - 10", player.getDisplayDamage());
     }
+
+    @RepeatedTest(20)
+    void testPlayerTakesDamage() {
+        playerWithParams.takeDamage(10);
+        int hp = playerWithParams.getHitPoint();
+        assertTrue(hp == 30 || hp == 20);
+    }
+
+    @Test
+    void testGetDamage() {
+        assertEquals(0, playerWithParams.getDamage());
+    }
+
+    @Test
+    void testSetDamage() {
+        playerWithParams.setDamage(5);
+        assertEquals(5, playerWithParams.getDamage());
+    }
 }

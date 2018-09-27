@@ -56,4 +56,8 @@ public abstract class Character extends GameObject {
     public int getHitChance() {
         return this.hitChance;
     }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
 }
