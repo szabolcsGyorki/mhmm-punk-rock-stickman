@@ -14,7 +14,7 @@ import java.util.Random;
 public class Loot extends Item {
 
     @ManyToMany
-    private ArrayList<Item> loot = new ArrayList<>();
+    private List<Item> loot = new ArrayList<>();
 
     @Transient
     private ItemsDAOImpl itemsList;

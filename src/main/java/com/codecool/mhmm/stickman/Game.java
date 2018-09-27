@@ -29,6 +29,8 @@ public class Game {
     public void initForDemo(){
         levelOne = new Level(10,10 ,WALL, FLOOR);
         Zsolt = new Player(1,1);
+        levelOne.placePlayer(Zsolt);
+
         levelOne.placeWall(1,2);
         levelOne.placeWall(2,2);
         levelOne.placeWall(3,2);
@@ -38,17 +40,20 @@ public class Game {
         levelOne.placeWall(9,2);
 
         levelOne.placeWall(1,5);
-        levelOne.placeWall(2,1);
-        levelOne.placeWall(3,1);
-        levelOne.placeWall(4,1);
-        levelOne.placeWall(5,1);
-        levelOne.placeWall(6,1);
+        levelOne.placeWall(2,5);
+        levelOne.placeWall(3,5);
+        levelOne.placeWall(4,5);
+        levelOne.placeWall(5,5);
+        levelOne.placeWall(6,5);
+        levelOne.placeWall(7,4);
+        levelOne.placeWall(7,3);
+        levelOne.placeWall(7,5);
+        levelOne.placeWall(7,6);
 
-        levelOne.placeEnemy(1,1,SLIME,1);
-        levelOne.placeEnemy(1,2,SKELETON,1);
-        levelOne.placeEnemy(1,3,ORC,1);
-        levelOne.placeEnemy(1,4,DRAGON,1);
-        levelOne.placePlayer(Zsolt);
+        levelOne.placeEnemy(6,2,SLIME,1);
+        levelOne.placeEnemy(8,2,SKELETON,1);
+        levelOne.placeEnemy(2,4,ORC,1);
+        levelOne.placeEnemy(6,7,DRAGON,1);
         transaction.begin();
         em.persist(levelOne);
         for (GameObject object : levelOne.getMap()) {
