@@ -1,8 +1,10 @@
 package com.codecool.mhmm.stickman.GameObjects.Items;
 
 import com.codecool.mhmm.stickman.DAO.DAOImpl.ItemsDAOImpl;
+import com.codecool.mhmm.stickman.GameObjects.Characters.Player;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -56,7 +58,39 @@ class LootTest {
 
     @Test
     void testPickUp() {
-
+        Player player = new Player(2,2, "John");
+        List<Item> lootItems = newLoot.getItems();
+        newLoot.Pickup(player);
+        assertEquals(lootItems, player.getItems());
     }
 
+    @RepeatedTest(20)
+    void testGetGoldIfSet() {
+        int gold = newLootParam.getGold();
+        assertTrue(gold > 0 && gold < 11);
+    }
+
+    @Test
+    void testGoldWithDefaultInstance() {
+        int gold = newLoot.getGold();
+        assertEquals(0, gold);
+    }
+
+    @Test
+    void testAdd() {
+        newLoot.add(armor);
+        assertNotNull(newLoot.getItems());
+    }
+
+    @Test
+    void testAddIsCorrect() {
+        newLoot.add(armor);
+        assertEquals(armor, newLoot.getItems().get(0));
+    }
+
+    @Test
+    void testSetItemsDAO() {
+        newLoot.setItemsDao(Mockito.mock(ItemsDAOImpl.class));
+        assertNotEquals(itemsDAOMock, newLoot.getItemsList());
+    }
 }

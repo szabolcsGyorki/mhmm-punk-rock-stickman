@@ -72,4 +72,8 @@ public class Loot extends Item {
     public int getGold() {
         return gold;
     }
+
+    public ItemsDAOImpl getItemsList() {
+        return itemsList;
+    }
 }
