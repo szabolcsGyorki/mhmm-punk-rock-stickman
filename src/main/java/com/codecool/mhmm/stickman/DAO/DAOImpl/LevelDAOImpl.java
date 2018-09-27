@@ -9,7 +9,7 @@ import java.util.List;
 
 public class LevelDAOImpl extends BaseDaoImpl implements LevelDAO {
 
-    LevelDAOImpl(EntityManager em) {
+    public LevelDAOImpl(EntityManager em) {
         super(em);
     }
 

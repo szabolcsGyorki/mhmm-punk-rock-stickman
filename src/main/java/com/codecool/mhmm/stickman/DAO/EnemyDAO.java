@@ -5,7 +5,7 @@ import com.codecool.mhmm.stickman.GameObjects.GameObjectType;
 
 import java.util.List;
 
-public interface EnemyDao {
+public interface EnemyDAO {
 
     List<Enemy> getAllEnemy();
 

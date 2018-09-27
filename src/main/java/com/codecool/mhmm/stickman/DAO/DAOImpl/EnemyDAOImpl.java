@@ -1,6 +1,6 @@
 package com.codecool.mhmm.stickman.DAO.DAOImpl;
 
-import com.codecool.mhmm.stickman.DAO.EnemyDao;
+import com.codecool.mhmm.stickman.DAO.EnemyDAO;
 import com.codecool.mhmm.stickman.GameObjects.Characters.Enemy.Enemy;
 import com.codecool.mhmm.stickman.GameObjects.GameObjectType;
 import javax.persistence.EntityManager;
@@ -12,9 +12,9 @@ import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
-public class EnemyDaoImpl extends BaseDaoImpl implements EnemyDao {
+public class EnemyDAOImpl extends BaseDaoImpl implements EnemyDAO {
 
-    public EnemyDaoImpl(EntityManager em) {
+    public EnemyDAOImpl(EntityManager em) {
         super(em);
     }
 

@@ -15,6 +15,7 @@ import java.util.Random;
 public class Loot extends Item {
 
     @ManyToMany
+    @JoinTable(name = "loot_content")
     private List<Item> loot = new ArrayList<>();
 
     @Transient
