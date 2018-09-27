@@ -30,8 +30,10 @@ function updateInventory() {
             '<div class="tab-pane fade" id="list-' + item.name + '" role="tabpanel" aria-labelledby="list-' + item.name + '-list">'
             + item_info + '</div>'
     }
+
     //setting the first list item selected
-    document.getElementById("list-tab").firstChild.classList.add("active");
+    let first_list_item = document.getElementById("list-tab").firstChild;
+    first_list_item.classList.add("active");
 }
 
 function get_selected_item() {

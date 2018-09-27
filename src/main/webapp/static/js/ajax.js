@@ -1,9 +1,3 @@
-window.addEventListener('load', function() {
-    ajax_get("/send", function (data) {
-        mapObjects = data[0];
-        mainCharacter = data[1][0];
-    }, 'load');
-});
 
 function ajax_get(url, callback, action, value) {
     let xmlhttp = new XMLHttpRequest();

@@ -1,6 +1,15 @@
 let mapObjects = [];
 let mainCharacter;
 
+window.addEventListener('load', function() {
+    ajax_get("/send", function (data) {
+        mapObjects = data[0];
+        mainCharacter = data[1][0];
+        updateCharacterStats();
+        updateInventory();
+    }, 'load');
+});
+
 function preload() {
     loadImages();
 
