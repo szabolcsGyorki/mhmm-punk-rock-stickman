@@ -87,7 +87,24 @@ class LevelDAOImplTest {
         List<GameObject> expectedContent = new ArrayList<>();
         expectedContent.add(enemy);
         expectedContent.add(player);
-        assertTrue(levelDAO.getLevelObjects(1L).containsAll(expectedContent));
+        assertTrue(levelDAO.getLevelObjects(level1.getId()).containsAll(expectedContent));
     }
 
+    @Test
+    void testCreateNewLevel() {
+        Level newLevel = new Level(2, 4, GameObjectType.WALL, GameObjectType.FLOOR);
+        levelDAO.createNewLevel(newLevel);
+        Level savedLevel = levelDAO.getLevel(newLevel.getId());
+        em.remove(newLevel);
+        assertNotNull(savedLevel);
+    }
+
+    @Test
+    void testCreateNewLevelIsCorrect() {
+        Level newLevel = new Level(2, 4, GameObjectType.WALL, GameObjectType.FLOOR);
+        levelDAO.createNewLevel(newLevel);
+        Level savedLevel = levelDAO.getLevel(newLevel.getId());
+        em.remove(newLevel);
+        assertEquals(newLevel, savedLevel);
+    }
 }

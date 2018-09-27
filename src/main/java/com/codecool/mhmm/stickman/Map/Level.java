@@ -37,6 +37,10 @@ public class Level {
     public Level() {
     }
 
+    public long getId() {
+        return id;
+    }
+
     public List<GameObject> getMap() {
         return map;
     }
