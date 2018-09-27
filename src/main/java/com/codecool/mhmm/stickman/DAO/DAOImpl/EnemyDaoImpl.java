@@ -14,7 +14,7 @@ import java.util.List;
 
 public class EnemyDaoImpl extends BaseDaoImpl implements EnemyDao {
 
-    public EnemyDaoImpl(EntityManager em) {
+    EnemyDaoImpl(EntityManager em) {
         super(em);
     }
 
