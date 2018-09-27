@@ -21,13 +21,13 @@ function updateInventory() {
         //inventory item list
         character_inventory_list.innerHTML +=
             '<a class="list-group-item list-group-item-action" id="list-'
-            + item.name + '-list" data-toggle="list" href="#list-' + item.name + '" role="tab" aria-controls="'
-            + item.name + '">' + item.name + '</a>';
+            + item.name.replace(/ /g,'') + '-list" data-toggle="list" href="#list-' + item.name.replace(/ /g,'') + '" role="tab" aria-controls="'
+            + item.name.replace(/ /g,'') + '">' + item.name + '</a>';
 
 
         //description of the items
         character_inventory_list_descriptions.innerHTML +=
-            '<div class="tab-pane fade" id="list-' + item.name + '" role="tabpanel" aria-labelledby="list-' + item.name + '-list">'
+            '<div class="tab-pane fade" id="list-' + item.name.replace(/ /g,'') + '" role="tabpanel" aria-labelledby="list-' + item.name.replace(/ /g,'') + '-list">'
             + item_info + '</div>'
     }
     //setting the first list item selected
