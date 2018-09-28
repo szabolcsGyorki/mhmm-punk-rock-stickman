@@ -1,9 +1,7 @@
 package com.codecool.mhmm.stickman;
 
-import com.codecool.mhmm.stickman.GameObjects.Characters.Enemy.*;
-import com.codecool.mhmm.stickman.GameObjects.Characters.Player;
-import com.codecool.mhmm.stickman.GameObjects.Items.Armor;
-import com.codecool.mhmm.stickman.GameObjects.Items.Weapon;
+import com.codecool.mhmm.stickman.game_objects.items.Armor;
+import com.codecool.mhmm.stickman.game_objects.items.Weapon;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 

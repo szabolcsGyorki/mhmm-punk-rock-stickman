@@ -1,11 +1,11 @@
 package com.codecool.mhmm.stickman;
 
-import com.codecool.mhmm.stickman.GameObjects.Characters.Player;
-import com.codecool.mhmm.stickman.GameObjects.GameObject;
-import com.codecool.mhmm.stickman.GameObjects.Items.Armor;
-import com.codecool.mhmm.stickman.GameObjects.Items.Item;
-import com.codecool.mhmm.stickman.GameObjects.Items.Weapon;
-import com.codecool.mhmm.stickman.Map.Level;
+import com.codecool.mhmm.stickman.game_objects.characters.Player;
+import com.codecool.mhmm.stickman.game_objects.GameObject;
+import com.codecool.mhmm.stickman.game_objects.items.Armor;
+import com.codecool.mhmm.stickman.game_objects.items.Item;
+import com.codecool.mhmm.stickman.game_objects.items.Weapon;
+import com.codecool.mhmm.stickman.map.Level;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import javax.persistence.EntityManager;
@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
-import static com.codecool.mhmm.stickman.GameObjects.GameObjectType.*;
 
 @WebServlet(urlPatterns = {"/send"})
 public class AjaxCall extends HttpServlet {
@@ -66,7 +65,7 @@ public class AjaxCall extends HttpServlet {
     }
 
     /**
-     * Converts a list of GameObjects to a JSONObject that's AJAX response ready
+     * Converts a list of game_objects to a JSONObject that's AJAX response ready
      * @return JSONArray with JSONObjects
      */
     @SuppressWarnings("unchecked")

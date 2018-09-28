@@ -1,14 +1,14 @@
 package com.codecool.mhmm.stickman;
 
-import com.codecool.mhmm.stickman.DAO.DAOImpl.EnemyDAOImpl;
-import com.codecool.mhmm.stickman.DAO.DAOImpl.ItemsDAOImpl;
-import com.codecool.mhmm.stickman.DAO.DAOImpl.LevelDAOImpl;
-import com.codecool.mhmm.stickman.GameObjects.Characters.Player;
-import com.codecool.mhmm.stickman.GameObjects.GameObject;
-import com.codecool.mhmm.stickman.GameObjects.Items.Armor;
-import com.codecool.mhmm.stickman.GameObjects.Items.Item;
-import com.codecool.mhmm.stickman.GameObjects.Items.Weapon;
-import com.codecool.mhmm.stickman.Map.Level;
+import com.codecool.mhmm.stickman.dao.dao_impl.EnemyDAOImpl;
+import com.codecool.mhmm.stickman.dao.dao_impl.ItemsDAOImpl;
+import com.codecool.mhmm.stickman.dao.dao_impl.LevelDAOImpl;
+import com.codecool.mhmm.stickman.game_objects.characters.Player;
+import com.codecool.mhmm.stickman.game_objects.GameObject;
+import com.codecool.mhmm.stickman.game_objects.items.Armor;
+import com.codecool.mhmm.stickman.game_objects.items.Item;
+import com.codecool.mhmm.stickman.game_objects.items.Weapon;
+import com.codecool.mhmm.stickman.map.Level;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,9 +16,9 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.servlet.http.HttpSession;
 
-import static com.codecool.mhmm.stickman.GameObjects.GameObjectType.*;
-import static com.codecool.mhmm.stickman.GameObjects.GameObjectType.DRAGON;
-import static com.codecool.mhmm.stickman.GameObjects.GameObjectType.ORC;
+import static com.codecool.mhmm.stickman.game_objects.GameObjectType.*;
+import static com.codecool.mhmm.stickman.game_objects.GameObjectType.DRAGON;
+import static com.codecool.mhmm.stickman.game_objects.GameObjectType.ORC;
 
 public class Game {
     private static Game ourInstance = new Game();
