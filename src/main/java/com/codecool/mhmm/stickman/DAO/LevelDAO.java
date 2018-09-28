@@ -5,24 +5,12 @@ import com.codecool.mhmm.stickman.Map.Level;
 
 import java.util.List;
 
-public interface LevelDAO {
+public interface LevelDAO extends BaseDAO {
 
     /**
-     * get Height, Width
-     * get Wall, Floor type
-     * get Object List
-     * @param id: id of the level
-     */
-    Level getLevel(long id);
-
-    /**
-     * get ONLY objects in level
-     * @param id: id of the level
+     * Get every objects that belongs to the given level
+     * @param id: id of the level which objects needs to be returned
+     * @return: a list with all the items of the given level
      */
     List<GameObject> getLevelObjects(long id);
-
-    /**
-     * check name duplication!
-     */
-    void createNewLevel(Level level);
 }

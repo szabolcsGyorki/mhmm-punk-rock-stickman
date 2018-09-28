@@ -53,58 +53,58 @@ class EnemyDaoImplTest {
 
     @Test
     void testGetEnemyById() {
-        Enemy enemy = edi.getEnemy(3);
+        Enemy enemy = edi.findById(3);
         assertNotNull(enemy);
     }
 
     @Test
     void testGetEnemyByIdOne() {
-        Enemy enemy = edi.getEnemy(1);
+        Enemy enemy = edi.findById(1);
         assertEquals(1, enemy.getId());
     }
 
     @Test
     void testGetEnemyByIdThree() {
-        Enemy enemy = edi.getEnemy(3);
+        Enemy enemy = edi.findById(3);
         assertEquals(DRAGON, enemy.getType());
     }
 
     @Test
     void testGetALlEnemy() {
-        List<Enemy> enemies = edi.getAllEnemy();
+        List<Enemy> enemies = edi.getAll();
         assertNotNull(enemies);
     }
 
     @Test
     void testGetAllEnemyReturnsCorrectly() {
         List<Enemy> expected = new ArrayList<>();
-        expected.add(edi.getEnemy(1L));
-        expected.add(edi.getEnemy(2L));
-        expected.add(edi.getEnemy(3L));
+        expected.add(edi.findById(1L));
+        expected.add(edi.findById(2L));
+        expected.add(edi.findById(3L));
 
-        List<Enemy> enemies = edi.getAllEnemy();
+        List<Enemy> enemies = edi.getAll();
         assertTrue(enemies.containsAll(expected));
     }
 
     @Test
     void testUpdateEnemy() {
-        edi.updateEnemy(enemy3, "hitPoint", 20);
-        Enemy updatedEnemy = edi.getEnemy(enemy3.getId());
+        edi.update(enemy3, "hitPoint", 20);
+        Enemy updatedEnemy = edi.findById(enemy3.getId());
         assertEquals(20, updatedEnemy.getHitPoint());
     }
 
     @Test
     void testUpdateAllEnemies() {
-        edi.updateEnemy(GameObjectType.ORC, "hitChance", 95);
-        Enemy enemy = edi.getEnemy(enemy2.getId());
+        edi.updateEnemiesByType(GameObjectType.ORC, "hitChance", 95);
+        Enemy enemy = edi.findById(enemy2.getId());
         assertEquals(95, enemy.getHitChance());
     }
 
     @Test
     void testSaveNewEnemy() {
         Enemy expectedEnemy = new Orc(5,6, 2);
-        edi.saveNewEnemy(expectedEnemy);
-        Enemy enemy = edi.getEnemy(expectedEnemy.getId());
+        edi.saveNew(expectedEnemy);
+        Enemy enemy = edi.findById(expectedEnemy.getId());
         assertEquals(expectedEnemy, enemy);
     }
 

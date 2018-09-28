@@ -5,65 +5,47 @@ import com.codecool.mhmm.stickman.GameObjects.GameObject;
 
 import java.util.List;
 
-public interface PlayerDAO {
+public interface PlayerDAO extends BaseDAO {
 
     /**
-     * IN ORDER!
-     * get player stats(name, str, agi, int, dodge-hit chance, X-Y coordinates)
-     * set damage, armor to 0
-     * get player inventory
-     * get player Armor
-     * get player Weapon
-     * equip player Armor
-     * equip player Weapon
-     * @param id: the id of the player
+     * @param name: name of the player
+     * @return: a player object
      */
-    Player getPlayer(long id);
+    Player getPlayerByName(String name);
 
     /**
-     * IN ORDER!
-     * get player stats(name, str, agi, int, dodge-hit chance, X-Y coordinates)
-     * set damage, armor to 0
-     * get player inventory
-     * get player Armor
-     * get player Weapon
-     * equip player Armor
-     * equip player Weapon
-     */
-    Player getPlayer(String name);
-
-    /**
-     * IN ORDER!
-     * UNEQUIP player Armor
-     * UNEQUIP player Weapon
-     * save player stats(name, str, agi, int, dodge-hit chance, X-Y coordinates, inventory)
-     * REEQUIP player Armor
-     * REEQUIP player Weapon
-     */
-    <T> void updatePlayer(Player player, String field, T value);
-
-    /**
-     * check if player name exist (character name)
-     */
-    void saveNewPlayer(Player player);
-
-    /**
-     * load list of modified elements
+     * load list of every game objects that was modified by the player (ex.: enemies
+     * that are damaged/dead, loot that was picked up, etc...)
+     * @param player: the player
+     * @return: a list that contains all modified objects
      */
     List<GameObject> getModifiedByPlayer(Player player);
 
     /**
-     * load list of modified elements
+     * Find the player by name and load list of every game objects that was modified by the player (ex.: enemies
+     * that are damaged/dead, loot that was picked up, etc...)
+     * @param playerName: the name of the player
+     * @return: a list that contains all modified objects
      */
     List<GameObject> getModifiedByPlayer(String playerName);
 
     /**
-     * load list of modified elements
-     * @param playerID: id of the player
+     * Find the player by id and load list of every game objects that was modified by the player (ex.: enemies
+     * that are damaged/dead, loot that was picked up, etc...)
+     * @param playerID: the id of the player
+     * @return: a list that contains all modified objects
      */
     List<GameObject> getModifiedByPlayer(long playerID);
 
+    /**
+     *
+     * @param player:
+     */
     void updateModifiedByPlayer(Player player);
 
+    /**
+     *
+     * @param player:
+     */
     void updatePlayerItems(Player player);
 }

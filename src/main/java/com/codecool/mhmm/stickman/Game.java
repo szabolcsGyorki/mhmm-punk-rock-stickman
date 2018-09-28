@@ -66,10 +66,10 @@ public class Game {
         levelOne.placeEnemy(2,4,ORC,1);
         levelOne.placeEnemy(6,7,DRAGON,1);
 
-        levelOne.placeLoot(4, 1, itemsDAO.getItem("Colossus Blade"));
-        levelOne.placeLoot(1, 4, itemsDAO.getItem("Shadow Plate"));
+        levelOne.placeLoot(4, 1, itemsDAO.getItemByName("Colossus Blade"));
+        levelOne.placeLoot(1, 4, itemsDAO.getItemByName("Shadow Plate"));
 
-        levelDao.createNewLevel(levelOne);
+        levelDao.saveNew(levelOne);
     }
 
     public static Game getInstance() {
@@ -120,7 +120,7 @@ public class Game {
     }
 
     void equip(Player player, String itemName){
-        Item item = itemsDAO.getItem(itemName);
+        Item item = itemsDAO.getItemByName(itemName);
         if (item instanceof Armor)
             player.setFullBody((Armor) item);
         if (item instanceof Weapon)

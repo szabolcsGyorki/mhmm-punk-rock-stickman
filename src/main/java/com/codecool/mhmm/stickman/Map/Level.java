@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NamedQuery(name="Level.getAll", query="SELECT level FROM Level level")
 public class Level {
 
     @Id

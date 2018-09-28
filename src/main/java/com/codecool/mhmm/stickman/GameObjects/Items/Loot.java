@@ -2,7 +2,6 @@ package com.codecool.mhmm.stickman.GameObjects.Items;
 
 import com.codecool.mhmm.stickman.DAO.DAOImpl.ItemsDAOImpl;
 import com.codecool.mhmm.stickman.GameObjects.Characters.Player;
-import com.codecool.mhmm.stickman.GameObjects.GameObject;
 import com.codecool.mhmm.stickman.GameObjects.GameObjectType;
 
 import javax.persistence.*;
@@ -55,10 +54,10 @@ public class Loot extends Item {
     }
 
     private void fillUpLoot(int numberOfLoots) {
-        List<Item> items = itemsList.getAllItems();
+        List<Item> items = itemsList.getAll();
         for (int i = 0; i < numberOfLoots; i++) {
             long itemNumber = (long) random.nextInt(items.size()) + 1;
-            Item item = itemsList.getItem(itemNumber);
+            Item item = itemsList.findById(itemNumber);
             if (item != null) {
                 lootList.add(item);
             }

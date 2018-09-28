@@ -4,15 +4,14 @@ import com.codecool.mhmm.stickman.GameObjects.GameObjectType;
 import com.codecool.mhmm.stickman.GameObjects.Items.Armor;
 import com.codecool.mhmm.stickman.GameObjects.Items.Item;
 import com.codecool.mhmm.stickman.GameObjects.Items.Weapon;
-import javax.persistence.Entity;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 @Entity
+@NamedQuery(name="Player.getAll", query="SELECT player FROM Player player")
 public class Player extends Character {
 
     private String name;

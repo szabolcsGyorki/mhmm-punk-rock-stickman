@@ -5,24 +5,22 @@ import com.codecool.mhmm.stickman.GameObjects.Items.Item;
 
 import java.util.List;
 
-public interface ItemsDAO {
+public interface ItemsDAO extends BaseDAO {
 
     /**
-     * get value, name
-     * get specific Type fields
-     * @param itemID: id of the item
+     * @param name: name of the item
+     * @return: an item object
      */
-    Item getItem(long itemID);
+    Item getItemByName(String name);
 
     /**
-     * get value, name
-     * get specific Type fields
+     * @return: a random item from the DB
      */
-    Item getItem(String name);
     Item getRandomItem();
 
-    void saveNewItem(Item item);
-
-    List<Item> getAllItems();
-    List<Item> getAllItems(GameObjectType type);
+    /**
+     * @param type: type of the weapon to return
+     * @return: all items that belongs to the given type
+     */
+    List<Item> getAllItemsByType(GameObjectType type);
 }

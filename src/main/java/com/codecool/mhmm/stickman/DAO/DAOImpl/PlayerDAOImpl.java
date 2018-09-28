@@ -20,28 +20,23 @@ public class PlayerDAOImpl extends BaseDaoImpl implements PlayerDAO {
     }
 
     @Override
-    public Player getPlayer(long id) {
+    public Player findById(long id) {
         return em.find(Player.class, id);
     }
 
     @Override
-    public Player getPlayer(String name) {
-        CriteriaQuery<Player> cq = cb.createQuery(Player.class);
-        Root<Player> playerRoot = cq.from(Player.class);
-        ParameterExpression p = cb.parameter(String.class);
-        cq.select(playerRoot).where(cb.equal(playerRoot.get("name"), p));
-        TypedQuery<Player> query = em.createQuery(cq);
-        query.setParameter(p, name);
-        return query.getSingleResult();
+    public List<Player> getAll() {
+        TypedQuery<Player> query = em.createNamedQuery("Player.getAll", Player.class);
+        return query.getResultList();
     }
 
     @Override
-    public <T> void updatePlayer(Player player, String field, T value) {
+    public void update(Object player, String field, Object value) {
         transaction.begin();
         CriteriaUpdate<Player> cq = cb.createCriteriaUpdate(Player.class);
         Root<Player> playerRoot = cq.from(Player.class);
         cq.set(field, value)
-                .where(cb.equal(playerRoot.get("id"), player.getId()));
+                .where(cb.equal(playerRoot.get("id"), ((Player)player).getId()));
         Query query = em.createQuery(cq);
         query.executeUpdate();
 //        em.refresh(player);
@@ -49,10 +44,21 @@ public class PlayerDAOImpl extends BaseDaoImpl implements PlayerDAO {
     }
 
     @Override
-    public void saveNewPlayer(Player player) {
+    public void saveNew(Object player) {
         transaction.begin();
         em.persist(player);
         transaction.commit();
+    }
+
+    @Override
+    public Player getPlayerByName(String name) {
+        CriteriaQuery<Player> cq = cb.createQuery(Player.class);
+        Root<Player> playerRoot = cq.from(Player.class);
+        ParameterExpression p = cb.parameter(String.class);
+        cq.select(playerRoot).where(cb.equal(playerRoot.get("name"), p));
+        TypedQuery<Player> query = em.createQuery(cq);
+        query.setParameter(p, name);
+        return query.getSingleResult();
     }
 
     @Override
@@ -71,12 +77,8 @@ public class PlayerDAOImpl extends BaseDaoImpl implements PlayerDAO {
     }
 
     @Override
-    public void updateModifiedByPlayer(Player player) {
-
-    }
+    public void updateModifiedByPlayer(Player player) { }
 
     @Override
-    public void updatePlayerItems(Player player) {
-
-    }
+    public void updatePlayerItems(Player player) { }
 }

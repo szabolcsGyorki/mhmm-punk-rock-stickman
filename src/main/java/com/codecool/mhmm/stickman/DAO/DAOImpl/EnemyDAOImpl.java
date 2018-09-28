@@ -19,30 +19,39 @@ public class EnemyDAOImpl extends BaseDaoImpl implements EnemyDAO {
     }
 
     @Override
-    public Enemy getEnemy(long id) {
+    public Enemy findById(long id) {
         return em.find(Enemy.class, id);
     }
 
     @Override
-    public List<Enemy> getAllEnemy() {
+    public List<Enemy> getAll() {
         TypedQuery<Enemy> query = em.createNamedQuery("Enemy.getAll", Enemy.class);
         return query.getResultList();
     }
 
     @Override
-    public <T> void updateEnemy(Enemy enemy, String field, T value) {
+    public void update(Object enemy, String field, Object value) {
         transaction.begin();
         CriteriaUpdate<Enemy> update = cb.createCriteriaUpdate(Enemy.class);
         Root<Enemy> enemyRoot = update.from(Enemy.class);
         update.set(field, value)
-                .where(cb.equal(enemyRoot.get("id"), enemy.getId()));
+                .where(cb.equal(enemyRoot.get("id"), ((Enemy)enemy).getId()));
         Query query = em.createQuery(update);
         query.executeUpdate();
         transaction.commit();
+
     }
 
     @Override
-    public <T> void updateEnemy(GameObjectType enemyType, String field, T value) {
+    public void saveNew(Object enemy) {
+        transaction.begin();
+        em.persist(enemy);
+        transaction.commit();
+
+    }
+
+    @Override
+    public <T> void updateEnemiesByType(GameObjectType enemyType, String field, T value) {
         transaction.begin();
         CriteriaUpdate<Enemy> update = cb.createCriteriaUpdate(Enemy.class);
         Root<Enemy> enemyRoot = update.from(Enemy.class);
@@ -50,13 +59,6 @@ public class EnemyDAOImpl extends BaseDaoImpl implements EnemyDAO {
                 .where(cb.equal(enemyRoot.get("type"), enemyType));
         Query query = em.createQuery(update);
         query.executeUpdate();
-        transaction.commit();
-    }
-
-    @Override
-    public void saveNewEnemy(Enemy enemy) {
-        transaction.begin();
-        em.persist(enemy);
         transaction.commit();
     }
 

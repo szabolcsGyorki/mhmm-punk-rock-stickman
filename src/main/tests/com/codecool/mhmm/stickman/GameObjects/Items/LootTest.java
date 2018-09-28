@@ -29,9 +29,9 @@ class LootTest {
         items = new ArrayList<>();
         items.add(weapon = new Weapon());
         items.add(armor = new Armor());
-        when(itemsDAOMock.getAllItems()).thenReturn(items);
-        when(itemsDAOMock.getItem(1L)).thenReturn(weapon);
-        when(itemsDAOMock.getItem(2L)).thenReturn(armor);
+        when(itemsDAOMock.getAll()).thenReturn(items);
+        when(itemsDAOMock.findById(1L)).thenReturn(weapon);
+        when(itemsDAOMock.findById(2L)).thenReturn(armor);
     }
 
     @BeforeEach

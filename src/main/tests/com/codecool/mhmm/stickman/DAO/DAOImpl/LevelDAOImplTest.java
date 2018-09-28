@@ -9,13 +9,10 @@ import com.codecool.mhmm.stickman.Map.Level;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -62,25 +59,25 @@ class LevelDAOImplTest {
 
     @Test
     void testGetLevel() {
-        Level level = levelDAO.getLevel(1L);
+        Level level = levelDAO.findById(1L);
         assertNotNull(level);
     }
 
     @Test
     void testGetLevelWidth() {
-        Level level = levelDAO.getLevel(1L);
+        Level level = levelDAO.findById(1L);
         assertEquals(4, level.getWIDTH());
     }
 
     @Test
     void testGetLevelHeight() {
-        Level level = levelDAO.getLevel(1L);
+        Level level = levelDAO.findById(1L);
         assertEquals(5, level.getHEIGHT());
     }
 
     @Test
     void testGetLevelFloor() {
-        Level level = levelDAO.getLevel(1L);
+        Level level = levelDAO.findById(1L);
         assertEquals(GameObjectType.FLOOR, level.getFloorImage());
     }
 
@@ -106,8 +103,8 @@ class LevelDAOImplTest {
     @Test
     void testCreateNewLevel() {
         Level newLevel = new Level(2, 4, GameObjectType.WALL, GameObjectType.FLOOR, itemsDAO);
-        levelDAO.createNewLevel(newLevel);
-        Level savedLevel = levelDAO.getLevel(newLevel.getId());
+        levelDAO.saveNew(newLevel);
+        Level savedLevel = levelDAO.findById(newLevel.getId());
         em.remove(newLevel);
         assertNotNull(savedLevel);
     }
@@ -115,8 +112,8 @@ class LevelDAOImplTest {
     @Test
     void testCreateNewLevelIsCorrect() {
         Level newLevel = new Level(2, 4, GameObjectType.WALL, GameObjectType.FLOOR, itemsDAO);
-        levelDAO.createNewLevel(newLevel);
-        Level savedLevel = levelDAO.getLevel(newLevel.getId());
+        levelDAO.saveNew(newLevel);
+        Level savedLevel = levelDAO.findById(newLevel.getId());
         em.remove(newLevel);
         assertEquals(newLevel, savedLevel);
     }

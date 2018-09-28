@@ -48,33 +48,33 @@ class PlayerDAOImplTest {
 
     @Test
     void testGetPlayer() {
-        Player player = playerDAO.getPlayer(1L);
+        Player player = playerDAO.findById(1L);
         assertNotNull(player);
     }
 
     @Test
     void testGetPlayerName() {
-        Player player = playerDAO.getPlayer(1L);
+        Player player = playerDAO.findById(1L);
         assertEquals("George", player.getName());
     }
 
     @Test
     void testGetPlayerByName() {
-        Player player = playerDAO.getPlayer("George");
+        Player player = playerDAO.getPlayerByName("George");
         assertNotNull(player);
     }
 
     @Test
     void testGetPlayerByNameIsCorrect() {
-        Player player = playerDAO.getPlayer("George");
+        Player player = playerDAO.getPlayerByName("George");
         assertEquals("George", player.getName());
     }
 
     @Test
     void testSaveNewPlayer() {
         Player expectedPlayer = new Player(2,3,"Aramis");
-        playerDAO.saveNewPlayer(expectedPlayer);
-        Player player = playerDAO.getPlayer(expectedPlayer.getId());
+        playerDAO.saveNew(expectedPlayer);
+        Player player = playerDAO.findById(expectedPlayer.getId());
         em.remove(expectedPlayer);
         assertEquals(expectedPlayer, player);
     }
@@ -82,8 +82,8 @@ class PlayerDAOImplTest {
     @Test
     void testPlayerUpdate() {
         player1.place(2, 1);
-        playerDAO.updatePlayer(player1, "X", player1.getX());
-        Player updatedPlayer = playerDAO.getPlayer(player1.getId());
+        playerDAO.update(player1, "X", player1.getX());
+        Player updatedPlayer = playerDAO.findById(player1.getId());
         assertEquals(2, updatedPlayer.getX());
     }
 }

@@ -5,30 +5,19 @@ import com.codecool.mhmm.stickman.GameObjects.GameObjectType;
 
 import java.util.List;
 
-public interface EnemyDAO {
-
-    List<Enemy> getAllEnemy();
+public interface EnemyDAO extends BaseDAO {
 
     /**
-     * get every field of enemy
+     * Update every enemies which belongs to the given type
+     * @param enemyType: type of the enemy
+     * @param field: the name of the field to update (from the POJO not DB)
+     * @param value: the new value of the given field
      */
-    Enemy getEnemy(long id);
+    <T> void updateEnemiesByType(GameObjectType enemyType, String field, T value);
 
     /**
-     * Update single enemy
-     * @param enemy: enemy object to be updated
-     * @param field: name of the field that is updated
-     * @param value: the new value (generic type)
+     * @param gameObjectType: type of the enemies to return
+     * @return: a list with all enemies that belongs to the given type
      */
-    <T> void updateEnemy(Enemy enemy, String field, T value);
-
-    /**
-     * update every enemy in this type
-     * !!! Handle different lvl !!!
-     */
-    <T> void updateEnemy(GameObjectType enemyType, String field, T value);
-
-    void saveNewEnemy(Enemy enemy);
-
     List<Enemy> getEnemiesByType(GameObjectType gameObjectType);
 }

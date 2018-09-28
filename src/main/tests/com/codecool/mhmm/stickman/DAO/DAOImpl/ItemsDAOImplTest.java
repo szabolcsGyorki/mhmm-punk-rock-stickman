@@ -1,6 +1,5 @@
 package com.codecool.mhmm.stickman.DAO.DAOImpl;
 
-import com.codecool.mhmm.stickman.DAO.ItemsDAO;
 import com.codecool.mhmm.stickman.GameObjects.GameObjectType;
 import com.codecool.mhmm.stickman.GameObjects.Items.Armor;
 import com.codecool.mhmm.stickman.GameObjects.Items.Item;
@@ -51,78 +50,78 @@ class ItemsDAOImplTest {
 
     @Test
     void testGetItemById() {
-        Item item = itemsDAO.getItem(1);
+        Item item = itemsDAO.findById(1);
         assertNotNull(item);
     }
 
     @Test
     void testGetItemByIdTwo() {
-        Item item = itemsDAO.getItem(2);
+        Item item = itemsDAO.findById(2);
         assertNotNull(item);
     }
 
     @Test
     void testGetItemByIdReturnsCorrectItem() {
-        Item item = itemsDAO.getItem(1);
+        Item item = itemsDAO.findById(1);
         assertEquals("Sacred Armor", item.getName());
     }
 
     @Test
     void testGetItemByNameOne() {
-        Item item = itemsDAO.getItem("Sacred Armor");
+        Item item = itemsDAO.getItemByName("Sacred Armor");
         assertNotNull(item);
     }
 
     @Test
     void testGetItemByNameTwo() {
-        Item item = itemsDAO.getItem("Mythic Armor");
+        Item item = itemsDAO.getItemByName("Mythic Armor");
         assertNotNull(item);
     }
 
     @Test
     void testGetItemByNameReturnsCorrectItem() {
-        Item item = itemsDAO.getItem("Sacred Armor");
+        Item item = itemsDAO.getItemByName("Sacred Armor");
         assertEquals("Sacred Armor", item.getName());
     }
 
     @Test
     void testSaveNewItem() {
         Item item = new Weapon("Perdition Blade", 650, 46, 34);
-        itemsDAO.saveNewItem(item);
-        Item savedItem = itemsDAO.getItem(item.getId());
+        itemsDAO.saveNew(item);
+        Item savedItem = itemsDAO.findById(item.getId());
         assertEquals(item, savedItem);
         em.remove(item);
     }
 
     @Test
     void testGetItemsByType() {
-        List<Item> items = itemsDAO.getAllItems(GameObjectType.ARMOR);
+        List<Item> items = itemsDAO.getAllItemsByType(GameObjectType.ARMOR);
         assertNotNull(items);
     }
 
     @Test
     void testGetItemsByTypeReturnsCorrectItems() {
         List<Item> expectedItems = new ArrayList<>();
-        expectedItems.add(itemsDAO.getItem(1L));
-        expectedItems.add(itemsDAO.getItem(2L));
+        expectedItems.add(itemsDAO.findById(1L));
+        expectedItems.add(itemsDAO.findById(2L));
 
-        List<Item> items = itemsDAO.getAllItems(GameObjectType.ARMOR);
+        List<Item> items = itemsDAO.getAllItemsByType(GameObjectType.ARMOR);
         assertTrue(expectedItems.containsAll(items));
     }
 
     @Test
     void testGetAllItems() {
-        List<Item> items = itemsDAO.getAllItems();
+        List<Item> items = itemsDAO.getAll();
         assertNotNull(items);
     }
 
     @Test
     void testGetAllItemsReturnsCorrectly() {
         List<Item> expectedItems = new ArrayList<>();
-        expectedItems.add(itemsDAO.getItem(1L));
-        expectedItems.add(itemsDAO.getItem(2L));
+        expectedItems.add(itemsDAO.findById(1L));
+        expectedItems.add(itemsDAO.findById(2L));
 
-        List<Item> items = itemsDAO.getAllItems();
+        List<Item> items = itemsDAO.getAll();
         assertTrue(expectedItems.containsAll(items));
     }
 
