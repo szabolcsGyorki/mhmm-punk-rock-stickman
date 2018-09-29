@@ -42,11 +42,11 @@ public class Player extends Character {
     }
 
     public void setFullBody(Armor fullBody) {
-        if (this.fullBody != null)
-            this.hitPoint -= this.fullBody.getHealthIncrease();
-        this.hitPoint += fullBody.getHealthIncrease();
+//        if (this.fullBody != null)
+//            this.hitPoint -= this.fullBody.getHealthIncrease();
+//        this.hitPoint += fullBody.getHealthIncrease();
         this.fullBody = fullBody;
-        this.setHitPoint(this.hitPoint);
+//        this.setHitPoint(this.hitPoint);
     }
 
     public void setWeapon(Weapon weapon) {
@@ -63,27 +63,27 @@ public class Player extends Character {
         return 0;
     }
 
-    public void changeStrength (int changeAmount){
+    void changeStrength(int changeAmount){
         this.strength += changeAmount;
     }
 
-    public boolean strengthTest(int testValue){
+    boolean strengthTest(int testValue){
         return testValue<strength;
     }
 
-    public void changeAgility (int changeAmount){
+    void changeAgility(int changeAmount){
         this.agility += changeAmount;
     }
 
-    public boolean agilityTest(int testValue){
+    boolean agilityTest(int testValue){
         return testValue<agility;
     }
 
-    public void changeIntelligence (int changeAmount){
+    void changeIntelligence(int changeAmount){
         this.intelligence += changeAmount;
     }
 
-    public boolean intelligenceTest(int testValue){
+    boolean intelligenceTest(int testValue){
         return testValue<intelligence;
     }
 

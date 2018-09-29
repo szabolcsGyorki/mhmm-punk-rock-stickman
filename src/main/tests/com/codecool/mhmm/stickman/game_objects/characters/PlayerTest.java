@@ -109,7 +109,7 @@ class PlayerTest {
     @Test
     void testStrengthTestFail() {
         player.changeStrength(5);
-        assertFalse(player.strengthTest(10));
+        assertFalse(player.strengthTest(15));
     }
 
     @Test
@@ -121,7 +121,7 @@ class PlayerTest {
     @Test
     void testAgilityTestFail() {
         player.changeAgility(5);
-        assertFalse(player.agilityTest(10));
+        assertFalse(player.agilityTest(15));
     }
 
     @Test
@@ -133,7 +133,7 @@ class PlayerTest {
     @Test
     void testIntelligenceTestFail() {
         player.changeIntelligence(5);
-        assertFalse(player.intelligenceTest(10));
+        assertFalse(player.intelligenceTest(15));
     }
 
     @Test
