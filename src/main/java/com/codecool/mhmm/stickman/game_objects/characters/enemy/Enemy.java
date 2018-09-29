@@ -18,6 +18,7 @@ public abstract class Enemy extends Character {
     Enemy(int X, int Y, int hitPoints, int damage, int level){
         super(X,Y,hitPoints,damage);
         this.level = level;
+        this.loot = new Loot();
     }
 
     protected Enemy() {
@@ -29,5 +30,9 @@ public abstract class Enemy extends Character {
 
     public void addLoot(Item item) {
         loot.add(item);
+    }
+
+    public List<Item> getLoot() {
+        return loot.getItems();
     }
 }
