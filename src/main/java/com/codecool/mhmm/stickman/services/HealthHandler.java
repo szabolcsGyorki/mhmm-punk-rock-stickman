@@ -3,9 +3,8 @@ package com.codecool.mhmm.stickman.services;
 import com.codecool.mhmm.stickman.game_objects.characters.Character;
 import com.codecool.mhmm.stickman.game_objects.characters.Player;
 import com.codecool.mhmm.stickman.game_objects.items.Armor;
-import com.codecool.mhmm.stickman.game_objects.items.Item;
 
-class HealthHandler {
+public class HealthHandler {
 
     void dealDamage(Character character, int damage) {
         int currentHealth = character.getHitPoint();
@@ -33,28 +32,22 @@ class HealthHandler {
         return character.getHitPoint() <= 0;
     }
 
-    private int getIncreaseHealth(Character character, Armor item) {
-        int increaseHealth = item.getHealthIncrease();
-        if (character instanceof Player) {
-            Armor armor = ((Player) character).getFullBody();
-            increaseHealth -= (armor != null) ? armor.getHealthIncrease() : 0;
-        }
+    private int getIncreasePlayerHealthByArmor(Player player, Armor newArmor) {
+        int increaseHealth = newArmor.getHealthIncrease();
+        Armor armor = player.getFullBody();
+        increaseHealth -= (armor != null) ? armor.getHealthIncrease() : 0;
         return increaseHealth;
     }
 
-    void increaseHealth(Character character, Item item) {
-        if (item instanceof Armor) {
-            int increaseHealth = getIncreaseHealth(character, (Armor) item);
-            character.setHitPoint(character.getHitPoint() + increaseHealth);
-        }
+    public void increasePlayerHealthWithArmor(Player player, Armor armor) {
+        int increaseHealth = getIncreasePlayerHealthByArmor(player, armor);
+        player.setHitPoint(player.getHitPoint() + increaseHealth);
     }
 
-    boolean characterWillDie(Character character, Item item) {
-        int increaseHealth = 0;
-        if (item instanceof Armor) {
-            increaseHealth = getIncreaseHealth(character, (Armor) item);
-        }
-        return character.getHitPoint() + increaseHealth <= 0;
+    public boolean armorChangeKillsPlayer(Player player, Armor armor) {
+        int increaseHealth;
+        increaseHealth = getIncreasePlayerHealthByArmor(player, armor);
+        return player.getHitPoint() + increaseHealth <= 0;
     }
 
     boolean damageKillsCharacter(Character character, int damage) {

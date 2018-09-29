@@ -29,14 +29,24 @@ function requestMap(action) {
     }, "map", action)
 }
 
-function requestEquip(item_name) {
+function requestEquipWeapon(item_name) {
     ajax_get('/send', function (data) {
         mapObjects = data[0];
         mainCharacter = data[1][0];
         mainCharacterHealth = mainCharacter.Health;
         updateCharacterStats();
         updateInventory();
-    },"equip", item_name)
+    },"equipWeapon", item_name)
+}
+
+function requestEquipArmor(item_name) {
+    ajax_get('/send', function (data) {
+        mapObjects = data[0];
+        mainCharacter = data[1][0];
+        mainCharacterHealth = mainCharacter.Health;
+        updateCharacterStats();
+        updateInventory();
+    },"equipArmor", item_name)
 }
 
 

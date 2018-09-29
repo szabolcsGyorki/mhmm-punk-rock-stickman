@@ -21,5 +21,9 @@ public interface BaseDAO <T> {
      * @param value: the new value of the given field
      */
     void update(T entity, String field, T value);
+
+    /**
+     * @param entity: the object that needs to be saved
+     */
     void saveNew(T entity);
 }

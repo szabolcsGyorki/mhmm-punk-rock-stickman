@@ -38,7 +38,12 @@ function updateInventory() {
     let items = character_inventory_list.getElementsByClassName("list-group-item list-group-item-action");
     for (let item of items) {
         if (item.classList.contains("active")) {
-            return item.innerHTML;
+            let itemName = item.innerHTML;
+            for (let inventoryItem of mainCharacter.inventory) {
+                if (inventoryItem.name === itemName) {
+                    return inventoryItem;
+                }
+            }
         }
     }
 }

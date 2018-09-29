@@ -42,13 +42,16 @@ public class AjaxCall extends HttpServlet {
 
         Level level = game.getLevel(session);
 
-        String actionRequired = null;
+        String actionRequired;
         if (req.getHeader("map") != null) {
             actionRequired = req.getHeader("map");
             game.move(player,level,actionRequired);
-        } else if (req.getHeader("equip") != null) {
-            actionRequired = req.getHeader("equip");
-            game.equip(player, actionRequired);
+        } else if (req.getHeader("equipWeapon") != null) {
+            actionRequired = req.getHeader("equipWeapon");
+            game.equipWeapon(player, actionRequired);
+        } else if(req.getHeader("equipArmor") != null) {
+            actionRequired = req.getHeader("equipArmor");
+            game.equipArmor(player, actionRequired);
         }
 
         game.setPlayer(session, player);

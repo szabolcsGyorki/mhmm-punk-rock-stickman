@@ -125,40 +125,40 @@ class HealthHandlerTest {
     }
 
     @Test
-    void testIncreasePlayerHealth() {
+    void testArmorIncreasePlayerHealth() {
         Player player = new Player(1,1,"john");
         player.setHitPoint(20);
         Armor armor = new Armor("armor", 20, 20);
-        healthHandler.increaseHealth(player, armor);
+        healthHandler.increasePlayerHealthWithArmor(player, armor);
         player.setFullBody(armor);
         assertEquals(40, player.getHitPoint());
     }
 
     @Test
-    void testIncreasePlayerHealthIfNewValueIsLower() {
+    void testArmorDecreasePlayerHealthIfNewValueIsLower() {
         Player player = new Player(1,1,"john");
         player.setHitPoint(20);
         Armor armor1 = new Armor("armor", 20, 20);
-        healthHandler.increaseHealth(player, armor1);
+        healthHandler.increasePlayerHealthWithArmor(player, armor1);
         player.setFullBody(armor1);
-        healthHandler.increaseHealth(player, new Armor("armor", 20, 10));
+        healthHandler.increasePlayerHealthWithArmor(player, new Armor("armor", 20, 10));
         assertEquals(30, player.getHitPoint());
     }
 
     @Test
-    void testPlayerWillDie() {
+    void testArmorChangeKillsPlayer() {
         Player player = new Player(1, 1, "kong");
         player.setHitPoint(20);
         player.setFullBody(new Armor("armor", 20, 50));
-        assertTrue(healthHandler.characterWillDie(player, new Armor("armor", 20, 10)));
+        assertTrue(healthHandler.armorChangeKillsPlayer(player, new Armor("armor", 20, 10)));
     }
 
     @Test
-    void testPlayerWillDieFalse() {
+    void testArmorChangeKillsPlayerFalse() {
         Player player = new Player(1, 1, "kong");
         player.setHitPoint(20);
         player.setFullBody(new Armor("armor", 20, 10));
-        assertFalse(healthHandler.characterWillDie(player, new Armor("armor", 20, 10)));
+        assertFalse(healthHandler.armorChangeKillsPlayer(player, new Armor("armor", 20, 10)));
     }
 
     @Test

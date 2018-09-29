@@ -9,6 +9,7 @@ import com.codecool.mhmm.stickman.game_objects.items.Armor;
 import com.codecool.mhmm.stickman.game_objects.items.Item;
 import com.codecool.mhmm.stickman.game_objects.items.Weapon;
 import com.codecool.mhmm.stickman.map.Level;
+import com.codecool.mhmm.stickman.services.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -30,6 +31,7 @@ public class Game {
     private ItemsDAOImpl itemsDAO = new ItemsDAOImpl(em);
     private EnemyDAOImpl enemyDao = new EnemyDAOImpl(em);
     private LevelDAOImpl levelDao = new LevelDAOImpl(em);
+    private HealthHandler healthHandler = new HealthHandler();
 
     //GUEST TRIAL STUFF
     private Player Zsolt;
@@ -119,11 +121,19 @@ public class Game {
         }
     }
 
-    void equip(Player player, String itemName){
+    void equipWeapon(Player player, String itemName){
         Item item = itemsDAO.getItemByName(itemName);
-        if (item instanceof Armor)
-            player.setFullBody((Armor) item);
         if (item instanceof Weapon)
             player.setWeapon((Weapon) item);
+    }
+
+    void equipArmor(Player player, String itemName){
+        Item item = itemsDAO.getItemByName(itemName);
+        if (item instanceof Armor) {
+            if (!healthHandler.armorChangeKillsPlayer(player, (Armor) item)) {
+                healthHandler.increasePlayerHealthWithArmor(player, (Armor) item);
+                player.setFullBody((Armor) item);
+            }
+        }
     }
 }
