@@ -44,21 +44,17 @@ class PlayerTest {
 
     @Test
     void testSetArmor() {
-        playerWithParams.setFullBody(new Armor());
-        assertNotNull(playerWithParams.getFullBody());
-    }
-
-    @Test
-    void testArmorChangesHealth(){
-        playerWithParams.setFullBody(new Armor("armor1", 20, 10));
-        assertEquals(40, playerWithParams.getHitPoint());
+        Armor armor = new Armor();
+        playerWithParams.setFullBody(armor);
+        assertEquals(armor, playerWithParams.getFullBody());
     }
 
     @Test
     void testChangeArmor() {
         playerWithParams.setFullBody(new Armor("armor1", 20, 30));
-        playerWithParams.setFullBody(new Armor("armor1", 20, 10));
-        assertEquals(40, playerWithParams.getHitPoint());
+        Armor armor = new Armor("armor1", 20, 10);
+        playerWithParams.setFullBody(armor);
+        assertEquals(armor, playerWithParams.getFullBody());
     }
 
     @Test
@@ -95,7 +91,7 @@ class PlayerTest {
     @RepeatedTest(20)
     void testAttackWithWeapon() {
         player.changeStrength(10);
-        player.setWeapon(new Weapon("Sword", 20, 10, 8));
+        player.setWeapon(new Weapon("Sword", 20, 8, 10));
         int damage = player.attack();
         assertTrue(damage == 0 || damage > 17 && damage < 21);
     }
@@ -145,7 +141,7 @@ class PlayerTest {
 
     @Test
     void testAddItemToInventoryIsCorrect() {
-        Weapon weapon = new Weapon("sword", 10, 10, 2);
+        Weapon weapon = new Weapon("sword", 10, 2, 10);
         player.addItemToInventory(weapon);
         assertEquals("sword", player.getItems().get(0).getName());
     }
@@ -160,7 +156,7 @@ class PlayerTest {
 
     @Test
     void testGetItemByIdIsCorrect(){
-        Weapon weapon = new Weapon("sword", 10, 10, 2);
+        Weapon weapon = new Weapon("sword", 10, 2, 10);
         weapon.setId(1);
         player.addItemToInventory(weapon);
         assertEquals("sword", player.getItemById(1).getName());
@@ -173,7 +169,7 @@ class PlayerTest {
 
     @Test
     void testDisplayDamageWithWeapon() {
-        playerWithParams.setWeapon(new Weapon("sword", 10, 10, 2));
+        playerWithParams.setWeapon(new Weapon("sword", 10, 2, 10));
         assertEquals("5 - 13", playerWithParams.getDisplayDamage());
     }
 
@@ -184,7 +180,7 @@ class PlayerTest {
 
     @Test
     void testDisplayDamageWithWeaponAndDefaultInstance() {
-        player.setWeapon(new Weapon("sword", 10, 10, 2));
+        player.setWeapon(new Weapon("sword", 10, 2, 10));
         assertEquals("2 - 10", player.getDisplayDamage());
     }
 

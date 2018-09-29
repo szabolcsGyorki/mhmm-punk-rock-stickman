@@ -11,10 +11,10 @@ public class Weapon extends Item {
     private int maxDamage;
     private int minDamage;
 
-    public Weapon(String name, int value, int maxDamage, int minDamage) {
+    public Weapon(String name, int value, int minDamage, int maxDamage) {
         super(name, value);
-        this.maxDamage = maxDamage;
         this.minDamage = minDamage;
+        this.maxDamage = maxDamage;
         this.type = GameObjectType.WEAPON;
     }
 

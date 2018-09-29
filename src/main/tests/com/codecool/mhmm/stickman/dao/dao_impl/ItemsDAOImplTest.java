@@ -86,7 +86,7 @@ class ItemsDAOImplTest {
 
     @Test
     void testSaveNewItem() {
-        Item item = new Weapon("Perdition Blade", 650, 46, 34);
+        Item item = new Weapon("Perdition Blade", 650, 34, 46);
         itemsDAO.saveNew(item);
         Item savedItem = itemsDAO.findById(item.getId());
         assertEquals(item, savedItem);

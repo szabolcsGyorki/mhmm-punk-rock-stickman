@@ -12,7 +12,7 @@ class WeaponTest {
 
     @BeforeEach
     void createWeapon() {
-        weapon = new Weapon("Mythical Sword", 20, 50, 40);
+        weapon = new Weapon("Mythical Sword", 20, 40, 50);
     }
 
     @Test
@@ -23,7 +23,7 @@ class WeaponTest {
 
     @Test
     void testCreateWeaponWithParams() {
-        Weapon weapon1 = new Weapon("weapon", 3, 4, 1);
+        Weapon weapon1 = new Weapon("weapon", 3, 1, 4);
         assertNotNull(weapon1);
     }
 

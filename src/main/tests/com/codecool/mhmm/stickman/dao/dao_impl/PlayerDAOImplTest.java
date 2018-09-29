@@ -25,7 +25,7 @@ class PlayerDAOImplTest {
     @BeforeAll
     static void init() {
         player1 = new Player(1,1, "George");
-        weapon1 = new Weapon("Unstoppable Force", 2500, 125, 95);
+        weapon1 = new Weapon("Unstoppable Force", 2500, 95, 125);
         player1.addItemToInventory(weapon1);
 
         EntityTransaction transaction = em.getTransaction();
