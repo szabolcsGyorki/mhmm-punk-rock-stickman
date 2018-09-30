@@ -1,8 +1,12 @@
 package com.codecool.mhmm.stickman.dao.dao_impl;
 
 import com.codecool.mhmm.stickman.dao.EnemyDAO;
+import com.codecool.mhmm.stickman.game_objects.GameObject;
 import com.codecool.mhmm.stickman.game_objects.characters.enemy.Enemy;
 import com.codecool.mhmm.stickman.game_objects.GameObjectType;
+import com.codecool.mhmm.stickman.game_objects.items.Item;
+import com.codecool.mhmm.stickman.map.Level;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
@@ -47,7 +51,6 @@ public class EnemyDAOImpl extends BaseDaoImpl implements EnemyDAO {
         transaction.begin();
         em.persist(enemy);
         transaction.commit();
-
     }
 
     @Override

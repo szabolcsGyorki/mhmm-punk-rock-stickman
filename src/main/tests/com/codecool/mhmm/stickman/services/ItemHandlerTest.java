@@ -50,28 +50,4 @@ class ItemHandlerTest {
         itemHandler.assignToPlayer(player, armor);
         assertEquals(inventory, player.getItems());
     }
-
-    @Test
-    void testAssignToEnemy() {
-        Enemy enemy = new Orc(1, 1, 1);
-        List<Item> loot = new ArrayList<>();
-        Weapon weapon = new Weapon("Sword", 20, 10, 20);
-        loot.add(weapon);
-        itemHandler.assignToEnemy(enemy, weapon);
-        assertEquals(loot, enemy.getLoot());
-    }
-
-    @Test
-    void testAssignMultipleToEnemy() {
-        Enemy enemy = new Orc(1, 1, 1);
-        List<Item> loot = new ArrayList<>();
-        Weapon weapon = new Weapon("Sword", 20, 10, 20);
-        Armor armor = new Armor("armor", 10, 20);
-        loot.add(weapon);
-        loot.add(armor);
-
-        itemHandler.assignToEnemy(enemy, weapon);
-        itemHandler.assignToEnemy(enemy, armor);
-        assertEquals(loot, enemy.getLoot());
-    }
 }

@@ -12,13 +12,9 @@ import java.util.List;
 @NamedQuery(name="Enemy.getAll", query="SELECT e FROM Enemy e")
 public abstract class Enemy extends Character {
 
-    @ManyToOne
-    private Loot loot;
-
     Enemy(int X, int Y, int hitPoints, int damage, int level){
         super(X,Y,hitPoints,damage);
         this.level = level;
-        this.loot = new Loot();
     }
 
     protected Enemy() {
@@ -26,13 +22,5 @@ public abstract class Enemy extends Character {
 
     public int attack(){
         return this.damage;
-    }
-
-    public void addLoot(Item item) {
-        loot.add(item);
-    }
-
-    public List<Item> getLoot() {
-        return loot.getItems();
     }
 }
