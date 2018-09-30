@@ -20,12 +20,12 @@ class ItemHandlerTest {
 
     @BeforeEach
     void init() {
-        itemHandler = new ItemHandler();
+        itemHandler = ItemHandler.getInstance();
     }
 
     @Test
     void sanityCheck() {
-        ItemHandler itemHandler = new ItemHandler();
+        ItemHandler itemHandler = ItemHandler.getInstance();
         assertNotNull(itemHandler);
     }
 

@@ -13,6 +13,18 @@ import java.util.List;
 
 public class JSONHandler {
 
+    private static JSONHandler instance;
+
+    public static JSONHandler getInstance() {
+        if (instance == null) {
+            instance = new JSONHandler();
+        }
+        return instance;
+    }
+
+    private JSONHandler() {
+    }
+
     @SuppressWarnings("unchecked")
     public String gameStateToJson(Player player, Level level) {
         JSONArray jsonArray = new JSONArray();

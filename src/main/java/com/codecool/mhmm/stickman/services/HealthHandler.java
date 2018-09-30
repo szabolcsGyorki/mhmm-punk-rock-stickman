@@ -6,6 +6,18 @@ import com.codecool.mhmm.stickman.game_objects.items.Armor;
 
 public class HealthHandler {
 
+    private static HealthHandler instance;
+
+    public static HealthHandler getInstance() {
+        if (instance == null) {
+            instance = new HealthHandler();
+        }
+        return instance;
+    }
+
+    private HealthHandler() {
+    }
+
     void dealDamage(Character character, int damage) {
         int currentHealth = character.getHitPoint();
         int newHealth = currentHealth - damage;

@@ -12,6 +12,18 @@ import static com.codecool.mhmm.stickman.game_objects.GameObjectType.*;
 
 public class LevelGenerator {
 
+    private static LevelGenerator instance;
+
+    public static LevelGenerator getInstance() {
+        if (instance == null) {
+            instance = new LevelGenerator();
+        }
+        return instance;
+    }
+
+    private LevelGenerator() {
+    }
+
     public Level levelOne(ItemsDAO itemsDAO, EnemyDAO enemyDAO){
         Level levelOne = generateBase(itemsDAO);
         GameObjectType wallImage = levelOne.getWallImage();

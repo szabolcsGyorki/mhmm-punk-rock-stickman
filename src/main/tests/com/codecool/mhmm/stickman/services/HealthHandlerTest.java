@@ -15,12 +15,12 @@ class HealthHandlerTest {
 
     @BeforeEach
     void init() {
-        healthHandler = new HealthHandler();
+        healthHandler = HealthHandler.getInstance();
     }
 
     @Test
     void sanityCheck() {
-        HealthHandler healthHandler = new HealthHandler();
+        HealthHandler healthHandler = HealthHandler.getInstance();
         assertNotNull(healthHandler);
     }
 

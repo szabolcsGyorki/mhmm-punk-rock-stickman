@@ -11,10 +11,7 @@ import com.codecool.mhmm.stickman.dao.dao_impl.LevelDAOImpl;
 import com.codecool.mhmm.stickman.dao.dao_impl.PlayerDAOImpl;
 import com.codecool.mhmm.stickman.game_objects.characters.Player;
 import com.codecool.mhmm.stickman.map.Level;
-import com.codecool.mhmm.stickman.services.HealthHandler;
-import com.codecool.mhmm.stickman.services.JSONHandler;
-import com.codecool.mhmm.stickman.services.LevelGenerator;
-import com.codecool.mhmm.stickman.services.MoveHandler;
+import com.codecool.mhmm.stickman.services.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -29,29 +26,13 @@ import java.io.IOException;
 @WebServlet
 public abstract class BaseController extends HttpServlet {
 
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("stickman");
-    private EntityManager em = emf.createEntityManager();
-    private ItemsDAO itemsDAO = new ItemsDAOImpl(em);
-    private EnemyDAO enemyDao = new EnemyDAOImpl(em);
-    private LevelDAO levelDao = new LevelDAOImpl(em);
-    private PlayerDAO playerDAO = new PlayerDAOImpl(em);
-    private HealthHandler healthHandler = new HealthHandler();
-    private LevelGenerator levelGenerator = new LevelGenerator();
-    private MoveHandler moveHandler = MoveHandler.getInstance();
-    private JSONHandler jsonHandler = new JSONHandler();
-    private boolean demoload = true;
-    private Game game = new Game(itemsDAO, enemyDao, levelDao, playerDAO, healthHandler, levelGenerator, moveHandler);
+    private JSONHandler jsonHandler = JSONHandler.getInstance();
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        if (demoload) {
-            game.initForDemo();
-            demoload = false;
-        }
-
-
         HttpSession session = req.getSession(true);
-        Player player = game.getPlayer(session);
 
+        Game game = (Game) session.getAttribute("game");
+        Player player = game.getPlayer(session);
         Level level = game.getLevel(session);
 
         doAction(req, game, player, level);

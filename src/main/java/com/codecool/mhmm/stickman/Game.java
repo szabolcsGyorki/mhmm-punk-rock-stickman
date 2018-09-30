@@ -5,10 +5,6 @@ import com.codecool.mhmm.stickman.dao.EnemyDAO;
 import com.codecool.mhmm.stickman.dao.ItemsDAO;
 import com.codecool.mhmm.stickman.dao.LevelDAO;
 import com.codecool.mhmm.stickman.dao.PlayerDAO;
-import com.codecool.mhmm.stickman.dao.dao_impl.EnemyDAOImpl;
-import com.codecool.mhmm.stickman.dao.dao_impl.ItemsDAOImpl;
-import com.codecool.mhmm.stickman.dao.dao_impl.LevelDAOImpl;
-import com.codecool.mhmm.stickman.dao.dao_impl.PlayerDAOImpl;
 import com.codecool.mhmm.stickman.game_objects.characters.Player;
 import com.codecool.mhmm.stickman.game_objects.GameObject;
 import com.codecool.mhmm.stickman.game_objects.items.Armor;
@@ -17,9 +13,6 @@ import com.codecool.mhmm.stickman.game_objects.items.Weapon;
 import com.codecool.mhmm.stickman.map.Level;
 import com.codecool.mhmm.stickman.services.*;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.servlet.http.HttpSession;
 
 public class Game {
@@ -31,13 +24,17 @@ public class Game {
     private HealthHandler healthHandler;
     private LevelGenerator levelGenerator;
     private MoveHandler moveHandler;
-    //GUEST TRIAL STUFF
+    private ItemHandler itemHandler;
+    private boolean initialized = false;
+    private boolean demoLoaded = false;
 
-    private Player Zsolt;
+    //GUEST TRIAL STUFF
+    private Player player;
     private Level levelOne;
 
     public Game(ItemsDAO itemsDAO, EnemyDAO enemyDao, LevelDAO levelDao, PlayerDAO playerDAO,
-                HealthHandler healthHandler,  LevelGenerator levelGenerator, MoveHandler moveHandler) {
+                HealthHandler healthHandler, LevelGenerator levelGenerator, MoveHandler moveHandler,
+                ItemHandler itemHandler) {
         this.itemsDAO = itemsDAO;
         this.enemyDao = enemyDao;
         this.levelDao = levelDao;
@@ -45,23 +42,27 @@ public class Game {
         this.healthHandler = healthHandler;
         this.levelGenerator = levelGenerator;
         this.moveHandler = moveHandler;
+        this.itemHandler = itemHandler;
     }
 
     public void initForDemo(){
         InitDB init = new InitDB(itemsDAO, levelDao, enemyDao, levelGenerator);
         init.init();
-
         playerDAO.saveNew(new Player(1, 1, "Zsolt"));
+        demoLoaded = true;
+    }
 
-        Zsolt = playerDAO.getPlayerByName("Zsolt");
+    public void initGame(String name) {
+        player = playerDAO.getPlayerByName(name);
         levelOne = (Level) levelDao.getAll().get(0);
-        levelOne.addContent(Zsolt);
+        levelOne.addContent(player);
+        initialized = true;
     }
 
     public Player getPlayer(HttpSession session) {
         if (session.getAttribute("Player") == null) {
-            session.setAttribute("Player", Zsolt);
-            return Zsolt;
+            session.setAttribute("Player", player);
+            return player;
         }
         return (Player)session.getAttribute("Player");
     }
@@ -72,6 +73,14 @@ public class Game {
             return levelOne;
         }
         return (Level)session.getAttribute("Level");
+    }
+
+    public boolean isInitialized() {
+        return initialized;
+    }
+
+    public boolean isDemoLoaded() {
+        return demoLoaded;
     }
 
     public void setPlayer(HttpSession session, Player player) {

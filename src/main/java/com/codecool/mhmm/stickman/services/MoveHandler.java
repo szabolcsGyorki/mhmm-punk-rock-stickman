@@ -11,10 +11,13 @@ import com.codecool.mhmm.stickman.map.Level;
 import java.util.List;
 
 public class MoveHandler {
-    private static MoveHandler ourInstance = new MoveHandler();
+    private static MoveHandler instance;
 
     public static MoveHandler getInstance() {
-        return ourInstance;
+        if (instance == null) {
+            instance = new MoveHandler();
+        }
+        return instance;
     }
 
     private MoveHandler() {

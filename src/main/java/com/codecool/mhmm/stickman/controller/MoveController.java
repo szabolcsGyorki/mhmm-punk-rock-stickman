@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(urlPatterns = {"/send"})
-public class AjaxCall extends BaseController {
+public class MoveController extends BaseController {
 
     @Override
     void doAction(HttpServletRequest req, Game game, Player player, Level level){
