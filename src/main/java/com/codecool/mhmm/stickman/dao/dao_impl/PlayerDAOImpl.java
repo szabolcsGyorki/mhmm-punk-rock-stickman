@@ -15,7 +15,7 @@ import java.util.List;
 
 public class PlayerDAOImpl extends BaseDaoImpl implements PlayerDAO {
 
-    PlayerDAOImpl(EntityManager em) {
+    public PlayerDAOImpl(EntityManager em) {
         super(em);
     }
 

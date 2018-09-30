@@ -1,8 +1,14 @@
 package com.codecool.mhmm.stickman;
 
+import com.codecool.mhmm.stickman.config.InitDB;
+import com.codecool.mhmm.stickman.dao.EnemyDAO;
+import com.codecool.mhmm.stickman.dao.ItemsDAO;
+import com.codecool.mhmm.stickman.dao.LevelDAO;
+import com.codecool.mhmm.stickman.dao.PlayerDAO;
 import com.codecool.mhmm.stickman.dao.dao_impl.EnemyDAOImpl;
 import com.codecool.mhmm.stickman.dao.dao_impl.ItemsDAOImpl;
 import com.codecool.mhmm.stickman.dao.dao_impl.LevelDAOImpl;
+import com.codecool.mhmm.stickman.dao.dao_impl.PlayerDAOImpl;
 import com.codecool.mhmm.stickman.game_objects.characters.Player;
 import com.codecool.mhmm.stickman.game_objects.GameObject;
 import com.codecool.mhmm.stickman.game_objects.items.Armor;
@@ -13,72 +19,46 @@ import com.codecool.mhmm.stickman.services.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.servlet.http.HttpSession;
 
-import static com.codecool.mhmm.stickman.game_objects.GameObjectType.*;
-import static com.codecool.mhmm.stickman.game_objects.GameObjectType.DRAGON;
-import static com.codecool.mhmm.stickman.game_objects.GameObjectType.ORC;
-
 public class Game {
-    private static Game ourInstance = new Game();
 
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("stickman");
-    private EntityManager em = emf.createEntityManager();
-    private EntityTransaction transaction = em.getTransaction();
-
-    private ItemsDAOImpl itemsDAO = new ItemsDAOImpl(em);
-    private EnemyDAOImpl enemyDao = new EnemyDAOImpl(em);
-    private LevelDAOImpl levelDao = new LevelDAOImpl(em);
-    private HealthHandler healthHandler = new HealthHandler();
-
+    private ItemsDAO itemsDAO;
+    private EnemyDAO enemyDao;
+    private LevelDAO levelDao;
+    private PlayerDAO playerDAO;
+    private HealthHandler healthHandler;
+    private LevelGenerator levelGenerator;
+    private MoveHandler moveHandler;
     //GUEST TRIAL STUFF
+
     private Player Zsolt;
     private Level levelOne;
 
+    public Game(ItemsDAO itemsDAO, EnemyDAO enemyDao, LevelDAO levelDao, PlayerDAO playerDAO,
+                HealthHandler healthHandler,  LevelGenerator levelGenerator, MoveHandler moveHandler) {
+        this.itemsDAO = itemsDAO;
+        this.enemyDao = enemyDao;
+        this.levelDao = levelDao;
+        this.playerDAO = playerDAO;
+        this.healthHandler = healthHandler;
+        this.levelGenerator = levelGenerator;
+        this.moveHandler = moveHandler;
+    }
+
     public void initForDemo(){
-        levelOne = new Level(10,10 ,WALL, FLOOR, itemsDAO);
-        Zsolt = new Player(1,1, "Zsolt");
-        levelOne.placePlayer(Zsolt);
+        InitDB init = new InitDB(itemsDAO, levelDao, enemyDao, levelGenerator);
+        init.init();
 
-        Init.init(em);
+        playerDAO.saveNew(new Player(1, 1, "Zsolt"));
 
-        levelOne.placeWall(1,2);
-        levelOne.placeWall(2,2);
-        levelOne.placeWall(3,2);
-        levelOne.placeWall(4,2);
-        levelOne.placeWall(5,2);
-        levelOne.placeWall(7,2);
-        levelOne.placeWall(9,2);
-
-        levelOne.placeWall(1,5);
-        levelOne.placeWall(2,5);
-        levelOne.placeWall(3,5);
-        levelOne.placeWall(4,5);
-        levelOne.placeWall(5,5);
-        levelOne.placeWall(6,5);
-        levelOne.placeWall(7,4);
-        levelOne.placeWall(7,3);
-        levelOne.placeWall(7,5);
-        levelOne.placeWall(7,6);
-
-        levelOne.placeEnemy(6,2,SLIME,1);
-        levelOne.placeEnemy(8,2,SKELETON,1);
-        levelOne.placeEnemy(2,4,ORC,1);
-        levelOne.placeEnemy(6,7,DRAGON,1);
-
-        levelOne.placeLoot(4, 1, itemsDAO.getItemByName("Colossus Blade"));
-        levelOne.placeLoot(1, 4, itemsDAO.getItemByName("Shadow Plate"));
-
-        levelDao.saveNew(levelOne);
+        Zsolt = playerDAO.getPlayerByName("Zsolt");
+        levelOne = (Level) levelDao.getAll().get(0);
+        levelOne.addContent(Zsolt);
     }
 
-    public static Game getInstance() {
-        return ourInstance;
-    }
-
-    Player getPlayer(HttpSession session) {
+    public Player getPlayer(HttpSession session) {
         if (session.getAttribute("Player") == null) {
             session.setAttribute("Player", Zsolt);
             return Zsolt;
@@ -94,40 +74,36 @@ public class Game {
         return (Level)session.getAttribute("Level");
     }
 
-    void setPlayer(HttpSession session, Player player) {
+    public void setPlayer(HttpSession session, Player player) {
         session.setAttribute("Player", player);
     }
 
-    void setLevel(HttpSession session, Level level) {
+    public void setLevel(HttpSession session, Level level) {
         session.setAttribute("Level", level);
     }
 
-    void move(GameObject movingObject, Level level, String actionRequired) {
-        if (actionRequired.equals("down")
-                && movingObject.getY() < level.getHEIGHT() -1) {
-            level.move(movingObject.getX(), movingObject.getY()+1, (Player) movingObject);
+    public void move(GameObject movingObject, Level level, String actionRequired) {
+        if (actionRequired.equals("down") && movingObject.getY() < level.getHEIGHT() -1) {
+            moveHandler.move(movingObject.getX(), movingObject.getY()+1, (Player) movingObject, level, itemsDAO);
         }
-        if (actionRequired.equals("up")
-                && movingObject.getY() > 0) {
-            level.move(movingObject.getX(), movingObject.getY()-1, (Player) movingObject);
+        if (actionRequired.equals("up") && movingObject.getY() > 0) {
+            moveHandler.move(movingObject.getX(), movingObject.getY()-1, (Player) movingObject, level, itemsDAO);
         }
-        if (actionRequired.equals("right")
-                && movingObject.getX() < level.getWIDTH() -1) {
-            level.move(movingObject.getX()+1, movingObject.getY(), (Player) movingObject);
+        if (actionRequired.equals("right") && movingObject.getX() < level.getWIDTH() -1) {
+            moveHandler.move(movingObject.getX()+1, movingObject.getY(), (Player) movingObject, level, itemsDAO);
         }
-        if (actionRequired.equals("left")
-                && movingObject.getX() > 0) {
-            level.move(movingObject.getX()-1, movingObject.getY(), (Player) movingObject);
+        if (actionRequired.equals("left") && movingObject.getX() > 0) {
+            moveHandler.move(movingObject.getX()-1, movingObject.getY(), (Player) movingObject, level, itemsDAO);
         }
     }
 
-    void equipWeapon(Player player, String itemName){
+    public void equipWeapon(Player player, String itemName){
         Item item = itemsDAO.getItemByName(itemName);
         if (item instanceof Weapon)
             player.setWeapon((Weapon) item);
     }
 
-    void equipArmor(Player player, String itemName){
+    public void equipArmor(Player player, String itemName){
         Item item = itemsDAO.getItemByName(itemName);
         if (item instanceof Armor) {
             if (!healthHandler.armorChangeKillsPlayer(player, (Armor) item)) {

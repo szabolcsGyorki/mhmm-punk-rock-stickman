@@ -1,4 +1,4 @@
-package com.codecool.mhmm.stickman;
+package com.codecool.mhmm.stickman.controller;
 
 import com.codecool.mhmm.stickman.config.TemplateEngineUtil;
 import org.thymeleaf.TemplateEngine;
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(urlPatterns = {"/"})
-public class BaseController extends HttpServlet {
+public class HomeController extends HttpServlet {
 
     private void addPlusContext(WebContext context, HttpServletRequest req) throws IndexOutOfBoundsException {
     }

@@ -31,12 +31,12 @@ public abstract class GameObject {
         return X;
     }
 
-    public GameObjectType getType() {
-        return type;
-    }
-
     public int getY() {
         return Y;
+    }
+
+    public GameObjectType getType() {
+        return type;
     }
 
     public void place(int X, int Y){

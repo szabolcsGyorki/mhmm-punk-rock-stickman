@@ -30,7 +30,7 @@ function requestMap(action) {
 }
 
 function requestEquipWeapon(item_name) {
-    ajax_get('/send', function (data) {
+    ajax_get('/equip', function (data) {
         mapObjects = data[0];
         mainCharacter = data[1][0];
         mainCharacterHealth = mainCharacter.Health;
@@ -40,7 +40,7 @@ function requestEquipWeapon(item_name) {
 }
 
 function requestEquipArmor(item_name) {
-    ajax_get('/send', function (data) {
+    ajax_get('/equip', function (data) {
         mapObjects = data[0];
         mainCharacter = data[1][0];
         mainCharacterHealth = mainCharacter.Health;

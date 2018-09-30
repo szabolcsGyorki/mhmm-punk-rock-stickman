@@ -1,5 +1,6 @@
 package com.codecool.mhmm.stickman.game_objects.items;
 
+import com.codecool.mhmm.stickman.dao.ItemsDAO;
 import com.codecool.mhmm.stickman.dao.dao_impl.ItemsDAOImpl;
 import com.codecool.mhmm.stickman.game_objects.characters.Player;
 import com.codecool.mhmm.stickman.game_objects.GameObjectType;
@@ -17,12 +18,12 @@ public class Loot extends Item {
     private List<Item> lootList = new ArrayList<>();
 
     @Transient
-    private ItemsDAOImpl itemsList;
+    private ItemsDAO itemsList;
 
     private int gold;
     private Random random = new Random();
 
-    public Loot(int X, int Y, ItemsDAOImpl ItemsDAO) {
+    public Loot(int X, int Y, ItemsDAO ItemsDAO) {
         super("Loot",0);
         this.itemsList = ItemsDAO;
         this.X = X;
@@ -54,10 +55,10 @@ public class Loot extends Item {
     }
 
     private void fillUpLoot(int numberOfLoots) {
-        List<Item> items = itemsList.getAll();
+        List items = itemsList.getAll();
         for (int i = 0; i < numberOfLoots; i++) {
             long itemNumber = (long) random.nextInt(items.size()) + 1;
-            Item item = itemsList.findById(itemNumber);
+            Item item = (Item) itemsList.findById(itemNumber);
             if (item != null) {
                 lootList.add(item);
             }
@@ -72,7 +73,7 @@ public class Loot extends Item {
         return gold;
     }
 
-    public ItemsDAOImpl getItemsList() {
+    public ItemsDAO getItemsList() {
         return itemsList;
     }
 }

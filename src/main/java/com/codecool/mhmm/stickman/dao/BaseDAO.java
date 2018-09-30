@@ -20,10 +20,10 @@ public interface BaseDAO <T> {
      * @param field: name of the field to update (from the POJO, not DB)
      * @param value: the new value of the given field
      */
-    void update(T entity, String field, T value);
+    <T> void update(T entity, String field, T value);
 
     /**
      * @param entity: the object that needs to be saved
      */
-    void saveNew(T entity);
+    <T> void saveNew(T entity);
 }
