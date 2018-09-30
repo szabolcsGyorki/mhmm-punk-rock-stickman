@@ -46,7 +46,7 @@ public class Game {
     }
 
     public void initForDemo(){
-        InitDB init = new InitDB(itemsDAO, levelDao, enemyDao, levelGenerator);
+        InitDB init = new InitDB(itemsDAO, levelDao, enemyDao, levelGenerator, healthHandler);
         init.init();
         playerDAO.saveNew(new Player(1, 1, "Zsolt"));
         demoLoaded = true;

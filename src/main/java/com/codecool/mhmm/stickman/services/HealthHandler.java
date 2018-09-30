@@ -24,19 +24,19 @@ public class HealthHandler {
         character.setHitPoint(newHealth);
     }
 
-    int calculateDragonHealth(int level) {
+    public int calculateDragonHealth(int level) {
         return 100 + level*20;
     }
 
-    int calculateOrcHealth(int level) {
+    public int calculateOrcHealth(int level) {
         return 20 + 8*(level-1);
     }
 
-    int calculateSlimeHealth(int level) {
+    public int calculateSlimeHealth(int level) {
         return 12 * level/2;
     }
 
-    int calculateSkeletonHealth(int level) {
+    public int calculateSkeletonHealth(int level) {
         return 6*level;
     }
 

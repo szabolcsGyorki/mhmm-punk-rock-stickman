@@ -8,7 +8,6 @@ public enum GameObjectType {
     LOOT,
     WALL,
     FLOOR,
-    ENEMY,
     ARMOR,
     WEAPON,
     MAIN_CHARACTER

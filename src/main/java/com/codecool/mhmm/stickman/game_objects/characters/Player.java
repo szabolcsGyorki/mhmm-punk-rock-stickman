@@ -51,7 +51,7 @@ public class Player extends Character {
 
     public int attack(){
         Random hit = new Random();
-        if (hit.nextInt() < this.hitChance) {
+        if (hit.nextInt(100) < this.hitChance) {
             if (this.weapon == null)
                 return strength;
             return this.weapon.dealDamage() + strength;

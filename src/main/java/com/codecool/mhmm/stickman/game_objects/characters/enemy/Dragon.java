@@ -8,8 +8,8 @@ public class Dragon extends Enemy {
 
     private int fireBreathTimer;
 
-    public Dragon(int X, int Y, int level) {
-        super(X, Y, 100 + level*20, 15 + level*5, level);
+    public Dragon(int X, int Y, int hitPoints, int level) {
+        super(X, Y, hitPoints, 15 + level*5, level);
         armor = 20 + level*3;
         dodgeChance = 15;
         hitChance = 90;

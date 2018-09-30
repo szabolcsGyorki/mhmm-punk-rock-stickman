@@ -9,8 +9,8 @@ public class Slime extends Enemy {
 
     private int slimeSplashChanse = 10;
 
-    public Slime(int X, int Y, int level) {
-        super(X,Y,12 * level/2,level,level);
+    public Slime(int X, int Y, int hitPoints, int level) {
+        super(X, Y ,hitPoints, level, level);
         this.hitChance = 80;
         this.type = GameObjectType.SLIME;
     }

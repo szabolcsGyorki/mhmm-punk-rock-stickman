@@ -10,6 +10,7 @@ import com.codecool.mhmm.stickman.game_objects.characters.enemy.Slime;
 import com.codecool.mhmm.stickman.game_objects.items.Armor;
 import com.codecool.mhmm.stickman.game_objects.items.Loot;
 import com.codecool.mhmm.stickman.game_objects.items.Weapon;
+import com.codecool.mhmm.stickman.services.HealthHandler;
 import com.codecool.mhmm.stickman.services.LevelGenerator;
 
 public class InitDB {
@@ -18,12 +19,15 @@ public class InitDB {
     private LevelDAO levelDAO;
     private EnemyDAO enemyDAO;
     private LevelGenerator levelGenerator;
+    private HealthHandler healthHandler;
 
-    public InitDB(ItemsDAO itemsDAO, LevelDAO levelDAO, EnemyDAO enemyDAO, LevelGenerator levelGenerator) {
+    public InitDB(ItemsDAO itemsDAO, LevelDAO levelDAO, EnemyDAO enemyDAO,
+                  LevelGenerator levelGenerator, HealthHandler healthHandler) {
         this.itemsDAO = itemsDAO;
         this.levelDAO = levelDAO;
         this.enemyDAO = enemyDAO;
         this.levelGenerator = levelGenerator;
+        this.healthHandler = healthHandler;
     }
 
     public void init() {
@@ -66,10 +70,10 @@ public class InitDB {
     }
 
     private void initEnemies() {
-        enemyDAO.saveNew(new Slime(6,2, 1));
-        enemyDAO.saveNew(new Skeleton(8,2, 1));
-        enemyDAO.saveNew(new Orc(2,4, 1));
-        enemyDAO.saveNew(new Dragon(6,7, 1));
+        enemyDAO.saveNew(new Slime(6,2, healthHandler.calculateSlimeHealth(1), 1));
+        enemyDAO.saveNew(new Skeleton(8,2, healthHandler.calculateSkeletonHealth(1), 1));
+        enemyDAO.saveNew(new Orc(2,4, healthHandler.calculateOrcHealth(1), 1));
+        enemyDAO.saveNew(new Dragon(6,7, healthHandler.calculateDragonHealth(1), 1));
     }
 
     private void initLoots() {
