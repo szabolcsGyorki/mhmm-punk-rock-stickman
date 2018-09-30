@@ -5,8 +5,8 @@ import com.codecool.mhmm.stickman.dao.EnemyDAO;
 import com.codecool.mhmm.stickman.dao.ItemsDAO;
 import com.codecool.mhmm.stickman.dao.LevelDAO;
 import com.codecool.mhmm.stickman.dao.PlayerDAO;
+import com.codecool.mhmm.stickman.game_objects.characters.Character;
 import com.codecool.mhmm.stickman.game_objects.characters.Player;
-import com.codecool.mhmm.stickman.game_objects.GameObject;
 import com.codecool.mhmm.stickman.game_objects.items.Armor;
 import com.codecool.mhmm.stickman.game_objects.items.Item;
 import com.codecool.mhmm.stickman.game_objects.items.Weapon;
@@ -91,18 +91,18 @@ public class Game {
         session.setAttribute("Level", level);
     }
 
-    public void move(GameObject movingObject, Level level, String actionRequired) {
-        if (actionRequired.equals("down") && movingObject.getY() < level.getHEIGHT() -1) {
-            moveHandler.move(movingObject.getX(), movingObject.getY()+1, (Player) movingObject, level, itemsDAO);
+    public void move(Character character, Level level, String actionRequired) {
+        if (actionRequired.equals("down") && character.getY() < level.getHEIGHT() -1) {
+            moveHandler.moveDown(character);
         }
-        if (actionRequired.equals("up") && movingObject.getY() > 0) {
-            moveHandler.move(movingObject.getX(), movingObject.getY()-1, (Player) movingObject, level, itemsDAO);
+        if (actionRequired.equals("up") && character.getY() > 0) {
+            moveHandler.moveUp(character);
         }
-        if (actionRequired.equals("right") && movingObject.getX() < level.getWIDTH() -1) {
-            moveHandler.move(movingObject.getX()+1, movingObject.getY(), (Player) movingObject, level, itemsDAO);
+        if (actionRequired.equals("right") && character.getX() < level.getWIDTH() -1) {
+            moveHandler.moveRight(character);
         }
-        if (actionRequired.equals("left") && movingObject.getX() > 0) {
-            moveHandler.move(movingObject.getX()-1, movingObject.getY(), (Player) movingObject, level, itemsDAO);
+        if (actionRequired.equals("left") && character.getX() > 0) {
+            moveHandler.moveLeft(character);
         }
     }
 
@@ -120,5 +120,41 @@ public class Game {
                 player.setFullBody((Armor) item);
             }
         }
+    }
+
+    public ItemsDAO getItemsDAO() {
+        return itemsDAO;
+    }
+
+    public EnemyDAO getEnemyDao() {
+        return enemyDao;
+    }
+
+    public LevelDAO getLevelDao() {
+        return levelDao;
+    }
+
+    public PlayerDAO getPlayerDAO() {
+        return playerDAO;
+    }
+
+    public HealthHandler getHealthHandler() {
+        return healthHandler;
+    }
+
+    public LevelGenerator getLevelGenerator() {
+        return levelGenerator;
+    }
+
+    public MoveHandler getMoveHandler() {
+        return moveHandler;
+    }
+
+    public ItemHandler getItemHandler() {
+        return itemHandler;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 }

@@ -18,7 +18,7 @@ public class HealthHandler {
     private HealthHandler() {
     }
 
-    void dealDamage(Character character, int damage) {
+    public void dealDamage(Character character, int damage) {
         int currentHealth = character.getHitPoint();
         int newHealth = currentHealth - damage;
         character.setHitPoint(newHealth);

@@ -1,21 +1,40 @@
 document.onkeydown = function(e) {
     let handled;
+
+    function callAction(fieldContent, direction) {
+        if (fieldContent === undefined) {
+            requestMove(direction);
+        } else if (fieldContent.name === "LOOT") {
+            requestLoot(direction)
+        } else if (fieldContent.name === "SLIME" ||
+                    fieldContent.name === "ORC" ||
+                    fieldContent.name === "SKELETON" ||
+                    fieldContent.name === "DRAGON") {
+            requestFight(direction)
+        }
+    }
+
     if (e.keyCode !== undefined && !defeat()) {
+        let fieldContent;
         switch (e.keyCode) {
             case 37: //left
-                requestMap('left');
+                fieldContent = getLeftFieldContent();
+                callAction(fieldContent, 'left');
                 handled = true;
                 break;
             case 39: //right
-                requestMap('right');
+                fieldContent = getRightFieldContent();
+                callAction(fieldContent, 'right');
                 handled = true;
                 break;
             case 38: //up
-                requestMap('up');
+                fieldContent = getUpFieldContent();
+                callAction(fieldContent, 'up');
                 handled = true;
                 break;
             case 40: //down
-                requestMap('down');
+                fieldContent = getDownFieldContent();
+                callAction(fieldContent, 'down');
                 handled = true;
                 break;
         }

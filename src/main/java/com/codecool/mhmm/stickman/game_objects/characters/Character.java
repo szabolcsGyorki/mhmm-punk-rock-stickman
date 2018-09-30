@@ -42,7 +42,7 @@ public abstract class Character extends GameObject {
     }
 
     public int getDamage() {
-        return damage;
+        return this.damage;
     }
 
     public int getHitPoint() {
@@ -59,5 +59,9 @@ public abstract class Character extends GameObject {
 
     public void setDamage(int damage) {
         this.damage = damage;
+    }
+
+    public int getDodgeChance() {
+        return dodgeChance;
     }
 }

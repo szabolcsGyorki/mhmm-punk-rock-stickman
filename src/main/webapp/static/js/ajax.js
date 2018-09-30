@@ -19,13 +19,12 @@ function ajax_get(url, callback, action, value) {
     xmlhttp.send();
 }
 
-function requestMap(action) {
-    ajax_get('/send', function (data) {
+function requestMove(action) {
+    ajax_get('/move', function (data) {
         mapObjects = data[0];
         mainCharacter = data[1][0];
         mainCharacterHealth = mainCharacter.Health;
         updateCharacterStats();
-        updateInventory();
     }, "map", action)
 }
 
@@ -47,6 +46,25 @@ function requestEquipArmor(item_name) {
         updateCharacterStats();
         updateInventory();
     },"equipArmor", item_name)
+}
+
+function requestLoot(direction) {
+    ajax_get('/loot', function (data) {
+        mapObjects = data[0];
+        mainCharacter = data[1][0];
+        mainCharacterHealth = mainCharacter.Health;
+        updateCharacterStats();
+        updateInventory();
+    },"pickUpLoot", direction)
+}
+
+function requestFight(direction) {
+    ajax_get('/fight', function (data) {
+        mapObjects = data[0];
+        mainCharacter = data[1][0];
+        mainCharacterHealth = mainCharacter.Health;
+        updateCharacterStats();
+    },"fight", direction)
 }
 
 

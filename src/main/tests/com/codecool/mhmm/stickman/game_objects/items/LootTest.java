@@ -60,7 +60,7 @@ class LootTest {
     void testPickUp() {
         Player player = new Player(2,2, "John");
         List<Item> lootItems = newLoot.getItems();
-        newLoot.Pickup(player);
+        newLoot.pickup(player);
         assertEquals(lootItems, player.getItems());
     }
 

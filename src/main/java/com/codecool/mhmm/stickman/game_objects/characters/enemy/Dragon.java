@@ -21,13 +21,13 @@ public class Dragon extends Enemy {
     }
 
     @Override
-    public int attack() {
+    public int getDamage() {
         if (fireBreathTimer < 1) {
             fireBreathTimer = 3;
-            return level*5 + super.attack();
+            return level*5 + super.getDamage();
         }
         fireBreathTimer -= 1;
-        return super.attack();
+        return super.getDamage();
     }
 }
 

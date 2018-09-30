@@ -23,7 +23,23 @@ public class MoveHandler {
     private MoveHandler() {
     }
 
-    public void move(int toX, int toY, Character movingCharacter, Level level, ItemsDAO itemsDAO){
+    public void moveLeft(Character character) {
+        character.place(character.getX() - 1, character.getY());
+    }
+
+    public void moveRight(Character character) {
+        character.place(character.getX() + 1, character.getY());
+    }
+
+    public void moveUp(Character character) {
+        character.place(character.getX(), character.getY() - 1);
+    }
+
+    public void moveDown(Character character) {
+        character.place(character.getX(), character.getY() + 1);
+    }
+
+    public void move(int toX, int toY, Character movingCharacter, Level level, ItemsDAO itemsDAO) {
         List<GameObject> map = level.getMap();
         GameObject destination = getDestination(toX, toY, map);
 
@@ -34,7 +50,7 @@ public class MoveHandler {
                 case LOOT: {
                     movingCharacter.place(toX, toY);
                     Loot loot = (Loot) destination;
-                    loot.Pickup((Player)movingCharacter);
+                    loot.pickup((Player) movingCharacter);
                     map.remove(destination);
                     break;
                 }
@@ -45,13 +61,13 @@ public class MoveHandler {
                     if (movingCharacter instanceof Player) {
                         Player player = (Player) movingCharacter;
                         Enemy enemy = (Enemy) destination;
-                        player.takeDamage(enemy.attack());
-                        enemy.takeDamage(player.attack());
+                        player.takeDamage(enemy.getDamage());
+                        enemy.takeDamage(player.getDamage());
                         if (enemy.getHitPoint() <= 0) {
                             map.remove(destination);
                             movingCharacter.place(toX, toY);
-                            Loot loot = new Loot(0,0,itemsDAO);
-                            loot.Pickup(player);
+                            Loot loot = new Loot(0, 0, itemsDAO);
+                            loot.pickup(player);
                         }
                         break;
                     }
@@ -60,9 +76,9 @@ public class MoveHandler {
         }
     }
 
-    private GameObject getDestination(int toX, int toY, List<GameObject> map) {
+    public GameObject getDestination(int toX, int toY, List<GameObject> map) {
         GameObject destination = null;
-        for (GameObject mapElement: map) {
+        for (GameObject mapElement : map) {
             if (mapElement.getX() == toX && mapElement.getY() == toY) {
                 destination = mapElement;
                 break;

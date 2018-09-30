@@ -19,13 +19,13 @@ public class Slime extends Enemy {
     }
 
     @Override
-    public int attack() {
+    public int getDamage() {
         Random attackType = new Random();
         int attackRoll = attackType.nextInt();
         if (attackRoll < slimeSplashChanse) {
             return Math.round(level * (10 / 16));
         } else {
-            return super.attack();
+            return super.getDamage();
         }
     }
 }

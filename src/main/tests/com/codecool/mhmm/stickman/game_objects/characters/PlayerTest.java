@@ -84,7 +84,7 @@ class PlayerTest {
     @RepeatedTest(20)
     void testAttackWithoutWeapon() {
         player.changeStrength(10);
-        int damage = player.attack();
+        int damage = player.getDamage();
         assertTrue(damage == 0 || damage == 10);
     }
 
@@ -92,7 +92,7 @@ class PlayerTest {
     void testAttackWithWeapon() {
         player.changeStrength(10);
         player.setWeapon(new Weapon("Sword", 20, 8, 10));
-        int damage = player.attack();
+        int damage = player.getDamage();
         assertTrue(damage == 0 || damage > 17 && damage < 21);
     }
 

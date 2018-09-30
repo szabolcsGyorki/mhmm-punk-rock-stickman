@@ -37,7 +37,7 @@ public class Loot extends Item {
         this.itemsList = itemsList;
     }
 
-    public void Pickup(Player player){
+    public void pickup(Player player){
         for(Item item : lootList)
             player.addItemToInventory(item);
     }

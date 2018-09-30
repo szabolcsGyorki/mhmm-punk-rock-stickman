@@ -49,7 +49,8 @@ public class Player extends Character {
         this.weapon = weapon;
     }
 
-    public int attack(){
+    @Override
+    public int getDamage(){
         Random hit = new Random();
         if (hit.nextInt(100) < this.hitChance) {
             if (this.weapon == null)

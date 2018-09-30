@@ -1,11 +1,8 @@
 package com.codecool.mhmm.stickman.game_objects.characters.enemy;
 
 import com.codecool.mhmm.stickman.game_objects.characters.Character;
-import com.codecool.mhmm.stickman.game_objects.items.Item;
-import com.codecool.mhmm.stickman.game_objects.items.Loot;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -18,9 +15,5 @@ public abstract class Enemy extends Character {
     }
 
     protected Enemy() {
-    }
-
-    public int attack(){
-        return this.damage;
     }
 }
