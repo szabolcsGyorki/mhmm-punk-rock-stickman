@@ -25,6 +25,7 @@ public class Game {
     private LevelGenerator levelGenerator;
     private MoveHandler moveHandler;
     private ItemHandler itemHandler;
+    private FightHandler fightHandler;
     private boolean initialized = false;
     private boolean demoLoaded = false;
 
@@ -34,7 +35,7 @@ public class Game {
 
     public Game(ItemsDAO itemsDAO, EnemyDAO enemyDao, LevelDAO levelDao, PlayerDAO playerDAO,
                 HealthHandler healthHandler, LevelGenerator levelGenerator, MoveHandler moveHandler,
-                ItemHandler itemHandler) {
+                ItemHandler itemHandler, FightHandler fightHandler) {
         this.itemsDAO = itemsDAO;
         this.enemyDao = enemyDao;
         this.levelDao = levelDao;
@@ -43,6 +44,7 @@ public class Game {
         this.levelGenerator = levelGenerator;
         this.moveHandler = moveHandler;
         this.itemHandler = itemHandler;
+        this.fightHandler = fightHandler;
     }
 
     public void initForDemo(){
@@ -152,6 +154,10 @@ public class Game {
 
     public ItemHandler getItemHandler() {
         return itemHandler;
+    }
+
+    public FightHandler getFightHandler() {
+        return fightHandler;
     }
 
     public Player getPlayer() {

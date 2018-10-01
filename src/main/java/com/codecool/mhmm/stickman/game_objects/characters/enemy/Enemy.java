@@ -9,9 +9,20 @@ import javax.persistence.*;
 @NamedQuery(name="Enemy.getAll", query="SELECT e FROM Enemy e")
 public abstract class Enemy extends Character {
 
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+    int damage;
+
     Enemy(int X, int Y, int hitPoints, int damage, int level){
-        super(X,Y,hitPoints,damage);
+        super(X,Y,hitPoints);
         this.level = level;
+        this.damage = damage;
     }
 
     protected Enemy() {

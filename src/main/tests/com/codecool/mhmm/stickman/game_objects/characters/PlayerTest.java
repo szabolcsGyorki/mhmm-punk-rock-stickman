@@ -2,11 +2,16 @@ package com.codecool.mhmm.stickman.game_objects.characters;
 
 import com.codecool.mhmm.stickman.game_objects.items.Armor;
 import com.codecool.mhmm.stickman.game_objects.items.Weapon;
+import com.codecool.mhmm.stickman.services.FightHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 class PlayerTest {
 
@@ -16,7 +21,7 @@ class PlayerTest {
     @BeforeEach
     void init() {
         player = new Player();
-        playerWithParams = new Player(2,2,"John");
+        playerWithParams = new Player(2, 2, "John");
     }
 
     @Test
@@ -27,7 +32,7 @@ class PlayerTest {
 
     @Test
     void testPlayerIsCreatedWithParams() {
-        Player player = new Player(2,2, "John");
+        Player player = new Player(2, 2, "John");
         assertNotNull(player);
     }
 
@@ -81,21 +86,6 @@ class PlayerTest {
         assertEquals(10, player.getIntelligence());
     }
 
-    @RepeatedTest(20)
-    void testAttackWithoutWeapon() {
-        player.changeStrength(10);
-        int damage = player.getDamage();
-        assertTrue(damage == 0 || damage == 10);
-    }
-
-    @RepeatedTest(20)
-    void testAttackWithWeapon() {
-        player.changeStrength(10);
-        player.setWeapon(new Weapon("Sword", 20, 8, 10));
-        int damage = player.getDamage();
-        assertTrue(damage == 0 || damage > 17 && damage < 21);
-    }
-
     @Test
     void testStrengthTestSuccess() {
         player.changeStrength(15);
@@ -133,6 +123,26 @@ class PlayerTest {
     }
 
     @Test
+    void testGetDodgeChance() {
+        int dodgeChance = playerWithParams.getDodgeChance();
+        assertEquals(0, dodgeChance);
+    }
+
+    @Test
+    void setHitchance() {
+        playerWithParams.setHitChance(50);
+        assertEquals(50, playerWithParams.getHitChance());
+    }
+
+    @Test
+    void testPlacePlayer() {
+        int x = 2;
+        int y = 2;
+        player.place(x, y);
+        assertTrue(x == player.getX() && y == player.getY());
+    }
+
+    @Test
     void testAddItemToInventory() {
         Weapon weapon = new Weapon();
         player.addItemToInventory(weapon);
@@ -147,7 +157,7 @@ class PlayerTest {
     }
 
     @Test
-    void testGetItemById(){
+    void testGetItemById() {
         Weapon weapon = new Weapon();
         weapon.setId(1);
         player.addItemToInventory(weapon);
@@ -155,7 +165,7 @@ class PlayerTest {
     }
 
     @Test
-    void testGetItemByIdIsCorrect(){
+    void testGetItemByIdIsCorrect() {
         Weapon weapon = new Weapon("sword", 10, 2, 10);
         weapon.setId(1);
         player.addItemToInventory(weapon);
@@ -184,21 +194,13 @@ class PlayerTest {
         assertEquals("2 - 10", player.getDisplayDamage());
     }
 
-    @RepeatedTest(20)
-    void testPlayerTakesDamage() {
-        playerWithParams.takeDamage(10);
-        int hp = playerWithParams.getHitPoint();
-        assertTrue(hp == 30 || hp == 20);
+    @Test
+    void testGetX() {
+        assertEquals(2, playerWithParams.getX());
     }
 
     @Test
-    void testGetDamage() {
-        assertEquals(0, playerWithParams.getDamage());
-    }
-
-    @Test
-    void testSetDamage() {
-        playerWithParams.setDamage(5);
-        assertEquals(5, playerWithParams.getDamage());
+    void testGetY() {
+        assertEquals(2, playerWithParams.getY());
     }
 }

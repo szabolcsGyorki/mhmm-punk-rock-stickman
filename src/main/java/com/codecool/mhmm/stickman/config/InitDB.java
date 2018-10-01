@@ -13,6 +13,8 @@ import com.codecool.mhmm.stickman.game_objects.items.Weapon;
 import com.codecool.mhmm.stickman.services.HealthHandler;
 import com.codecool.mhmm.stickman.services.LevelGenerator;
 
+import java.util.Random;
+
 public class InitDB {
 
     private ItemsDAO itemsDAO;
@@ -70,7 +72,7 @@ public class InitDB {
     }
 
     private void initEnemies() {
-        enemyDAO.saveNew(new Slime(6,2, healthHandler.calculateSlimeHealth(1), 1));
+        enemyDAO.saveNew(new Slime(6,2, healthHandler.calculateSlimeHealth(1), 1, new Random()));
         enemyDAO.saveNew(new Skeleton(8,2, healthHandler.calculateSkeletonHealth(1), 1));
         enemyDAO.saveNew(new Orc(2,4, healthHandler.calculateOrcHealth(1), 1));
         enemyDAO.saveNew(new Dragon(6,7, healthHandler.calculateDragonHealth(1), 1));

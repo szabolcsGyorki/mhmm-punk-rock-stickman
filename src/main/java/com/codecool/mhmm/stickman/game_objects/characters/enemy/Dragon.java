@@ -24,10 +24,10 @@ public class Dragon extends Enemy {
     public int getDamage() {
         if (fireBreathTimer < 1) {
             fireBreathTimer = 3;
-            return level*5 + super.getDamage();
+            return level*5 + this.damage;
         }
         fireBreathTimer -= 1;
-        return super.getDamage();
+        return this.damage;
     }
 }
 

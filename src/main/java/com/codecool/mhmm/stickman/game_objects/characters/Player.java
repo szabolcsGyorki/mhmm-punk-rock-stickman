@@ -30,7 +30,7 @@ public class Player extends Character {
     private List<Item> items = new ArrayList<>();
 
     public Player(int X, int Y, String name) {
-        super(X, Y, 30, 0);
+        super(X, Y, 30);
         this.type = GameObjectType.MAIN_CHARACTER;
         strength = 3;
         agility = 3;
@@ -47,17 +47,6 @@ public class Player extends Character {
 
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
-    }
-
-    @Override
-    public int getDamage(){
-        Random hit = new Random();
-        if (hit.nextInt(100) < this.hitChance) {
-            if (this.weapon == null)
-                return strength;
-            return this.weapon.dealDamage() + strength;
-        }
-        return 0;
     }
 
     void changeStrength(int changeAmount){

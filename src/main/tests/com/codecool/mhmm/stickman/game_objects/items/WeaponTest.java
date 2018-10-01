@@ -41,10 +41,4 @@ class WeaponTest {
     void testWeaponMaxDamageIsCorrect() {
         assertEquals(50, weapon.getMaxDamage());
     }
-
-    @RepeatedTest(10)
-    void testWeaponDealsDamage() {
-        int damage = weapon.dealDamage();
-        assertTrue(damage > 39 && damage < 51);
-    }
 }

@@ -12,37 +12,20 @@ import java.util.Random;
 public abstract class Character extends GameObject {
 
     protected int level;
-    int hitPoint;
-    protected int damage;
+    private int hitPoint;
     protected int dodgeChance;
     protected int armor;
     protected int hitChance;
-    protected GameObjectType type;
 
-    public Character(int X, int Y, int hitPoint, int damage) {
+    public Character(int X, int Y, int hitPoint) {
         super(X, Y);
         this.hitPoint = hitPoint;
-        this.damage = damage;
         this.dodgeChance = 0;
         this.armor = 0;
         this.hitChance = 100;
     }
 
     protected Character() {
-    }
-
-    public void takeDamage(int damageAmount){
-        Random dodge = new Random();
-        if (dodge.nextInt(100)>this.dodgeChance)
-            this.hitPoint -= damageAmount;
-    }
-
-    public GameObjectType getType(){
-        return type;
-    }
-
-    public int getDamage() {
-        return this.damage;
     }
 
     public int getHitPoint() {
@@ -57,11 +40,11 @@ public abstract class Character extends GameObject {
         return this.hitChance;
     }
 
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
-
     public int getDodgeChance() {
         return dodgeChance;
+    }
+
+    public void setHitChance(int hitChance) {
+        this.hitChance = hitChance;
     }
 }

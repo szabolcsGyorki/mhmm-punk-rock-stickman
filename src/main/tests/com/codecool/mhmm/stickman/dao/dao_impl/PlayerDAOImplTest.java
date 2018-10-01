@@ -2,14 +2,15 @@ package com.codecool.mhmm.stickman.dao.dao_impl;
 
 import com.codecool.mhmm.stickman.game_objects.characters.Player;
 import com.codecool.mhmm.stickman.game_objects.items.Weapon;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,26 +19,27 @@ class PlayerDAOImplTest {
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("stickman");
     private static EntityManager em = emf.createEntityManager();
     private static PlayerDAOImpl playerDAO = new PlayerDAOImpl(em);
+    private static EntityTransaction transaction = em.getTransaction();
 
-    private static Player player1;
-    private static Weapon weapon1;
+    private Player player;
+    private long playerId;
+    private Weapon weapon;
 
-    @BeforeAll
-    static void init() {
-        player1 = new Player(1,1, "George");
-        weapon1 = new Weapon("Unstoppable Force", 2500, 95, 125);
-        player1.addItemToInventory(weapon1);
+    @BeforeEach
+    void init() {
+        em.clear();
+
+        player = new Player(1,1, "George");
+        weapon = new Weapon("Unstoppable Force", 2500, 95, 125);
+        player.addItemToInventory(weapon);
 
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
-        em.persist(player1);
-        em.persist(weapon1);
+        em.persist(player);
+        em.persist(weapon);
         transaction.commit();
-    }
 
-    @BeforeEach
-    void clear() {
-        em.clear();
+        playerId = player.getId();
     }
 
     @Test
@@ -48,13 +50,13 @@ class PlayerDAOImplTest {
 
     @Test
     void testGetPlayer() {
-        Player player = playerDAO.findById(1L);
+        Player player = playerDAO.findById(playerId);
         assertNotNull(player);
     }
 
     @Test
     void testGetPlayerName() {
-        Player player = playerDAO.findById(1L);
+        Player player = playerDAO.findById(playerId);
         assertEquals("George", player.getName());
     }
 
@@ -75,15 +77,47 @@ class PlayerDAOImplTest {
         Player expectedPlayer = new Player(2,3,"Aramis");
         playerDAO.saveNew(expectedPlayer);
         Player player = playerDAO.findById(expectedPlayer.getId());
+        transaction.begin();
         em.remove(expectedPlayer);
+        transaction.commit();
         assertEquals(expectedPlayer, player);
     }
 
     @Test
     void testPlayerUpdate() {
-        player1.place(2, 1);
-        playerDAO.update(player1, "X", player1.getX());
-        Player updatedPlayer = playerDAO.findById(player1.getId());
-        assertEquals(2, updatedPlayer.getX());
+        int expected = 2;
+        playerDAO.update(player, "X", expected);
+        Player updatedPlayer = playerDAO.findById(player.getId());
+        assertEquals(expected, updatedPlayer.getX());
+    }
+
+    @Test
+    void testGetAll() {
+        Player playerTwo = new Player();
+        List<Player> expected = new ArrayList<>();
+        expected.add(player);
+        expected.add(playerTwo);
+
+        playerDAO.saveNew(playerTwo);
+        List<Player> savedPlayers = playerDAO.getAll();
+        transaction.begin();
+        em.remove(playerTwo);
+        transaction.commit();
+
+        assertEquals(expected, savedPlayers);
+    }
+
+    @AfterEach
+    void removeEntries() {
+        transaction.begin();
+        em.remove(player);
+        em.remove(weapon);
+        transaction.commit();
+    }
+
+    @AfterAll
+    static void close() {
+        em.close();
+        emf.close();
     }
 }

@@ -36,7 +36,7 @@ public abstract class GameObject {
     }
 
     public GameObjectType getType() {
-        return type;
+        return this.type;
     }
 
     public void place(int X, int Y){

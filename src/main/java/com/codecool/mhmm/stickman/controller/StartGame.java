@@ -34,9 +34,10 @@ public class StartGame extends HttpServlet {
     private LevelDAO levelDao = new LevelDAOImpl(em);
     private PlayerDAO playerDAO = new PlayerDAOImpl(em);
     private LevelGenerator levelGenerator = LevelGenerator.getInstance();
-    private HealthHandler healthHandler = HealthHandler.getInstance();
+    private HealthHandler healthHandler = new HealthHandler();
     private MoveHandler moveHandler = MoveHandler.getInstance();
-    private ItemHandler itemHandler = ItemHandler.getInstance();
+    private ItemHandler itemHandler = new ItemHandler(itemsDAO, healthHandler);
+    private FightHandler fightHandler = FightHandler.getInstance();
 
     private void addPlusContext(WebContext context, HttpServletRequest req) throws IndexOutOfBoundsException {
     }
@@ -53,8 +54,8 @@ public class StartGame extends HttpServlet {
         String name = (String) session.getAttribute("playerName");
 
         if (session.getAttribute("game") == null) {
-            Game game = new Game(itemsDAO, enemyDao, levelDao, playerDAO,
-                    healthHandler, levelGenerator, moveHandler, itemHandler);
+            Game game = new Game(itemsDAO, enemyDao, levelDao, playerDAO, healthHandler,
+                    levelGenerator, moveHandler, itemHandler, fightHandler);
             if (!game.isDemoLoaded()) {
                 game.initForDemo();
                 name = "Zsolt";

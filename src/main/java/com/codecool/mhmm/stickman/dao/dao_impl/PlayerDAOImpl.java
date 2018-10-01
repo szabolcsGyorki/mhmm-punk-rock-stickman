@@ -39,7 +39,7 @@ public class PlayerDAOImpl extends BaseDaoImpl implements PlayerDAO {
                 .where(cb.equal(playerRoot.get("id"), ((Player)player).getId()));
         Query query = em.createQuery(cq);
         query.executeUpdate();
-//        em.refresh(player);
+        em.refresh(player);
         transaction.commit();
     }
 

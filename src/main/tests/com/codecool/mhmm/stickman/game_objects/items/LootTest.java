@@ -59,6 +59,7 @@ class LootTest {
     @Test
     void testPickUp() {
         Player player = new Player(2,2, "John");
+        newLoot.add(new Weapon());
         List<Item> lootItems = newLoot.getItems();
         newLoot.pickup(player);
         assertEquals(lootItems, player.getItems());

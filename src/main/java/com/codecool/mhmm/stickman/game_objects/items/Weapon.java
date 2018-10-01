@@ -21,11 +21,6 @@ public class Weapon extends Item {
     public Weapon() {
     }
 
-    public int dealDamage() {
-        Random random = new Random();
-        return random.nextInt(this.maxDamage - this.minDamage) + this.minDamage;
-    }
-
     public int getMinDamage() {
         return this.minDamage;
     }

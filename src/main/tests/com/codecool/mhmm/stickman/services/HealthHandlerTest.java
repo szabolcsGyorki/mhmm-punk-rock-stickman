@@ -15,12 +15,12 @@ class HealthHandlerTest {
 
     @BeforeEach
     void init() {
-        healthHandler = HealthHandler.getInstance();
+        healthHandler = new HealthHandler();
     }
 
     @Test
     void sanityCheck() {
-        HealthHandler healthHandler = HealthHandler.getInstance();
+        HealthHandler healthHandler = new HealthHandler();
         assertNotNull(healthHandler);
     }
 
@@ -34,7 +34,7 @@ class HealthHandlerTest {
 
     @Test
     void testDamagEnemy() {
-        Enemy enemy = new Orc(1,1,2);
+        Enemy enemy = new Orc(1,1, 10, 2);
         enemy.setHitPoint(30);
         healthHandler.dealDamage(enemy, 15);
         assertEquals(15, enemy.getHitPoint());
@@ -112,14 +112,14 @@ class HealthHandlerTest {
 
     @Test
     void testEnemyIsDead() {
-        Enemy enemy = new Orc(1,1,1);
+        Enemy enemy = new Orc(1,1, 10, 1);
         enemy.setHitPoint(0);
         assertTrue(healthHandler.characterIsDead(enemy));
     }
 
     @Test
     void testEnemyIsNotDead() {
-        Enemy enemy = new Orc(1,1,1);
+        Enemy enemy = new Orc(1,1, 10, 1);
         enemy.setHitPoint(20);
         assertFalse(healthHandler.characterIsDead(enemy));
     }
@@ -177,14 +177,14 @@ class HealthHandlerTest {
 
     @Test
     void testDamageKillsEnemy() {
-        Enemy enemy = new Orc(1,1,1);
+        Enemy enemy = new Orc(1,1, 10, 1);
         enemy.setHitPoint(10);
         assertTrue(healthHandler.damageKillsCharacter(enemy, 21));
     }
 
     @Test
     void testDamageKillsEnemyFalse() {
-        Enemy enemy = new Orc(1,1,1);
+        Enemy enemy = new Orc(1,1, 10, 1);
         enemy.setHitPoint(30);
         assertFalse(healthHandler.damageKillsCharacter(enemy, 21));
     }

@@ -7,12 +7,13 @@ import java.util.Random;
 @Entity
 public class Slime extends Enemy {
 
-    private int slimeSplashChanse = 10;
+    private Random attackType;
 
-    public Slime(int X, int Y, int hitPoints, int level) {
+    public Slime(int X, int Y, int hitPoints, int level, Random random) {
         super(X, Y ,hitPoints, level, level);
         this.hitChance = 80;
         this.type = GameObjectType.SLIME;
+        this.attackType = random;
     }
 
     public Slime() {
@@ -20,12 +21,11 @@ public class Slime extends Enemy {
 
     @Override
     public int getDamage() {
-        Random attackType = new Random();
-        int attackRoll = attackType.nextInt();
-        if (attackRoll < slimeSplashChanse) {
-            return Math.round(level * (10 / 16));
+        int attackRoll = attackType.nextInt(100);
+        if (attackRoll < 10) {
+            return Math.round(level * 2);
         } else {
-            return super.getDamage();
+            return this.damage;
         }
     }
 }

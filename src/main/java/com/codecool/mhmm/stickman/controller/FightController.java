@@ -7,24 +7,26 @@ import com.codecool.mhmm.stickman.game_objects.characters.Player;
 import com.codecool.mhmm.stickman.game_objects.characters.enemy.Enemy;
 import com.codecool.mhmm.stickman.game_objects.items.Loot;
 import com.codecool.mhmm.stickman.map.Level;
+import com.codecool.mhmm.stickman.services.FightHandler;
 import com.codecool.mhmm.stickman.services.HealthHandler;
 import com.codecool.mhmm.stickman.services.MoveHandler;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Random;
 
 @WebServlet(urlPatterns = {"/fight"})
 public class FightController extends BaseController {
 
     @Override
     void doAction(HttpServletRequest req, Game game, Player player, Level level) {
-        String actionRequired;
         MoveHandler moveHandler = game.getMoveHandler();
         HealthHandler healthHandler = game.getHealthHandler();
         ItemsDAO itemsDAO = game.getItemsDAO();
+        FightHandler fightHandler = game.getFightHandler();
+
         List<GameObject> map = level.getMap();
+        String actionRequired;
         Enemy enemy = null;
 
         if (req.getHeader("fight") != null) {
@@ -40,19 +42,20 @@ public class FightController extends BaseController {
             }
         }
 
-        int playerDamage = player.getDamage();
-        Random dodge = new Random();
-        if (dodge.nextInt(100) < player.getDodgeChance()) {
-            playerDamage = 0;
+        if (fightHandler.characterHits(player)) {
+            int playerDamage = fightHandler.getPlayerDamage(player);
+            if (!fightHandler.characterDodges(enemy)) {
+                healthHandler.dealDamage(enemy, playerDamage);
+            }
         }
-        healthHandler.dealDamage(enemy, playerDamage);
 
         assert enemy != null;
-        int enemyDamage = enemy.getDamage();
-        if (dodge.nextInt(100) < enemy.getDodgeChance()) {
-            enemyDamage = 0;
+        if (fightHandler.characterHits(enemy)) {
+            int enemyDamage = enemy.getDamage();
+            if (!fightHandler.characterDodges(player)) {
+                healthHandler.dealDamage(player, enemyDamage);
+            }
         }
-        healthHandler.dealDamage(player, enemyDamage);
 
         if (enemy.getHitPoint() <= 0) {
             map.remove(enemy);

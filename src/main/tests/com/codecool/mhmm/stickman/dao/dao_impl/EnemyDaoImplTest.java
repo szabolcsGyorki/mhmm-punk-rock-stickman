@@ -3,16 +3,15 @@ package com.codecool.mhmm.stickman.dao.dao_impl;
 
 import com.codecool.mhmm.stickman.game_objects.characters.enemy.*;
 import com.codecool.mhmm.stickman.game_objects.GameObjectType;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static com.codecool.mhmm.stickman.game_objects.GameObjectType.DRAGON;
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,27 +21,32 @@ class EnemyDaoImplTest {
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("stickman");
     private static EntityManager em = emf.createEntityManager();
     private static EnemyDAOImpl edi = new EnemyDAOImpl(em);
-    private static Enemy enemy1;
-    private static Enemy enemy2;
-    private static Enemy enemy3;
+    private static EntityTransaction transaction = em.getTransaction();
 
-    @BeforeAll
-    static void init() {
-        enemy1 = new Slime(1,2,1);
-        enemy2 = new Orc(1,2,1);
-        enemy3 = new Dragon(1,2,1);
+    private Enemy enemy1;
+    private long enemy1Id;
+    private Enemy enemy2;
+    private long enemy2Id;
+    private Enemy enemy3;
+    private long enemy3Id;
 
-        EntityTransaction transaction = em.getTransaction();
+    @BeforeEach
+    void init() {
+        em.clear();
+
+        enemy1 = new Slime(1,2, 5, 1, new Random());
+        enemy2 = new Orc(1,2, 10, 1);
+        enemy3 = new Dragon(1,2, 20, 1);
+
         transaction.begin();
         em.persist(enemy1);
         em.persist(enemy2);
         em.persist(enemy3);
         transaction.commit();
-    }
 
-    @BeforeEach
-    void clear() {
-        em.clear();
+        enemy1Id = enemy1.getId();
+        enemy2Id = enemy2.getId();
+        enemy3Id = enemy3.getId();
     }
 
     @Test
@@ -53,44 +57,33 @@ class EnemyDaoImplTest {
 
     @Test
     void testGetEnemyById() {
-        Enemy enemy = edi.findById(3);
+        Enemy enemy = edi.findById(enemy3Id);
         assertNotNull(enemy);
     }
 
     @Test
     void testGetEnemyByIdOne() {
-        Enemy enemy = edi.findById(1);
-        assertEquals(1, enemy.getId());
-    }
-
-    @Test
-    void testGetEnemyByIdThree() {
-        Enemy enemy = edi.findById(3);
-        assertEquals(DRAGON, enemy.getType());
+        Enemy enemy = edi.findById(enemy1Id);
+        assertEquals(enemy1, enemy);
     }
 
     @Test
     void testGetALlEnemy() {
-        List<Enemy> enemies = edi.getAll();
-        assertNotNull(enemies);
-    }
-
-    @Test
-    void testGetAllEnemyReturnsCorrectly() {
         List<Enemy> expected = new ArrayList<>();
-        expected.add(edi.findById(1L));
-        expected.add(edi.findById(2L));
-        expected.add(edi.findById(3L));
+        expected.add(enemy1);
+        expected.add(enemy2);
+        expected.add(enemy3);
 
         List<Enemy> enemies = edi.getAll();
-        assertTrue(enemies.containsAll(expected));
+        assertTrue(expected.containsAll(enemies) && enemies.containsAll(expected));
     }
 
     @Test
     void testUpdateEnemy() {
-        edi.update(enemy3, "hitPoint", 20);
+        int expected = 40;
+        edi.update(enemy3, "hitPoint", expected);
         Enemy updatedEnemy = edi.findById(enemy3.getId());
-        assertEquals(20, updatedEnemy.getHitPoint());
+        assertEquals(expected, updatedEnemy.getHitPoint());
     }
 
     @Test
@@ -102,9 +95,14 @@ class EnemyDaoImplTest {
 
     @Test
     void testSaveNewEnemy() {
-        Enemy expectedEnemy = new Orc(5,6, 2);
+        Enemy expectedEnemy = new Orc(5,6,10, 2);
         edi.saveNew(expectedEnemy);
         Enemy enemy = edi.findById(expectedEnemy.getId());
+
+        transaction.begin();
+        em.remove(expectedEnemy);
+        transaction.commit();
+
         assertEquals(expectedEnemy, enemy);
     }
 
@@ -112,6 +110,15 @@ class EnemyDaoImplTest {
     void testGetEnemiesByType() {
         List<Enemy> enemies = edi.getEnemiesByType(DRAGON);
         assertEquals(DRAGON, enemies.get(0).getType());
+    }
+
+    @AfterEach
+    void remove() {
+        transaction.begin();
+        em.remove(enemy1);
+        em.remove(enemy2);
+        em.remove(enemy3);
+        transaction.commit();
     }
 
     @AfterAll
