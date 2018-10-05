@@ -50,14 +50,14 @@ public class FightController extends BaseController {
         }
 
         assert enemy != null;
-        if (fightHandler.characterHits(enemy)) {
-            int enemyDamage = enemy.getDamage();
-            if (!fightHandler.characterDodges(player)) {
-                healthHandler.dealDamage(player, enemyDamage);
+        if (enemy.getHitPoint() > 0) {
+            if (fightHandler.characterHits(enemy)) {
+                int enemyDamage = enemy.getDamage();
+                if (!fightHandler.characterDodges(player)) {
+                    healthHandler.dealDamage(player, enemyDamage);
+                }
             }
-        }
-
-        if (enemy.getHitPoint() <= 0) {
+        } else {
             map.remove(enemy);
             Loot loot = new Loot(enemy.getX(), enemy.getY());
             itemHandler.setLootGold(loot);
