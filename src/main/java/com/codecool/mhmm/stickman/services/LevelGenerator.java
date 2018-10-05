@@ -25,7 +25,7 @@ public class LevelGenerator {
     }
 
     public Level levelOne(ItemsDAO itemsDAO, EnemyDAO enemyDAO){
-        Level levelOne = generateBase(itemsDAO);
+        Level levelOne = generateBase(10,10 ,WALL, FLOOR);
         GameObjectType wallImage = levelOne.getWallImage();
 
         levelOne.addContent(new Wall(1, 2, wallImage));
@@ -57,8 +57,8 @@ public class LevelGenerator {
         return levelOne;
     }
 
-    private Level generateBase(ItemsDAO itemsDAO){
-        Level level = new Level(10,10 ,WALL, FLOOR);
+    private Level generateBase(int width, int height, GameObjectType wall, GameObjectType floor){
+        Level level = new Level(width, height, wall, floor);
 
         for(int i = 0; i< level.getWIDTH(); i++){
             level.addContent(new Wall(i,0, level.getWallImage()));

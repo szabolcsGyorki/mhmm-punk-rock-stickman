@@ -11,6 +11,7 @@ import com.codecool.mhmm.stickman.game_objects.items.Armor;
 import com.codecool.mhmm.stickman.game_objects.items.Loot;
 import com.codecool.mhmm.stickman.game_objects.items.Weapon;
 import com.codecool.mhmm.stickman.services.HealthHandler;
+import com.codecool.mhmm.stickman.services.ItemHandler;
 import com.codecool.mhmm.stickman.services.LevelGenerator;
 
 import java.util.Random;
@@ -22,14 +23,16 @@ public class InitDB {
     private EnemyDAO enemyDAO;
     private LevelGenerator levelGenerator;
     private HealthHandler healthHandler;
+    private ItemHandler itemHandler;
 
     public InitDB(ItemsDAO itemsDAO, LevelDAO levelDAO, EnemyDAO enemyDAO,
-                  LevelGenerator levelGenerator, HealthHandler healthHandler) {
+                  LevelGenerator levelGenerator, HealthHandler healthHandler, ItemHandler itemHandler) {
         this.itemsDAO = itemsDAO;
         this.levelDAO = levelDAO;
         this.enemyDAO = enemyDAO;
         this.levelGenerator = levelGenerator;
         this.healthHandler = healthHandler;
+        this.itemHandler = itemHandler;
     }
 
     public void init() {
@@ -79,11 +82,15 @@ public class InitDB {
     }
 
     private void initLoots() {
-        Loot loot1 = new Loot(4, 1, itemsDAO);
-        Loot loot2 = new Loot(1, 4, itemsDAO);
+        Loot loot1 = new Loot(4, 1);
+        Loot loot2 = new Loot(1, 4);
 
         loot1.add(itemsDAO.getItemByName("Colossus Blade"));
         loot2.add(itemsDAO.getItemByName("Shadow Plate"));
+        itemHandler.setLootGold(loot1);
+        itemHandler.setLootGold(loot2);
+        itemHandler.fillUpLoot(loot1);
+        itemHandler.fillUpLoot(loot2);
 
         itemsDAO.saveNew(loot1);
         itemsDAO.saveNew(loot2);

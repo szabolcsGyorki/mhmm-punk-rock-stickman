@@ -9,6 +9,7 @@ import com.codecool.mhmm.stickman.game_objects.items.Loot;
 import com.codecool.mhmm.stickman.map.Level;
 import com.codecool.mhmm.stickman.services.FightHandler;
 import com.codecool.mhmm.stickman.services.HealthHandler;
+import com.codecool.mhmm.stickman.services.ItemHandler;
 import com.codecool.mhmm.stickman.services.MoveHandler;
 
 import javax.servlet.annotation.WebServlet;
@@ -24,6 +25,7 @@ public class FightController extends BaseController {
         HealthHandler healthHandler = game.getHealthHandler();
         ItemsDAO itemsDAO = game.getItemsDAO();
         FightHandler fightHandler = game.getFightHandler();
+        ItemHandler itemHandler = game.getItemHandler();
 
         List<GameObject> map = level.getMap();
         String actionRequired;
@@ -59,7 +61,10 @@ public class FightController extends BaseController {
 
         if (enemy.getHitPoint() <= 0) {
             map.remove(enemy);
-            level.addContent(new Loot(enemy.getX(), enemy.getY(), itemsDAO));
+            Loot loot = new Loot(enemy.getX(), enemy.getY());
+            itemHandler.setLootGold(loot);
+            itemHandler.fillUpLoot(loot);
+            level.addContent(loot);
         }
     }
 }

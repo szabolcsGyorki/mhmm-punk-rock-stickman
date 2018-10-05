@@ -49,7 +49,7 @@ public class Player extends Character {
         this.weapon = weapon;
     }
 
-    void changeStrength(int changeAmount){
+    public void changeStrength(int changeAmount){
         this.strength += changeAmount;
     }
 

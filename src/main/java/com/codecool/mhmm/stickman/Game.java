@@ -48,7 +48,7 @@ public class Game {
     }
 
     public void initForDemo(){
-        InitDB init = new InitDB(itemsDAO, levelDao, enemyDao, levelGenerator, healthHandler);
+        InitDB init = new InitDB(itemsDAO, levelDao, enemyDao, levelGenerator, healthHandler, itemHandler);
         init.init();
         playerDAO.saveNew(new Player(1, 1, "Zsolt"));
         demoLoaded = true;
@@ -62,18 +62,10 @@ public class Game {
     }
 
     public Player getPlayer(HttpSession session) {
-        if (session.getAttribute("Player") == null) {
-            session.setAttribute("Player", player);
-            return player;
-        }
         return (Player)session.getAttribute("Player");
     }
 
     public Level getLevel(HttpSession session) {
-        if (session.getAttribute("Level") == null) {
-            session.setAttribute("Level", levelOne);
-            return levelOne;
-        }
         return (Level)session.getAttribute("Level");
     }
 
@@ -91,37 +83,6 @@ public class Game {
 
     public void setLevel(HttpSession session, Level level) {
         session.setAttribute("Level", level);
-    }
-
-    public void move(Character character, Level level, String actionRequired) {
-        if (actionRequired.equals("down") && character.getY() < level.getHEIGHT() -1) {
-            moveHandler.moveDown(character);
-        }
-        if (actionRequired.equals("up") && character.getY() > 0) {
-            moveHandler.moveUp(character);
-        }
-        if (actionRequired.equals("right") && character.getX() < level.getWIDTH() -1) {
-            moveHandler.moveRight(character);
-        }
-        if (actionRequired.equals("left") && character.getX() > 0) {
-            moveHandler.moveLeft(character);
-        }
-    }
-
-    public void equipWeapon(Player player, String itemName){
-        Item item = itemsDAO.getItemByName(itemName);
-        if (item instanceof Weapon)
-            player.setWeapon((Weapon) item);
-    }
-
-    public void equipArmor(Player player, String itemName){
-        Item item = itemsDAO.getItemByName(itemName);
-        if (item instanceof Armor) {
-            if (!healthHandler.armorChangeKillsPlayer(player, (Armor) item)) {
-                healthHandler.increasePlayerHealthWithArmor(player, (Armor) item);
-                player.setFullBody((Armor) item);
-            }
-        }
     }
 
     public ItemsDAO getItemsDAO() {
@@ -162,5 +123,9 @@ public class Game {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public Level getLevelOne() {
+        return levelOne;
     }
 }

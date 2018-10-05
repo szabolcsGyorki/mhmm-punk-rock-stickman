@@ -47,4 +47,8 @@ public abstract class Character extends GameObject {
     public void setHitChance(int hitChance) {
         this.hitChance = hitChance;
     }
+
+    public void setDodgeChance(int dodgeChance) {
+        this.dodgeChance = dodgeChance;
+    }
 }

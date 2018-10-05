@@ -23,24 +23,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Random;
 
 @WebServlet(urlPatterns = {"/"})
 public class StartGame extends HttpServlet {
 
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("stickman");
     private EntityManager em = emf.createEntityManager();
-    private ItemsDAO itemsDAO = new ItemsDAOImpl(em);
+    private Random random = new Random();
+    private ItemsDAO itemsDAO = new ItemsDAOImpl(em, random);
     private EnemyDAO enemyDao = new EnemyDAOImpl(em);
     private LevelDAO levelDao = new LevelDAOImpl(em);
     private PlayerDAO playerDAO = new PlayerDAOImpl(em);
     private LevelGenerator levelGenerator = LevelGenerator.getInstance();
     private HealthHandler healthHandler = new HealthHandler();
     private MoveHandler moveHandler = MoveHandler.getInstance();
-    private ItemHandler itemHandler = new ItemHandler(itemsDAO, healthHandler);
-    private FightHandler fightHandler = FightHandler.getInstance();
-
-    private void addPlusContext(WebContext context, HttpServletRequest req) throws IndexOutOfBoundsException {
-    }
+    private ItemHandler itemHandler = new ItemHandler(itemsDAO, healthHandler, random);
+    private FightHandler fightHandler = new FightHandler(random);
 
     private String getHTML() {
         return "index";
@@ -64,11 +63,12 @@ public class StartGame extends HttpServlet {
                 game.initGame(name);
             }
             session.setAttribute("game", game);
+            session.setAttribute("Player", game.getPlayer());
+            session.setAttribute("Level", game.getLevelOne());
         }
 
 
         try {
-            addPlusContext(context, req);
             engine.process( getHTML() + ".html", context, resp.getWriter());
         } catch(IndexOutOfBoundsException e) {
             engine.process("404.html", context, resp.getWriter());

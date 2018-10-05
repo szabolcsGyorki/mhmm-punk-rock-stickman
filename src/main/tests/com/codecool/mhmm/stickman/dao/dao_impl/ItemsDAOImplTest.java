@@ -5,6 +5,7 @@ import com.codecool.mhmm.stickman.game_objects.items.Armor;
 import com.codecool.mhmm.stickman.game_objects.items.Item;
 import com.codecool.mhmm.stickman.game_objects.items.Weapon;
 import org.junit.jupiter.api.*;
+import org.mockito.Mockito;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,15 +14,19 @@ import javax.persistence.Persistence;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.when;
 
 class ItemsDAOImplTest {
 
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("stickman");
     private static EntityManager em = emf.createEntityManager();
-    private static ItemsDAOImpl itemsDAO = new ItemsDAOImpl(em);
-    private static EntityTransaction transaction = em.getTransaction();
+    private Random random = Mockito.mock(Random.class);
+    private ItemsDAOImpl itemsDAO = new ItemsDAOImpl(em, random);
+    private EntityTransaction transaction = em.getTransaction();
 
     private Item armor;
     private long armorId;
@@ -47,7 +52,7 @@ class ItemsDAOImplTest {
 
     @Test
     void testInstanceCreated() {
-        ItemsDAOImpl dao = new ItemsDAOImpl(em);
+        ItemsDAOImpl dao = new ItemsDAOImpl(em, random);
         assertNotNull(dao);
     }
 
@@ -101,8 +106,9 @@ class ItemsDAOImplTest {
         assertTrue(expected.containsAll(items) && items.containsAll(expected));
     }
 
-    @RepeatedTest(20)
+    @Test
     void testGetRandomItem() {
+        when(random.nextInt(anyInt())).thenReturn(0);
         Item item = itemsDAO.getRandomItem();
         assertNotNull(item);
     }

@@ -14,8 +14,11 @@ import java.util.Random;
 
 public class ItemsDAOImpl extends BaseDaoImpl implements ItemsDAO {
 
-    public ItemsDAOImpl(EntityManager em) {
+    private Random random;
+
+    public ItemsDAOImpl(EntityManager em, Random random) {
         super(em);
+        this.random = random;
     }
 
     @Override
@@ -54,7 +57,6 @@ public class ItemsDAOImpl extends BaseDaoImpl implements ItemsDAO {
 
     @Override
     public Item getRandomItem() {
-        Random random = new Random();
         List<Item> items = getAll();
         int id = random.nextInt(items.size());
         return items.get(id);
