@@ -15,14 +15,14 @@ public class JSONHandler {
 
     private static JSONHandler instance;
 
+    private JSONHandler() {
+    }
+
     public static JSONHandler getInstance() {
         if (instance == null) {
             instance = new JSONHandler();
         }
         return instance;
-    }
-
-    private JSONHandler() {
     }
 
     @SuppressWarnings("unchecked")
@@ -37,15 +37,16 @@ public class JSONHandler {
         return jsonArray.toJSONString();
     }
 
-     /**
+    /**
      * Converts a list of game_objects to a JSONObject that's AJAX response ready
+     *
      * @return JSONArray with JSONObjects
      */
     @SuppressWarnings("unchecked")
-    private JSONArray levelToJson (List<GameObject> gameObjects) {
+    private JSONArray levelToJson(List<GameObject> gameObjects) {
         JSONArray gameObjectsJSONArray = new JSONArray();
 
-        for (GameObject gameObject: gameObjects) {
+        for (GameObject gameObject : gameObjects) {
             JSONObject obj = new JSONObject();
             obj.put("name", gameObject.getType().toString());
             obj.put("x", gameObject.getX());
@@ -56,12 +57,12 @@ public class JSONHandler {
     }
 
     @SuppressWarnings("unchecked")
-    private JSONObject characterToJson (Player player) {
+    private JSONObject characterToJson(Player player) {
         JSONObject character = new JSONObject();
         JSONArray characterInventory = new JSONArray();
 
         //filling inventory
-        for (Item item: player.getItems()) {
+        for (Item item : player.getItems()) {
             JSONObject jsonItem = new JSONObject();
 
             jsonItem.put("name", item.getName());

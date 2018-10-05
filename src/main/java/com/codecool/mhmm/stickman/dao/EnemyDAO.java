@@ -9,9 +9,10 @@ public interface EnemyDAO extends BaseDAO {
 
     /**
      * Update every enemies which belongs to the given type
+     *
      * @param enemyType: type of the enemy
-     * @param field: the name of the field to update (from the POJO not DB)
-     * @param value: the new value of the given field
+     * @param field:     the name of the field to update (from the POJO not DB)
+     * @param value:     the new value of the given field
      */
     <T> void updateEnemiesByType(GameObjectType enemyType, String field, T value);
 

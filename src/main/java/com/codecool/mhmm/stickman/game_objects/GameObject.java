@@ -19,12 +19,24 @@ public abstract class GameObject {
     @Column(name = "coordinate_y")
     protected int Y;
 
-    public GameObject(int X, int Y){
+    public GameObject(int X, int Y) {
         this.X = X;
         this.Y = Y;
     }
 
     protected GameObject() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public GameObjectType getType() {
+        return this.type;
     }
 
     public int getX() {
@@ -35,20 +47,8 @@ public abstract class GameObject {
         return Y;
     }
 
-    public GameObjectType getType() {
-        return this.type;
-    }
-
-    public void place(int X, int Y){
+    public void place(int X, int Y) {
         this.X = X;
         this.Y = Y;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 }

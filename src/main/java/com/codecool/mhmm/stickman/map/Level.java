@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@NamedQuery(name="Level.getAll", query="SELECT level FROM Level level")
+@NamedQuery(name = "Level.getAll", query = "SELECT level FROM Level level")
 public class Level {
 
     @Id
@@ -25,8 +25,8 @@ public class Level {
     private GameObjectType floorImage;
 
     public Level(int width, int height, GameObjectType wall, GameObjectType floor) {
-        this.WIDTH=width;
-        this.HEIGHT=height;
+        this.WIDTH = width;
+        this.HEIGHT = height;
         this.wallImage = wall;
         this.floorImage = floor;
     }
@@ -42,23 +42,23 @@ public class Level {
         return map;
     }
 
-    public int getHEIGHT() {
-        return HEIGHT;
+    public void addContent(GameObject content) {
+        map.add(content);
     }
 
     public int getWIDTH() {
         return WIDTH;
     }
 
-    public GameObjectType getFloorImage() {
-        return floorImage;
+    public int getHEIGHT() {
+        return HEIGHT;
     }
 
     public GameObjectType getWallImage() {
         return wallImage;
     }
 
-    public void addContent(GameObject content) {
-        map.add(content);
+    public GameObjectType getFloorImage() {
+        return floorImage;
     }
 }

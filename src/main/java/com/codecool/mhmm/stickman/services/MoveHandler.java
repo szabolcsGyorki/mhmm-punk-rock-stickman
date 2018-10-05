@@ -1,12 +1,7 @@
 package com.codecool.mhmm.stickman.services;
 
-import com.codecool.mhmm.stickman.dao.ItemsDAO;
 import com.codecool.mhmm.stickman.game_objects.GameObject;
 import com.codecool.mhmm.stickman.game_objects.characters.Character;
-import com.codecool.mhmm.stickman.game_objects.characters.Player;
-import com.codecool.mhmm.stickman.game_objects.characters.enemy.Enemy;
-import com.codecool.mhmm.stickman.game_objects.items.Loot;
-import com.codecool.mhmm.stickman.map.Level;
 
 import java.util.List;
 
@@ -14,14 +9,14 @@ public class MoveHandler {
 
     private static MoveHandler instance;
 
+    private MoveHandler() {
+    }
+
     public static MoveHandler getInstance() {
         if (instance == null) {
             instance = new MoveHandler();
         }
         return instance;
-    }
-
-    private MoveHandler() {
     }
 
     public void moveLeft(Character character) {

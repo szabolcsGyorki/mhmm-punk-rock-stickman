@@ -8,10 +8,9 @@ import com.codecool.mhmm.stickman.game_objects.items.Weapon;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 @Entity
-@NamedQuery(name="Player.getAll", query="SELECT player FROM Player player")
+@NamedQuery(name = "Player.getAll", query = "SELECT player FROM Player player")
 public class Player extends Character {
 
     private String name;
@@ -41,36 +40,28 @@ public class Player extends Character {
     public Player() {
     }
 
-    public void setFullBody(Armor fullBody) {
-        this.fullBody = fullBody;
-    }
-
-    public void setWeapon(Weapon weapon) {
-        this.weapon = weapon;
-    }
-
-    public void changeStrength(int changeAmount){
+    public void changeStrength(int changeAmount) {
         this.strength += changeAmount;
     }
 
-    boolean strengthTest(int testValue){
-        return testValue<strength;
+    boolean strengthTest(int testValue) {
+        return testValue < strength;
     }
 
-    void changeAgility(int changeAmount){
+    void changeAgility(int changeAmount) {
         this.agility += changeAmount;
     }
 
-    boolean agilityTest(int testValue){
-        return testValue<agility;
+    boolean agilityTest(int testValue) {
+        return testValue < agility;
     }
 
-    void changeIntelligence(int changeAmount){
+    void changeIntelligence(int changeAmount) {
         this.intelligence += changeAmount;
     }
 
-    boolean intelligenceTest(int testValue){
-        return testValue<intelligence;
+    boolean intelligenceTest(int testValue) {
+        return testValue < intelligence;
     }
 
     public int getIntelligence() {
@@ -89,8 +80,16 @@ public class Player extends Character {
         return fullBody;
     }
 
+    public void setFullBody(Armor fullBody) {
+        this.fullBody = fullBody;
+    }
+
     public Weapon getWeapon() {
         return weapon;
+    }
+
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
     }
 
     public void addItemToInventory(Item item) {

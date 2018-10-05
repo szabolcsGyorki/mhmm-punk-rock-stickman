@@ -16,6 +16,7 @@ public interface PlayerDAO extends BaseDAO {
     /**
      * load list of every game objects that was modified by the player (ex.: enemies
      * that are damaged/dead, loot that was picked up, etc...)
+     *
      * @param player: the player
      * @return: a list that contains all modified objects
      */
@@ -24,6 +25,7 @@ public interface PlayerDAO extends BaseDAO {
     /**
      * Find the player by name and load list of every game objects that was modified by the player (ex.: enemies
      * that are damaged/dead, loot that was picked up, etc...)
+     *
      * @param playerName: the name of the player
      * @return: a list that contains all modified objects
      */
@@ -32,19 +34,18 @@ public interface PlayerDAO extends BaseDAO {
     /**
      * Find the player by id and load list of every game objects that was modified by the player (ex.: enemies
      * that are damaged/dead, loot that was picked up, etc...)
+     *
      * @param playerID: the id of the player
      * @return: a list that contains all modified objects
      */
     List<GameObject> getModifiedByPlayer(long playerID);
 
     /**
-     *
      * @param player:
      */
     void updateModifiedByPlayer(Player player);
 
     /**
-     *
      * @param player:
      */
     void updatePlayerItems(Player player);

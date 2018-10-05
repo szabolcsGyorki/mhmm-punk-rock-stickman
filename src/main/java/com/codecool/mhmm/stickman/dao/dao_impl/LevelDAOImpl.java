@@ -34,7 +34,7 @@ public class LevelDAOImpl extends BaseDaoImpl implements LevelDAO {
     public void saveNew(Object level) {
         transaction.begin();
         em.persist(level);
-        for (GameObject object : ((Level)level).getMap()) {
+        for (GameObject object : ((Level) level).getMap()) {
             em.persist(object);
         }
         transaction.commit();

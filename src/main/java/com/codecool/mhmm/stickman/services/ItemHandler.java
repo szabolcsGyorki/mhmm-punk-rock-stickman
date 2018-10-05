@@ -26,13 +26,13 @@ public class ItemHandler {
         player.addItemToInventory(item);
     }
 
-    public void equipWeapon(Player player, String itemName){
+    public void equipWeapon(Player player, String itemName) {
         Item item = itemsDAO.getItemByName(itemName);
         if (item instanceof Weapon)
             player.setWeapon((Weapon) item);
     }
 
-    public void equipArmor(Player player, String itemName){
+    public void equipArmor(Player player, String itemName) {
         Item item = itemsDAO.getItemByName(itemName);
         if (item instanceof Armor) {
             if (!healthHandler.armorChangeKillsPlayer(player, (Armor) item)) {

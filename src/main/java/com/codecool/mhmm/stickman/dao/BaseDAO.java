@@ -2,7 +2,7 @@ package com.codecool.mhmm.stickman.dao;
 
 import java.util.List;
 
-public interface BaseDAO <T> {
+public interface BaseDAO<T> {
 
     /**
      * @param id: id of the entity
@@ -17,8 +17,8 @@ public interface BaseDAO <T> {
 
     /**
      * @param entity: the object to update
-     * @param field: name of the field to update (from the POJO, not DB)
-     * @param value: the new value of the given field
+     * @param field:  name of the field to update (from the POJO, not DB)
+     * @param value:  the new value of the given field
      */
     <T> void update(T entity, String field, T value);
 

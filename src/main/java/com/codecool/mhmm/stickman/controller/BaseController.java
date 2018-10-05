@@ -1,21 +1,10 @@
 package com.codecool.mhmm.stickman.controller;
 
 import com.codecool.mhmm.stickman.Game;
-import com.codecool.mhmm.stickman.dao.EnemyDAO;
-import com.codecool.mhmm.stickman.dao.ItemsDAO;
-import com.codecool.mhmm.stickman.dao.LevelDAO;
-import com.codecool.mhmm.stickman.dao.PlayerDAO;
-import com.codecool.mhmm.stickman.dao.dao_impl.EnemyDAOImpl;
-import com.codecool.mhmm.stickman.dao.dao_impl.ItemsDAOImpl;
-import com.codecool.mhmm.stickman.dao.dao_impl.LevelDAOImpl;
-import com.codecool.mhmm.stickman.dao.dao_impl.PlayerDAOImpl;
 import com.codecool.mhmm.stickman.game_objects.characters.Player;
 import com.codecool.mhmm.stickman.map.Level;
 import com.codecool.mhmm.stickman.services.*;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

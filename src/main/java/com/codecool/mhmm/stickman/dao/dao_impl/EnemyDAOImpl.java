@@ -1,11 +1,8 @@
 package com.codecool.mhmm.stickman.dao.dao_impl;
 
 import com.codecool.mhmm.stickman.dao.EnemyDAO;
-import com.codecool.mhmm.stickman.game_objects.GameObject;
 import com.codecool.mhmm.stickman.game_objects.characters.enemy.Enemy;
 import com.codecool.mhmm.stickman.game_objects.GameObjectType;
-import com.codecool.mhmm.stickman.game_objects.items.Item;
-import com.codecool.mhmm.stickman.map.Level;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -39,7 +36,7 @@ public class EnemyDAOImpl extends BaseDaoImpl implements EnemyDAO {
         CriteriaUpdate<Enemy> update = cb.createCriteriaUpdate(Enemy.class);
         Root<Enemy> enemyRoot = update.from(Enemy.class);
         update.set(field, value)
-                .where(cb.equal(enemyRoot.get("id"), ((Enemy)enemy).getId()));
+                .where(cb.equal(enemyRoot.get("id"), ((Enemy) enemy).getId()));
         Query query = em.createQuery(update);
         query.executeUpdate();
         em.refresh(enemy);

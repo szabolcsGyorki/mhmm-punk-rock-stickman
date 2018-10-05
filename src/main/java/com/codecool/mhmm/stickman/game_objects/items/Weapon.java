@@ -3,7 +3,6 @@ package com.codecool.mhmm.stickman.game_objects.items;
 import com.codecool.mhmm.stickman.game_objects.GameObjectType;
 
 import javax.persistence.Entity;
-import java.util.Random;
 
 @Entity
 public class Weapon extends Item {

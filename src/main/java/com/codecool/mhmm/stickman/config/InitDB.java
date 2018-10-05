@@ -57,7 +57,7 @@ public class InitDB {
         itemsDAO.saveNew(new Weapon("RNG Sword", 1000, 1, 120));
         itemsDAO.saveNew(new Weapon("Colossus Blade", 120, 12, 30));
         itemsDAO.saveNew(new Weapon("Hydra Bow", 42, 1, 3));
-        itemsDAO.saveNew(new Weapon("Healing Wand",100, -100, -10));
+        itemsDAO.saveNew(new Weapon("Healing Wand", 100, -100, -10));
         itemsDAO.saveNew(new Weapon("Flaming Flamingo", 5, 40, 41));
         itemsDAO.saveNew(new Weapon("Ice Shard", 0, 0, 2));
         itemsDAO.saveNew(new Weapon("Cthulhus book of Insanity", 600, -600, 600));
@@ -75,10 +75,10 @@ public class InitDB {
     }
 
     private void initEnemies() {
-        enemyDAO.saveNew(new Slime(6,2, healthHandler.calculateSlimeHealth(1), 1, new Random()));
-        enemyDAO.saveNew(new Skeleton(8,2, healthHandler.calculateSkeletonHealth(1), 1));
-        enemyDAO.saveNew(new Orc(2,4, healthHandler.calculateOrcHealth(1), 1));
-        enemyDAO.saveNew(new Dragon(6,7, healthHandler.calculateDragonHealth(1), 1));
+        enemyDAO.saveNew(new Slime(6, 2, healthHandler.calculateSlimeHealth(1), 1, new Random()));
+        enemyDAO.saveNew(new Skeleton(8, 2, healthHandler.calculateSkeletonHealth(1), 1));
+        enemyDAO.saveNew(new Orc(2, 4, healthHandler.calculateOrcHealth(1), 1));
+        enemyDAO.saveNew(new Dragon(6, 7, healthHandler.calculateDragonHealth(1), 1));
     }
 
     private void initLoots() {

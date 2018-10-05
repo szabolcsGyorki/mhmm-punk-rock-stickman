@@ -1,6 +1,7 @@
 package com.codecool.mhmm.stickman.game_objects.characters.enemy;
 
 import com.codecool.mhmm.stickman.game_objects.GameObjectType;
+
 import javax.persistence.Entity;
 import java.util.Random;
 
@@ -10,7 +11,7 @@ public class Slime extends Enemy {
     private Random attackType;
 
     public Slime(int X, int Y, int hitPoints, int level, Random random) {
-        super(X, Y ,hitPoints, level, level);
+        super(X, Y, hitPoints, level, level);
         this.hitChance = 80;
         this.type = GameObjectType.SLIME;
         this.attackType = random;

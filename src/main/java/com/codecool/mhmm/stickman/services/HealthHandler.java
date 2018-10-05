@@ -16,19 +16,19 @@ public class HealthHandler {
     }
 
     public int calculateDragonHealth(int level) {
-        return 100 + level*20;
+        return 100 + level * 20;
     }
 
     public int calculateOrcHealth(int level) {
-        return 20 + 8*(level-1);
+        return 20 + 8 * (level - 1);
     }
 
     public int calculateSlimeHealth(int level) {
-        return 12 * level/2;
+        return 12 * level / 2;
     }
 
     public int calculateSkeletonHealth(int level) {
-        return 6*level;
+        return 6 * level;
     }
 
     boolean characterIsDead(Character character) {
@@ -42,12 +42,12 @@ public class HealthHandler {
         return increaseHealth;
     }
 
-    public void increasePlayerHealthWithArmor(Player player, Armor armor) {
+    void increasePlayerHealthWithArmor(Player player, Armor armor) {
         int increaseHealth = getIncreasePlayerHealthByArmor(player, armor);
         player.setHitPoint(player.getHitPoint() + increaseHealth);
     }
 
-    public boolean armorChangeKillsPlayer(Player player, Armor armor) {
+    boolean armorChangeKillsPlayer(Player player, Armor armor) {
         int increaseHealth;
         increaseHealth = getIncreasePlayerHealthByArmor(player, armor);
         return player.getHitPoint() + increaseHealth <= 0;

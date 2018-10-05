@@ -1,7 +1,6 @@
 package com.codecool.mhmm.stickman.controller;
 
 import com.codecool.mhmm.stickman.Game;
-import com.codecool.mhmm.stickman.dao.ItemsDAO;
 import com.codecool.mhmm.stickman.game_objects.GameObject;
 import com.codecool.mhmm.stickman.game_objects.characters.Player;
 import com.codecool.mhmm.stickman.game_objects.characters.enemy.Enemy;
@@ -23,7 +22,6 @@ public class FightController extends BaseController {
     void doAction(HttpServletRequest req, Game game, Player player, Level level) {
         MoveHandler moveHandler = game.getMoveHandler();
         HealthHandler healthHandler = game.getHealthHandler();
-        ItemsDAO itemsDAO = game.getItemsDAO();
         FightHandler fightHandler = game.getFightHandler();
         ItemHandler itemHandler = game.getItemHandler();
 

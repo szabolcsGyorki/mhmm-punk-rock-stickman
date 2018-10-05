@@ -5,11 +5,7 @@ import com.codecool.mhmm.stickman.dao.EnemyDAO;
 import com.codecool.mhmm.stickman.dao.ItemsDAO;
 import com.codecool.mhmm.stickman.dao.LevelDAO;
 import com.codecool.mhmm.stickman.dao.PlayerDAO;
-import com.codecool.mhmm.stickman.game_objects.characters.Character;
 import com.codecool.mhmm.stickman.game_objects.characters.Player;
-import com.codecool.mhmm.stickman.game_objects.items.Armor;
-import com.codecool.mhmm.stickman.game_objects.items.Item;
-import com.codecool.mhmm.stickman.game_objects.items.Weapon;
 import com.codecool.mhmm.stickman.map.Level;
 import com.codecool.mhmm.stickman.services.*;
 
@@ -47,7 +43,7 @@ public class Game {
         this.fightHandler = fightHandler;
     }
 
-    public void initForDemo(){
+    public void initForDemo() {
         InitDB init = new InitDB(itemsDAO, levelDao, enemyDao, levelGenerator, healthHandler, itemHandler);
         init.init();
         playerDAO.saveNew(new Player(1, 1, "Zsolt"));
@@ -59,30 +55,6 @@ public class Game {
         levelOne = (Level) levelDao.getAll().get(0);
         levelOne.addContent(player);
         initialized = true;
-    }
-
-    public Player getPlayer(HttpSession session) {
-        return (Player)session.getAttribute("Player");
-    }
-
-    public Level getLevel(HttpSession session) {
-        return (Level)session.getAttribute("Level");
-    }
-
-    public boolean isInitialized() {
-        return initialized;
-    }
-
-    public boolean isDemoLoaded() {
-        return demoLoaded;
-    }
-
-    public void setPlayer(HttpSession session, Player player) {
-        session.setAttribute("Player", player);
-    }
-
-    public void setLevel(HttpSession session, Level level) {
-        session.setAttribute("Level", level);
     }
 
     public ItemsDAO getItemsDAO() {
@@ -121,11 +93,35 @@ public class Game {
         return fightHandler;
     }
 
+    public boolean isInitialized() {
+        return initialized;
+    }
+
+    public boolean isDemoLoaded() {
+        return demoLoaded;
+    }
+
     public Player getPlayer() {
         return player;
     }
 
     public Level getLevelOne() {
         return levelOne;
+    }
+
+    public Player getPlayer(HttpSession session) {
+        return (Player) session.getAttribute("Player");
+    }
+
+    public void setPlayer(HttpSession session, Player player) {
+        session.setAttribute("Player", player);
+    }
+
+    public Level getLevel(HttpSession session) {
+        return (Level) session.getAttribute("Level");
+    }
+
+    public void setLevel(HttpSession session, Level level) {
+        session.setAttribute("Level", level);
     }
 }

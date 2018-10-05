@@ -69,8 +69,8 @@ public class StartGame extends HttpServlet {
 
 
         try {
-            engine.process( getHTML() + ".html", context, resp.getWriter());
-        } catch(IndexOutOfBoundsException e) {
+            engine.process(getHTML() + ".html", context, resp.getWriter());
+        } catch (IndexOutOfBoundsException e) {
             engine.process("404.html", context, resp.getWriter());
         }
     }

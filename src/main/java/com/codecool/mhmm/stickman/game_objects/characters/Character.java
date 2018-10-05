@@ -1,21 +1,20 @@
 package com.codecool.mhmm.stickman.game_objects.characters;
 
 import com.codecool.mhmm.stickman.game_objects.GameObject;
-import com.codecool.mhmm.stickman.game_objects.GameObjectType;
+
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import java.util.Random;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Character extends GameObject {
 
     protected int level;
-    private int hitPoint;
     protected int dodgeChance;
     protected int armor;
     protected int hitChance;
+    private int hitPoint;
 
     public Character(int X, int Y, int hitPoint) {
         super(X, Y);
@@ -40,12 +39,12 @@ public abstract class Character extends GameObject {
         return this.hitChance;
     }
 
-    public int getDodgeChance() {
-        return dodgeChance;
-    }
-
     public void setHitChance(int hitChance) {
         this.hitChance = hitChance;
+    }
+
+    public int getDodgeChance() {
+        return dodgeChance;
     }
 
     public void setDodgeChance(int dodgeChance) {

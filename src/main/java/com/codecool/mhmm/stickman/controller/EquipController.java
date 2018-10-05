@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 public class EquipController extends BaseController {
 
     @Override
-    void doAction(HttpServletRequest req, Game game, Player player, Level level){
+    void doAction(HttpServletRequest req, Game game, Player player, Level level) {
         ItemHandler itemHandler = game.getItemHandler();
         ItemsDAO itemsDAO = game.getItemsDAO();
 
@@ -22,7 +22,7 @@ public class EquipController extends BaseController {
         if (req.getHeader("equipWeapon") != null) {
             itemName = req.getHeader("equipWeapon");
             itemHandler.equipWeapon(player, itemName);
-        } else if(req.getHeader("equipArmor") != null) {
+        } else if (req.getHeader("equipArmor") != null) {
             itemName = req.getHeader("equipArmor");
             itemHandler.equipArmor(player, itemName);
         }

@@ -36,7 +36,7 @@ public class PlayerDAOImpl extends BaseDaoImpl implements PlayerDAO {
         CriteriaUpdate<Player> cq = cb.createCriteriaUpdate(Player.class);
         Root<Player> playerRoot = cq.from(Player.class);
         cq.set(field, value)
-                .where(cb.equal(playerRoot.get("id"), ((Player)player).getId()));
+                .where(cb.equal(playerRoot.get("id"), ((Player) player).getId()));
         Query query = em.createQuery(cq);
         query.executeUpdate();
         em.refresh(player);
@@ -77,8 +77,10 @@ public class PlayerDAOImpl extends BaseDaoImpl implements PlayerDAO {
     }
 
     @Override
-    public void updateModifiedByPlayer(Player player) { }
+    public void updateModifiedByPlayer(Player player) {
+    }
 
     @Override
-    public void updatePlayerItems(Player player) { }
+    public void updatePlayerItems(Player player) {
+    }
 }
