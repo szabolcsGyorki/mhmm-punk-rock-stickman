@@ -42,20 +42,32 @@ public class FightController extends BaseController {
             }
         }
 
+        String response = "";
+
+        assert enemy != null;
         if (fightHandler.characterHits(player)) {
             int playerDamage = fightHandler.getPlayerDamage(player);
             if (!fightHandler.characterDodges(enemy)) {
                 healthHandler.dealDamage(enemy, playerDamage);
+                response += "Your attack hits " + enemy.getType() + " for " + playerDamage + " damage. ";
+            } else {
+                response += enemy.getType() + " dodges your attack. ";
             }
+        } else {
+            response += "Your attack misses. ";
         }
 
-        assert enemy != null;
         if (enemy.getHitPoint() > 0) {
             if (fightHandler.characterHits(enemy)) {
                 int enemyDamage = enemy.getDamage();
                 if (!fightHandler.characterDodges(player)) {
                     healthHandler.dealDamage(player, enemyDamage);
+                    response += enemy.getType() + "'s attack hits your for " + enemyDamage + " damage.";
+                } else {
+                    response += "You dodge " + enemy.getType() + "'s attack.";
                 }
+            } else {
+                response += enemy.getType() + "'s attack misses.";
             }
         } else {
             map.remove(enemy);
@@ -63,7 +75,8 @@ public class FightController extends BaseController {
             itemHandler.setLootGold(loot);
             itemHandler.fillUpLoot(loot);
             level.addContent(loot);
+            response += enemy.getType() + " dies.";
         }
-        return "fight";
+        return response;
     }
 }

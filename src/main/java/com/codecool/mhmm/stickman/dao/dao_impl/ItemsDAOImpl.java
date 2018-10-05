@@ -9,6 +9,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -57,7 +58,12 @@ public class ItemsDAOImpl extends BaseDaoImpl implements ItemsDAO {
 
     @Override
     public Item getRandomItem() {
-        List<Item> items = getAll();
+        List<Item> items = new ArrayList<>();
+        List<Item> armors = getAllItemsByType(GameObjectType.ARMOR);
+        List<Item> weapons = getAllItemsByType(GameObjectType.WEAPON);
+        items.addAll(armors);
+        items.addAll(weapons);
+
         int id = random.nextInt(items.size());
         return items.get(id);
     }

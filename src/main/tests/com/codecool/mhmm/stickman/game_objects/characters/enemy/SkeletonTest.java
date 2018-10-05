@@ -15,7 +15,7 @@ class SkeletonTest {
     @Test
     void testBaseDamage() {
         Skeleton skeleton = new Skeleton(1, 1, 20, 2);
-        assertEquals(2, skeleton.getDamage());
+        assertEquals(3, skeleton.getDamage());
     }
 
     @Test

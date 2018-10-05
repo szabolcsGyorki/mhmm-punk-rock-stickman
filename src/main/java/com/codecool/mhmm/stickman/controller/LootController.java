@@ -37,6 +37,6 @@ public class LootController extends BaseController {
             itemHandler.pickUpLoot(player, loot);
             map.remove(loot);
         }
-        return "";
+        return "You picked up new loot.";
     }
 }
