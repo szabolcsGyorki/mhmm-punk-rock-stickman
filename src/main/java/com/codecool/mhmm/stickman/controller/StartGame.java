@@ -67,6 +67,7 @@ public class StartGame extends HttpServlet {
             session.setAttribute("Level", game.getLevelOne());
         }
 
+        Sound.init();
 
         try {
             engine.process(getHTML() + ".html", context, resp.getWriter());
