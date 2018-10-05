@@ -26,13 +26,17 @@ public class JSONHandler {
     }
 
     @SuppressWarnings("unchecked")
-    public String gameStateToJson(Player player, Level level) {
+    public String gameStateToJson(Player player, Level level, String response) {
         JSONArray jsonArray = new JSONArray();
         jsonArray.add(levelToJson(level.getMap()));
 
         JSONArray charArray = new JSONArray();
         charArray.add(characterToJson(player));
         jsonArray.add(charArray);
+
+        JSONObject responseJson = new JSONObject();
+        responseJson.put("response", response);
+        jsonArray.add(responseJson);
 
         return jsonArray.toJSONString();
     }

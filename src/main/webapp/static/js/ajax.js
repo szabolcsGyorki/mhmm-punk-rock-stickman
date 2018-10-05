@@ -24,7 +24,7 @@ function requestMove(action) {
         mapObjects = data[0];
         mainCharacter = data[1][0];
         mainCharacterHealth = mainCharacter.Health;
-        updateCharacterStats();
+        updateCharacterStats(data[2].response);
     }, "map", action)
 }
 
@@ -33,7 +33,7 @@ function requestEquipWeapon(item_name) {
         mapObjects = data[0];
         mainCharacter = data[1][0];
         mainCharacterHealth = mainCharacter.Health;
-        updateCharacterStats();
+        updateCharacterStats(data[2].response);
         updateInventory();
     },"equipWeapon", item_name)
 }
@@ -43,7 +43,7 @@ function requestEquipArmor(item_name) {
         mapObjects = data[0];
         mainCharacter = data[1][0];
         mainCharacterHealth = mainCharacter.Health;
-        updateCharacterStats();
+        updateCharacterStats(data[2].response);
         updateInventory();
     },"equipArmor", item_name)
 }
@@ -53,7 +53,7 @@ function requestLoot(direction) {
         mapObjects = data[0];
         mainCharacter = data[1][0];
         mainCharacterHealth = mainCharacter.Health;
-        updateCharacterStats();
+        updateCharacterStats(data[2].response);
         updateInventory();
     },"pickUpLoot", direction)
 }
@@ -63,7 +63,7 @@ function requestFight(direction) {
         mapObjects = data[0];
         mainCharacter = data[1][0];
         mainCharacterHealth = mainCharacter.Health;
-        updateCharacterStats();
+        updateCharacterStats(data[2].response);
     },"fight", direction)
 }
 

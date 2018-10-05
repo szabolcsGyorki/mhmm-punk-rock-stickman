@@ -13,11 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 public class EquipController extends BaseController {
 
     @Override
-    void doAction(HttpServletRequest req, Game game, Player player, Level level) {
+    String doAction(HttpServletRequest req, Game game, Player player, Level level) {
         ItemHandler itemHandler = game.getItemHandler();
-        ItemsDAO itemsDAO = game.getItemsDAO();
-
-        String itemName;
+        String itemName = "";
 
         if (req.getHeader("equipWeapon") != null) {
             itemName = req.getHeader("equipWeapon");
@@ -26,5 +24,7 @@ public class EquipController extends BaseController {
             itemName = req.getHeader("equipArmor");
             itemHandler.equipArmor(player, itemName);
         }
+
+        return itemName + " equipped";
     }
 }

@@ -24,14 +24,14 @@ public abstract class BaseController extends HttpServlet {
         Player player = game.getPlayer(session);
         Level level = game.getLevel(session);
 
-        doAction(req, game, player, level);
+        String response = doAction(req, game, player, level);
 
         game.setPlayer(session, player);
         game.setLevel(session, level);
 
-        String jsonArray = jsonHandler.gameStateToJson(player, level);
+        String jsonArray = jsonHandler.gameStateToJson(player, level, response);
         resp.getWriter().write(jsonArray);
     }
 
-    abstract void doAction(HttpServletRequest req, Game game, Player player, Level level);
+    abstract String doAction(HttpServletRequest req, Game game, Player player, Level level);
 }

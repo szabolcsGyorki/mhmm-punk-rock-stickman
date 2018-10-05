@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 public class MoveController extends BaseController {
 
     @Override
-    void doAction(HttpServletRequest req, Game game, Player player, Level level) {
+    String doAction(HttpServletRequest req, Game game, Player player, Level level) {
         String actionRequired;
         MoveHandler moveHandler = game.getMoveHandler();
 
@@ -31,5 +31,6 @@ public class MoveController extends BaseController {
                 moveHandler.moveLeft(player);
             }
         }
+        return "";
     }
 }

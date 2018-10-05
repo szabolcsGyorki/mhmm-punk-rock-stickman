@@ -19,7 +19,7 @@ import java.util.List;
 public class FightController extends BaseController {
 
     @Override
-    void doAction(HttpServletRequest req, Game game, Player player, Level level) {
+    String doAction(HttpServletRequest req, Game game, Player player, Level level) {
         MoveHandler moveHandler = game.getMoveHandler();
         HealthHandler healthHandler = game.getHealthHandler();
         FightHandler fightHandler = game.getFightHandler();
@@ -64,5 +64,6 @@ public class FightController extends BaseController {
             itemHandler.fillUpLoot(loot);
             level.addContent(loot);
         }
+        return "fight";
     }
 }

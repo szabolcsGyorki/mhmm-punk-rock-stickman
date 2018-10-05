@@ -16,7 +16,7 @@ import java.util.List;
 public class LootController extends BaseController {
 
     @Override
-    void doAction(HttpServletRequest req, Game game, Player player, Level level) {
+    String doAction(HttpServletRequest req, Game game, Player player, Level level) {
         String actionRequired;
         MoveHandler moveHandler = game.getMoveHandler();
         ItemHandler itemHandler = game.getItemHandler();
@@ -37,5 +37,6 @@ public class LootController extends BaseController {
             itemHandler.pickUpLoot(player, loot);
             map.remove(loot);
         }
+        return "";
     }
 }

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class LoadLevel extends BaseController {
     @Override
-    void doAction(HttpServletRequest req, Game game, Player player, Level level) {
-
+    String doAction(HttpServletRequest req, Game game, Player player, Level level) {
+        return "Loading complete";
     }
 }
