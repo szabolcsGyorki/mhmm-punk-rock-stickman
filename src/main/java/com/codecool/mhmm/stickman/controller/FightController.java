@@ -83,6 +83,11 @@ public class FightController extends BaseController {
             level.addContent(loot);
             response += enemyType + " dies.";
         }
+
+        if (player.getHitPoint() <= 0) {
+            Sound.playDie(GameObjectType.MAIN_CHARACTER);
+            Sound.playGameOver();
+        }
         return response;
     }
 }

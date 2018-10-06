@@ -7,6 +7,7 @@ import com.codecool.mhmm.stickman.game_objects.items.Loot;
 import com.codecool.mhmm.stickman.map.Level;
 import com.codecool.mhmm.stickman.services.ItemHandler;
 import com.codecool.mhmm.stickman.services.MoveHandler;
+import com.codecool.mhmm.stickman.services.Sound;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -35,6 +36,7 @@ public class LootController extends BaseController {
                 loot = (Loot) moveHandler.getDestination(player.getX() - 1, player.getY(), map);
             }
             itemHandler.pickUpLoot(player, loot);
+            Sound.playLoot();
             map.remove(loot);
         }
         return "You picked up new loot.";
