@@ -67,5 +67,13 @@ function requestFight(direction) {
     },"fight", direction)
 }
 
-
+function requestNextLevel() {
+    ajax_get('/next-level', function (data) {
+        mapObjects = data[0];
+        mainCharacter = data[1][0];
+        mainCharacterHealth = mainCharacter.Health;
+        updateCharacterStats(data[2].response);
+        updateInventory();
+    },"nextLevel", "next")
+}
 

@@ -98,5 +98,6 @@ public class InitDB {
 
     private void initLevels() {
         levelDAO.saveNew(levelGenerator.levelOne(itemsDAO, enemyDAO));
+        levelDAO.saveNew(levelGenerator.levelTwo(itemsDAO, enemyDAO));
     }
 }

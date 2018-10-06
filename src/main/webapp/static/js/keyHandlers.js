@@ -2,15 +2,19 @@ document.onkeydown = function(e) {
     let handled;
 
     function callAction(fieldContent, direction) {
-        if (fieldContent === undefined) {
-            requestMove(direction);
-        } else if (fieldContent.name === "LOOT") {
-            requestLoot(direction)
-        } else if (fieldContent.name === "SLIME" ||
-                    fieldContent.name === "ORC" ||
-                    fieldContent.name === "SKELETON" ||
-                    fieldContent.name === "DRAGON") {
-            requestFight(direction)
+        if (mapCleared()) {
+            requestNextLevel();
+        } else {
+            if (fieldContent === undefined) {
+                requestMove(direction);
+            } else if (fieldContent.name === "LOOT") {
+                requestLoot(direction)
+            } else if (fieldContent.name === "SLIME" ||
+                fieldContent.name === "ORC" ||
+                fieldContent.name === "SKELETON" ||
+                fieldContent.name === "DRAGON") {
+                requestFight(direction)
+            }
         }
     }
 

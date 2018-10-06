@@ -64,7 +64,7 @@ public class StartGame extends HttpServlet {
             }
             session.setAttribute("game", game);
             session.setAttribute("Player", game.getPlayer());
-            session.setAttribute("Level", game.getLevelOne());
+            session.setAttribute("Level", game.getLevel());
         }
 
         Sound.init();

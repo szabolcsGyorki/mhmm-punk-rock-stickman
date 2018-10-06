@@ -27,7 +27,7 @@ public class Game {
 
     //GUEST TRIAL STUFF
     private Player player;
-    private Level levelOne;
+    private Level level;
 
     public Game(ItemsDAO itemsDAO, EnemyDAO enemyDao, LevelDAO levelDao, PlayerDAO playerDAO,
                 HealthHandler healthHandler, LevelGenerator levelGenerator, MoveHandler moveHandler,
@@ -52,8 +52,8 @@ public class Game {
 
     public void initGame(String name) {
         player = playerDAO.getPlayerByName(name);
-        levelOne = (Level) levelDao.getAll().get(0);
-        levelOne.addContent(player);
+        level = (Level) levelDao.getAll().get(0);
+        level.addContent(player);
         initialized = true;
     }
 
@@ -105,8 +105,8 @@ public class Game {
         return player;
     }
 
-    public Level getLevelOne() {
-        return levelOne;
+    public Level getLevel() {
+        return level;
     }
 
     public Player getPlayer(HttpSession session) {
@@ -123,5 +123,11 @@ public class Game {
 
     public void setLevel(HttpSession session, Level level) {
         session.setAttribute("Level", level);
+    }
+
+    public void nextLevel() {
+        level = (Level) levelDao.getAll().get(1);
+        player.place(1, 1);
+        level.addContent(player);
     }
 }

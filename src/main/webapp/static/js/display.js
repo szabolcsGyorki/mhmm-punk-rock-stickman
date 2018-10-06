@@ -74,3 +74,12 @@ function getDownFieldContent() {
     let {fromX, fromY} = getPlayerPosition();
     return mapObjects.filter(o => o.x === fromX && o.y === fromY + 1)[0]
 }
+
+function mapCleared() {
+    for (let object of mapObjects) {
+        if (object.name !== "WALL" || object.name !== "MAIN_CHARACTER") {
+            return false;
+        }
+    }
+    return true;
+}

@@ -57,6 +57,30 @@ public class LevelGenerator {
         return levelOne;
     }
 
+    public Level levelTwo(ItemsDAO itemsDAO, EnemyDAO enemyDAO) {
+        Level levelTwo = generateBase(10, 10, WALL, FLOOR);
+        GameObjectType wallImage = levelTwo.getWallImage();
+
+        levelTwo.addContent(new Wall(2, 5, wallImage));
+        levelTwo.addContent(new Wall(3, 5, wallImage));
+        levelTwo.addContent(new Wall(4, 5, wallImage));
+        levelTwo.addContent(new Wall(5, 5, wallImage));
+        levelTwo.addContent(new Wall(6, 5, wallImage));
+        levelTwo.addContent(new Wall(7, 4, wallImage));
+        levelTwo.addContent(new Wall(7, 3, wallImage));
+        levelTwo.addContent(new Wall(7, 5, wallImage));
+        levelTwo.addContent(new Wall(7, 6, wallImage));
+
+        levelTwo.addContent((GameObject) enemyDAO.findById(26L));
+        levelTwo.addContent((GameObject) enemyDAO.findById(27L));
+        levelTwo.addContent((GameObject) enemyDAO.findById(28L));
+        levelTwo.addContent((GameObject) enemyDAO.findById(29L));
+
+        levelTwo.addContent((Loot) itemsDAO.findById(30));
+
+        return levelTwo;
+    }
+
     private Level generateBase(int width, int height, GameObjectType wall, GameObjectType floor) {
         Level level = new Level(width, height, wall, floor);
 
