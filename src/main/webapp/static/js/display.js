@@ -77,7 +77,7 @@ function getDownFieldContent() {
 
 function mapCleared() {
     for (let object of mapObjects) {
-        if (object.name !== "WALL" || object.name !== "MAIN_CHARACTER") {
+        if (!(object.name === "WALL" || object.name === "MAIN_CHARACTER")) {
             return false;
         }
     }
