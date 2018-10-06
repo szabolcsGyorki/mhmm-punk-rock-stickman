@@ -2,9 +2,9 @@ package com.codecool.mhmm.stickman.services;
 
 import com.codecool.mhmm.stickman.game_objects.GameObject;
 import com.codecool.mhmm.stickman.game_objects.characters.Player;
-import com.codecool.mhmm.stickman.game_objects.items.Armor;
+import com.codecool.mhmm.stickman.game_objects.items.equipable.Armor;
 import com.codecool.mhmm.stickman.game_objects.items.Item;
-import com.codecool.mhmm.stickman.game_objects.items.Weapon;
+import com.codecool.mhmm.stickman.game_objects.items.equipable.Weapon;
 import com.codecool.mhmm.stickman.map.Level;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

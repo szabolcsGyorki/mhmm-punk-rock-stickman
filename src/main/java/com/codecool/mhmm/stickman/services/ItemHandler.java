@@ -2,10 +2,10 @@ package com.codecool.mhmm.stickman.services;
 
 import com.codecool.mhmm.stickman.dao.ItemsDAO;
 import com.codecool.mhmm.stickman.game_objects.characters.Player;
-import com.codecool.mhmm.stickman.game_objects.items.Armor;
+import com.codecool.mhmm.stickman.game_objects.items.equipable.Armor;
 import com.codecool.mhmm.stickman.game_objects.items.Item;
 import com.codecool.mhmm.stickman.game_objects.items.Loot;
-import com.codecool.mhmm.stickman.game_objects.items.Weapon;
+import com.codecool.mhmm.stickman.game_objects.items.equipable.Weapon;
 
 import java.util.Random;
 import java.util.stream.Stream;

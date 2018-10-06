@@ -1,9 +1,9 @@
 package com.codecool.mhmm.stickman.game_objects.characters;
 
 import com.codecool.mhmm.stickman.game_objects.GameObjectType;
-import com.codecool.mhmm.stickman.game_objects.items.Armor;
+import com.codecool.mhmm.stickman.game_objects.items.equipable.Armor;
 import com.codecool.mhmm.stickman.game_objects.items.Item;
-import com.codecool.mhmm.stickman.game_objects.items.Weapon;
+import com.codecool.mhmm.stickman.game_objects.items.equipable.Weapon;
 
 import javax.persistence.*;
 import java.util.ArrayList;

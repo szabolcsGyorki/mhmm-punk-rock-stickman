@@ -2,7 +2,7 @@ package com.codecool.mhmm.stickman.services;
 
 import com.codecool.mhmm.stickman.game_objects.characters.Character;
 import com.codecool.mhmm.stickman.game_objects.characters.Player;
-import com.codecool.mhmm.stickman.game_objects.items.Armor;
+import com.codecool.mhmm.stickman.game_objects.items.equipable.Armor;
 
 public class HealthHandler {
 

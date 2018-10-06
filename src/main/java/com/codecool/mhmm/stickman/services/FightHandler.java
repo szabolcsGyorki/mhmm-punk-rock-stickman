@@ -6,7 +6,7 @@ import com.codecool.mhmm.stickman.game_objects.characters.Character;
 import com.codecool.mhmm.stickman.game_objects.characters.Player;
 import com.codecool.mhmm.stickman.game_objects.characters.enemy.Enemy;
 import com.codecool.mhmm.stickman.game_objects.items.Loot;
-import com.codecool.mhmm.stickman.game_objects.items.Weapon;
+import com.codecool.mhmm.stickman.game_objects.items.equipable.Weapon;
 import com.codecool.mhmm.stickman.map.Level;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public class FightHandler {
         this.random = random;
     }
 
-    int getPlayerDamage(Player player) {
+    private int getPlayerDamage(Player player) {
         int baseDamage = player.getStrength();
         Weapon weapon = player.getWeapon();
         if (weapon != null) {
@@ -35,11 +35,11 @@ public class FightHandler {
         return baseDamage;
     }
 
-    boolean characterHits(Character character) {
+    private boolean characterHits(Character character) {
         return random.nextInt(100) < character.getHitChance();
     }
 
-    boolean characterDodges(Character character) {
+    private boolean characterDodges(Character character) {
         return random.nextInt(100) < character.getDodgeChance();
     }
 

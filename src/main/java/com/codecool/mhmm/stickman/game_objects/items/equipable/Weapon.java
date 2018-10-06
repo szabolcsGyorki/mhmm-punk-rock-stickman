@@ -1,6 +1,7 @@
-package com.codecool.mhmm.stickman.game_objects.items;
+package com.codecool.mhmm.stickman.game_objects.items.equipable;
 
 import com.codecool.mhmm.stickman.game_objects.GameObjectType;
+import com.codecool.mhmm.stickman.game_objects.items.Item;
 
 import javax.persistence.Entity;
 
