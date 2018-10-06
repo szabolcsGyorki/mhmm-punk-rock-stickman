@@ -2,6 +2,7 @@ let mapObjects = [];
 let mainCharacter;
 let mainCharacterHealth;
 let levelNumber;
+let gameIsWon = false;
 
 window.addEventListener('load', function() {
     ajax_get("/send", function (data) {
@@ -89,6 +90,10 @@ function mapCleared() {
 function wonTheGame() {
     if (mapCleared() && levelNumber === 1) {
         image(won_image, 0, 0, 490, 490);
+        if (!gameIsWon) {
+            won();
+        }
+        gameIsWon = true;
         return true;
     }
     return false;

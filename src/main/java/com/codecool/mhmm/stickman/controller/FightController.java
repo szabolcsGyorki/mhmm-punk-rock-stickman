@@ -24,9 +24,32 @@ public class FightController extends BaseController {
         ItemHandler itemHandler = game.getItemHandler();
 
         List<GameObject> map = level.getMap();
-        String actionRequired;
-        Enemy enemy = null;
+        Enemy enemy = getEnemy(req, player, moveHandler, map);
 
+        String response = "";
+        assert enemy != null;
+        GameObjectType enemyType = enemy.getType();
+
+        response += fightHandler.playerHitsEnemy(player, enemy, healthHandler);
+
+        if (enemy.getHitPoint() > 0) {
+            response += fightHandler.enemyHitsPlayer(player, enemy, healthHandler);
+        } else {
+            response += fightHandler.enemyDies(level, itemHandler, map, enemy);
+        }
+
+        if (player.getHitPoint() <= 0) {
+            Sound.playDie(GameObjectType.MAIN_CHARACTER);
+            Sound.playGameOver();
+        }
+        return response;
+    }
+
+
+
+    private Enemy getEnemy(HttpServletRequest req, Player player, MoveHandler moveHandler, List<GameObject> map) {
+        Enemy enemy = null;
+        String actionRequired;
         if (req.getHeader("fight") != null) {
             actionRequired = req.getHeader("fight");
             if (actionRequired.equals("down")) {
@@ -39,55 +62,6 @@ public class FightController extends BaseController {
                 enemy = (Enemy) moveHandler.getDestination(player.getX() - 1, player.getY(), map);
             }
         }
-
-        String response = "";
-        assert enemy != null;
-        GameObjectType enemyType = enemy.getType();
-
-        if (fightHandler.characterHits(player)) {
-            int playerDamage = fightHandler.getPlayerDamage(player);
-            if (!fightHandler.characterDodges(enemy)) {
-                healthHandler.dealDamage(enemy, playerDamage);
-                response += "Your attack hits " + enemyType + " for " + playerDamage + " damage. ";
-                Sound.playAttack(GameObjectType.MAIN_CHARACTER);
-            } else {
-                Sound.playMiss();
-                response += enemyType + " dodges your attack. ";
-            }
-        } else {
-            response += "Your attack misses. ";
-        }
-
-        if (enemy.getHitPoint() > 0) {
-            if (fightHandler.characterHits(enemy)) {
-                int enemyDamage = enemy.getDamage();
-                if (!fightHandler.characterDodges(player)) {
-                    healthHandler.dealDamage(player, enemyDamage);
-                    response += enemyType + "'s attack hits your for " + enemyDamage + " damage.";
-                    if (enemyType.equals(GameObjectType.SKELETON)) {
-                        Sound.playAttack(GameObjectType.SKELETON);
-                    }
-                } else {
-                    Sound.playMiss();
-                    response += "You dodge " + enemyType + "'s attack.";
-                }
-            } else {
-                response += enemyType + "'s attack misses.";
-            }
-        } else {
-            Sound.playDie(enemyType);
-            map.remove(enemy);
-            Loot loot = new Loot(enemy.getX(), enemy.getY());
-            itemHandler.setLootGold(loot);
-            itemHandler.fillUpLoot(loot);
-            level.addContent(loot);
-            response += enemyType + " dies.";
-        }
-
-        if (player.getHitPoint() <= 0) {
-            Sound.playDie(GameObjectType.MAIN_CHARACTER);
-            Sound.playGameOver();
-        }
-        return response;
+        return enemy;
     }
 }

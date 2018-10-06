@@ -21,7 +21,7 @@ public abstract class BaseController extends HttpServlet {
         HttpSession session = req.getSession(true);
 
         Game game = (Game) session.getAttribute("game");
-        Player player = game.getPlayer(session);
+            Player player = game.getPlayer(session);
         Level level = game.getLevel(session);
 
         String response = doAction(req, game, player, level);

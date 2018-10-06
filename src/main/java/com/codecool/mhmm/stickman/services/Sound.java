@@ -30,7 +30,7 @@ public class Sound {
         deathSounds.put(GameObjectType.ORC, Sound::playOrcDeath);
     }
 
-    public static void playAttack(GameObjectType type) {
+    static void playAttack(GameObjectType type) {
         attackSounds.get(type).run();
     }
 
@@ -99,7 +99,7 @@ public class Sound {
         playSound("src/main/webapp/static/sounds/dragon_die.wav");
     }
 
-    public static void playMiss() {
+    static void playMiss() {
         playSound("src/main/webapp/static/sounds/missed.wav");
     }
 
@@ -109,5 +109,9 @@ public class Sound {
 
     public static void playLoot() {
         playSound("src/main/webapp/static/sounds/loot.wav");
+    }
+
+    public static void playWon() {
+        playSound("src/main/webapp/static/sounds/game_won.wav");
     }
 }

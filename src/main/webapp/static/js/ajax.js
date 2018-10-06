@@ -78,3 +78,6 @@ function requestNextLevel() {
     },"nextLevel", "next")
 }
 
+function won() {
+    ajax_get('/won', function () {}, 'won', 'won')
+}
