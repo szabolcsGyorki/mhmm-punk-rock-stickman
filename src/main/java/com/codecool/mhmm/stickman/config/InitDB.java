@@ -41,6 +41,7 @@ public class InitDB {
         initEnemies();
         initLoots();
         initLevels();
+        additionalInits();
     }
 
     private void initArmors() {
@@ -99,5 +100,9 @@ public class InitDB {
     private void initLevels() {
         levelDAO.saveNew(levelGenerator.levelOne(itemsDAO, enemyDAO));
         levelDAO.saveNew(levelGenerator.levelTwo(itemsDAO, enemyDAO));
+    }
+
+    private void additionalInits() {
+        enemyDAO.saveNew(new Orc());
     }
 }

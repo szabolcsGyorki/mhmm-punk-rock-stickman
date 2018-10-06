@@ -24,6 +24,7 @@ function requestMove(action) {
         mapObjects = data[0];
         mainCharacter = data[1][0];
         mainCharacterHealth = mainCharacter.Health;
+        levelNumber = data[2].level;
         updateCharacterStats(data[2].response);
     }, "map", action)
 }

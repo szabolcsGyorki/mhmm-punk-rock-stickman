@@ -18,7 +18,7 @@ document.onkeydown = function(e) {
         }
     }
 
-    if (e.keyCode !== undefined && !defeat()) {
+    if (e.keyCode !== undefined && !defeat() && !wonTheGame()) {
         let fieldContent;
         switch (e.keyCode) {
             case 37: //left

@@ -126,7 +126,8 @@ public class Game {
     }
 
     public void nextLevel() {
-        level = (Level) levelDao.getAll().get(1);
+        int next = level.getNumber() + 1;
+        level = (Level) levelDao.getAll().get(next);
         player.place(1, 1);
         level.addContent(player);
     }

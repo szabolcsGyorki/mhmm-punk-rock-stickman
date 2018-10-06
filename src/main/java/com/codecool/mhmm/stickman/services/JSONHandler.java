@@ -36,6 +36,7 @@ public class JSONHandler {
 
         JSONObject responseJson = new JSONObject();
         responseJson.put("response", response);
+        responseJson.put("level", level.getNumber());
         jsonArray.add(responseJson);
 
         return jsonArray.toJSONString();

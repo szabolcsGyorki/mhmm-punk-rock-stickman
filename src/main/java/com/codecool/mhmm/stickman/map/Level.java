@@ -23,6 +23,7 @@ public class Level {
     private int HEIGHT;
     private GameObjectType wallImage;
     private GameObjectType floorImage;
+    private int number;
 
     public Level(int width, int height, GameObjectType wall, GameObjectType floor) {
         this.WIDTH = width;
@@ -60,5 +61,13 @@ public class Level {
 
     public GameObjectType getFloorImage() {
         return floorImage;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 }

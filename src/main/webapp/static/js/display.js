@@ -1,6 +1,7 @@
 let mapObjects = [];
 let mainCharacter;
 let mainCharacterHealth;
+let levelNumber;
 
 window.addEventListener('load', function() {
     ajax_get("/send", function (data) {
@@ -49,6 +50,7 @@ function drawBoard() {
         }
     }
     defeat();
+    wonTheGame();
 }
 
 function getPlayerPosition() {
@@ -82,4 +84,12 @@ function mapCleared() {
         }
     }
     return true;
+}
+
+function wonTheGame() {
+    if (mapCleared() && levelNumber === 1) {
+        image(won_image, 0, 0, 490, 490);
+        return true;
+    }
+    return false;
 }
