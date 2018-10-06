@@ -5,7 +5,6 @@ import com.codecool.mhmm.stickman.game_objects.GameObject;
 import com.codecool.mhmm.stickman.game_objects.GameObjectType;
 import com.codecool.mhmm.stickman.game_objects.characters.Player;
 import com.codecool.mhmm.stickman.game_objects.characters.enemy.Enemy;
-import com.codecool.mhmm.stickman.game_objects.items.Loot;
 import com.codecool.mhmm.stickman.map.Level;
 import com.codecool.mhmm.stickman.services.*;
 
@@ -28,7 +27,6 @@ public class FightController extends BaseController {
 
         String response = "";
         assert enemy != null;
-        GameObjectType enemyType = enemy.getType();
 
         response += fightHandler.playerHitsEnemy(player, enemy, healthHandler);
 
@@ -44,8 +42,6 @@ public class FightController extends BaseController {
         }
         return response;
     }
-
-
 
     private Enemy getEnemy(HttpServletRequest req, Player player, MoveHandler moveHandler, List<GameObject> map) {
         Enemy enemy = null;

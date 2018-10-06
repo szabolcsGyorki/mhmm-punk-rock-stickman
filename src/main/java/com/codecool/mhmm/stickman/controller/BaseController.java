@@ -3,7 +3,7 @@ package com.codecool.mhmm.stickman.controller;
 import com.codecool.mhmm.stickman.Game;
 import com.codecool.mhmm.stickman.game_objects.characters.Player;
 import com.codecool.mhmm.stickman.map.Level;
-import com.codecool.mhmm.stickman.services.*;
+import com.codecool.mhmm.stickman.services.JSONHandler;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +21,7 @@ public abstract class BaseController extends HttpServlet {
         HttpSession session = req.getSession(true);
 
         Game game = (Game) session.getAttribute("game");
-            Player player = game.getPlayer(session);
+        Player player = game.getPlayer(session);
         Level level = game.getLevel(session);
 
         String response = doAction(req, game, player, level);
