@@ -1,4 +1,4 @@
-let dragon_image, loot_image, main_character_image, orc_image, skeleton_image, slime_image, wall_image, defeat_image;
+let dragon_image, loot_image, main_character_image, orc_image, skeleton_image, slime_image, wall_image, defeat_image, won_image;
 let dir = 'static/img/';
 let ext = '.png';
 
@@ -10,5 +10,6 @@ function loadImages() {
     skeleton_image = loadImage(dir + 'image_skeleton' + ext);
     slime_image = loadImage(dir + 'image_slime' + ext);
     wall_image = loadImage(dir + 'image_wall' + ext);
-    defeat_image = loadImage(dir + 'image_defeat' + ext)
+    defeat_image = loadImage(dir + 'image_defeat' + ext);
+    won_image = loadImage(dir + 'image_won' + ext)
 }

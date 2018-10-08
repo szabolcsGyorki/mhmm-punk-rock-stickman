@@ -14,8 +14,10 @@ function updateInventory() {
         let item_info;
         if (item.type === "weapon") {
             item_info = "+ " + item.minDamage + " - " + item.maxDamage + " damage";
-        } else {
+        } else if (item.type === "armor") {
             item_info = "+ " + item.healthIncrease + " HP";
+        } else if (item.type === "healthpotion") {
+            item_info = "+ " + item.healing + " HP";
         }
 
         //inventory item list
@@ -38,7 +40,12 @@ function updateInventory() {
     let items = character_inventory_list.getElementsByClassName("list-group-item list-group-item-action");
     for (let item of items) {
         if (item.classList.contains("active")) {
-            return item.innerHTML;
+            let itemName = item.innerHTML;
+            for (let inventoryItem of mainCharacter.inventory) {
+                if (inventoryItem.name === itemName) {
+                    return inventoryItem;
+                }
+            }
         }
     }
 }

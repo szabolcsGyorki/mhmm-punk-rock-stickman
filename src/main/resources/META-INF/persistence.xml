@@ -6,7 +6,7 @@
 
     <persistence-unit name="stickman" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>com.codecool.mhmm.stickman.Init</class>
+        <class>com.codecool.mhmm.stickman.config.InitDB</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL94Dialect"/>
             <property name="hibernate.hbm2dll.auto" value="create-drop"/>
