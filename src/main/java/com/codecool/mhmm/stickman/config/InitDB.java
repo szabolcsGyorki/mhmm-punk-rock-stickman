@@ -106,6 +106,8 @@ public class InitDB {
 
     private void additionalInits() {
         enemyDAO.saveNew(new Orc());
+        itemsDAO.saveNew(new HealthPotion("Super Healing potion", 30, 40));
+        itemsDAO.saveNew(new HealthPotion("Light Healing potion", 10, 10));
     }
 
     private void initPotions() {

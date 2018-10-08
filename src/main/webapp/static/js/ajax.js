@@ -21,61 +21,52 @@ function ajax_get(url, callback, action, value) {
 
 function requestMove(action) {
     ajax_get('/move', function (data) {
-        mapObjects = data[0];
-        mainCharacter = data[1][0];
-        mainCharacterHealth = mainCharacter.Health;
-        levelNumber = data[2].level;
-        updateCharacterStats(data[2].response);
+        updateGame(data);
     }, "map", action)
 }
 
 function requestEquipWeapon(item_name) {
     ajax_get('/equip', function (data) {
-        mapObjects = data[0];
-        mainCharacter = data[1][0];
-        mainCharacterHealth = mainCharacter.Health;
-        updateCharacterStats(data[2].response);
-        updateInventory();
+        updateGame(data);
     },"equipWeapon", item_name)
 }
 
 function requestEquipArmor(item_name) {
     ajax_get('/equip', function (data) {
-        mapObjects = data[0];
-        mainCharacter = data[1][0];
-        mainCharacterHealth = mainCharacter.Health;
-        updateCharacterStats(data[2].response);
-        updateInventory();
+        updateGame(data);
     },"equipArmor", item_name)
 }
 
 function requestLoot(direction) {
     ajax_get('/loot', function (data) {
-        mapObjects = data[0];
-        mainCharacter = data[1][0];
-        mainCharacterHealth = mainCharacter.Health;
-        updateCharacterStats(data[2].response);
-        updateInventory();
+        updateGame(data);
     },"pickUpLoot", direction)
 }
 
 function requestFight(direction) {
     ajax_get('/fight', function (data) {
-        mapObjects = data[0];
-        mainCharacter = data[1][0];
-        mainCharacterHealth = mainCharacter.Health;
-        updateCharacterStats(data[2].response);
+        updateGame(data);
     },"fight", direction)
 }
 
 function requestNextLevel() {
     ajax_get('/next-level', function (data) {
-        mapObjects = data[0];
-        mainCharacter = data[1][0];
-        mainCharacterHealth = mainCharacter.Health;
-        updateCharacterStats(data[2].response);
-        updateInventory();
+        updateGame(data);
     },"nextLevel", "next")
+}
+
+function requestPotion(potion) {
+    ajax_get('/potion', function (data) {
+        updateGame(data);
+    },"potion", potion)
+}
+
+function updateGame(data) {
+    mapObjects = data[0];
+    mainCharacter = data[1][0];
+    mainCharacterHealth = mainCharacter.Health;
+    updateCharacterStats(data[2].response);
+    updateInventory();
 }
 
 function won() {

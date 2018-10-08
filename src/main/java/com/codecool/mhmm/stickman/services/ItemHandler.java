@@ -6,6 +6,7 @@ import com.codecool.mhmm.stickman.game_objects.items.equipable.Armor;
 import com.codecool.mhmm.stickman.game_objects.items.Item;
 import com.codecool.mhmm.stickman.game_objects.items.Loot;
 import com.codecool.mhmm.stickman.game_objects.items.equipable.Weapon;
+import com.codecool.mhmm.stickman.game_objects.items.potion.HealthPotion;
 
 import java.util.Random;
 import java.util.stream.Stream;
@@ -54,6 +55,12 @@ public class ItemHandler {
 
     public void pickUpLoot(Player player, Loot loot) {
         loot.getItems().forEach(player::addItemToInventory);
+    }
+
+    public void drinkPotion(Player player, String potion) {
+        HealthPotion healthPotion = (HealthPotion) itemsDAO.getItemByName(potion);
+        player.setHitPoint(player.getHitPoint() + healthPotion.getAmmount());
+        player.removeItemFromInventory(healthPotion);
     }
 }
 

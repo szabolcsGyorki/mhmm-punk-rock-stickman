@@ -14,8 +14,10 @@ function updateInventory() {
         let item_info;
         if (item.type === "weapon") {
             item_info = "+ " + item.minDamage + " - " + item.maxDamage + " damage";
-        } else {
+        } else if (item.type === "armor") {
             item_info = "+ " + item.healthIncrease + " HP";
+        } else if (item.type === "healthpotion") {
+            item_info = "+ " + item.healing + " HP";
         }
 
         //inventory item list

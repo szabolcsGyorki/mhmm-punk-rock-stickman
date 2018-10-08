@@ -7,5 +7,7 @@ equip_button.addEventListener("click", function () {
         requestEquipWeapon(item.name);
     } else if (item.type === "armor") {
         requestEquipArmor(item.name);
+    } else if (item.type === "healthpotion") {
+        requestPotion(item.name);
     }
 });
