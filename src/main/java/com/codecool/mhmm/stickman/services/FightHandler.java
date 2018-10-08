@@ -20,7 +20,7 @@ public class FightHandler {
         this.random = random;
     }
 
-    private int getPlayerDamage(Player player) {
+    int getPlayerDamage(Player player) {
         int baseDamage = player.getStrength();
         Weapon weapon = player.getWeapon();
         if (weapon != null) {
@@ -35,11 +35,11 @@ public class FightHandler {
         return baseDamage;
     }
 
-    private boolean characterHits(Character character) {
+    boolean characterHits(Character character) {
         return random.nextInt(100) < character.getHitChance();
     }
 
-    private boolean characterDodges(Character character) {
+    boolean characterDodges(Character character) {
         return random.nextInt(100) < character.getDodgeChance();
     }
 

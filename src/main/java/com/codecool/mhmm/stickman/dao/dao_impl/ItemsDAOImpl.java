@@ -61,8 +61,10 @@ public class ItemsDAOImpl extends BaseDaoImpl implements ItemsDAO {
         List<Item> items = new ArrayList<>();
         List<Item> armors = getAllItemsByType(GameObjectType.ARMOR);
         List<Item> weapons = getAllItemsByType(GameObjectType.WEAPON);
+        List<Item> potions = getAllItemsByType(GameObjectType.HEALTHPOTION);
         items.addAll(armors);
         items.addAll(weapons);
+        items.addAll(potions);
 
         int id = random.nextInt(items.size());
         return items.get(id);

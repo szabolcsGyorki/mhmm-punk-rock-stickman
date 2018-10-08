@@ -16,5 +16,5 @@ function updateCharacterStats(response) {
         character_stats_list.appendChild(new_list_item);
     }
 
-    response_field.innerHTML = response;
+    response_field.innerHTML += response;
 }

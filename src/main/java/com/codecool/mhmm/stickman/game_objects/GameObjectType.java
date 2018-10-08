@@ -10,5 +10,6 @@ public enum GameObjectType {
     FLOOR,
     ARMOR,
     WEAPON,
-    MAIN_CHARACTER
+    MAIN_CHARACTER,
+    HEALTHPOTION
 }

@@ -1,6 +1,8 @@
 package com.codecool.mhmm.stickman.game_objects.items;
 
 import com.codecool.mhmm.stickman.dao.dao_impl.ItemsDAOImpl;
+import com.codecool.mhmm.stickman.game_objects.items.equipable.Armor;
+import com.codecool.mhmm.stickman.game_objects.items.equipable.Weapon;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -3,7 +3,7 @@ package com.codecool.mhmm.stickman.services;
 import com.codecool.mhmm.stickman.game_objects.characters.Player;
 import com.codecool.mhmm.stickman.game_objects.characters.enemy.Enemy;
 import com.codecool.mhmm.stickman.game_objects.characters.enemy.Orc;
-import com.codecool.mhmm.stickman.game_objects.items.Armor;
+import com.codecool.mhmm.stickman.game_objects.items.equipable.Armor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

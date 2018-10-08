@@ -5,6 +5,7 @@ import com.codecool.mhmm.stickman.game_objects.characters.Player;
 import com.codecool.mhmm.stickman.game_objects.items.equipable.Armor;
 import com.codecool.mhmm.stickman.game_objects.items.Item;
 import com.codecool.mhmm.stickman.game_objects.items.equipable.Weapon;
+import com.codecool.mhmm.stickman.game_objects.items.potion.HealthPotion;
 import com.codecool.mhmm.stickman.map.Level;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -75,9 +76,12 @@ public class JSONHandler {
                 jsonItem.put("maxDamage", ((Weapon) item).getMaxDamage());
                 jsonItem.put("minDamage", ((Weapon) item).getMinDamage());
                 jsonItem.put("type", "weapon");
-            } else {
+            } else if (item instanceof Armor){
                 jsonItem.put("healthIncrease", ((Armor) item).getHealthIncrease());
                 jsonItem.put("type", "armor");
+            } else {
+                jsonItem.put("healing", ((HealthPotion) item).getAmmount());
+                jsonItem.put("type", "healthpotion");
             }
             characterInventory.add(jsonItem);
         }

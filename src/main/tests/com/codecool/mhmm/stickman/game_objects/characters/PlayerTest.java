@@ -1,7 +1,7 @@
 package com.codecool.mhmm.stickman.game_objects.characters;
 
-import com.codecool.mhmm.stickman.game_objects.items.Armor;
-import com.codecool.mhmm.stickman.game_objects.items.Weapon;
+import com.codecool.mhmm.stickman.game_objects.items.equipable.Armor;
+import com.codecool.mhmm.stickman.game_objects.items.equipable.Weapon;
 import com.codecool.mhmm.stickman.services.FightHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;

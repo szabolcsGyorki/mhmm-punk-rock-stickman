@@ -1,12 +1,14 @@
 package com.codecool.mhmm.stickman.game_objects.items;
 
 import com.codecool.mhmm.stickman.game_objects.characters.Player;
+import com.codecool.mhmm.stickman.game_objects.items.equipable.Armor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ArmorTest {
+
     private Armor armor;
 
     @BeforeEach

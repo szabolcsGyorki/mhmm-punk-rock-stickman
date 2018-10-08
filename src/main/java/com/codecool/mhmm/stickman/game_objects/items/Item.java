@@ -26,7 +26,7 @@ public abstract class Item extends GameObject {
     protected Item() {
     }
 
-    void assignToCharacter(Player player) {
+    protected void assignToCharacter(Player player) {
         player.addItemToInventory(this);
         logger.info("'{}' added to inventory", this.name);
     }

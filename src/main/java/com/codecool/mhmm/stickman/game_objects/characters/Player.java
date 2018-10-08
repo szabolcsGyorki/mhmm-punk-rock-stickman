@@ -29,9 +29,9 @@ public class Player extends Character {
     private List<Item> items = new ArrayList<>();
 
     public Player(int X, int Y, String name) {
-        super(X, Y, 300);
+        super(X, Y, 30);
         this.type = GameObjectType.MAIN_CHARACTER;
-        strength = 30;
+        strength = 3;
         agility = 3;
         intelligence = 3;
         this.name = name;

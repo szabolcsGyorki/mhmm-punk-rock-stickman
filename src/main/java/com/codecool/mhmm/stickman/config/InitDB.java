@@ -10,6 +10,7 @@ import com.codecool.mhmm.stickman.game_objects.characters.enemy.Slime;
 import com.codecool.mhmm.stickman.game_objects.items.equipable.Armor;
 import com.codecool.mhmm.stickman.game_objects.items.Loot;
 import com.codecool.mhmm.stickman.game_objects.items.equipable.Weapon;
+import com.codecool.mhmm.stickman.game_objects.items.potion.HealthPotion;
 import com.codecool.mhmm.stickman.services.HealthHandler;
 import com.codecool.mhmm.stickman.services.ItemHandler;
 import com.codecool.mhmm.stickman.services.LevelGenerator;
@@ -36,6 +37,7 @@ public class InitDB {
     }
 
     public void init() {
+        initPotions();
         initArmors();
         initWeapons();
         initEnemies();
@@ -104,5 +106,9 @@ public class InitDB {
 
     private void additionalInits() {
         enemyDAO.saveNew(new Orc());
+    }
+
+    private void initPotions() {
+        itemsDAO.saveNew(new HealthPotion("Healing potion", 20, 20));
     }
 }

@@ -1,9 +1,9 @@
 package com.codecool.mhmm.stickman.dao.dao_impl;
 
 import com.codecool.mhmm.stickman.game_objects.GameObjectType;
-import com.codecool.mhmm.stickman.game_objects.items.Armor;
+import com.codecool.mhmm.stickman.game_objects.items.equipable.Armor;
 import com.codecool.mhmm.stickman.game_objects.items.Item;
-import com.codecool.mhmm.stickman.game_objects.items.Weapon;
+import com.codecool.mhmm.stickman.game_objects.items.equipable.Weapon;
 import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
 

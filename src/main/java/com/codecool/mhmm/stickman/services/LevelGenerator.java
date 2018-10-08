@@ -47,12 +47,12 @@ public class LevelGenerator {
         levelOne.addContent(new Wall(7, 5, wallImage));
         levelOne.addContent(new Wall(7, 6, wallImage));
 
-        levelOne.addContent((GameObject) enemyDAO.findById(26L));
+        levelOne.addContent((GameObject) enemyDAO.findById(30L));
         levelOne.addContent((GameObject) enemyDAO.findById(27L));
         levelOne.addContent((GameObject) enemyDAO.findById(28L));
         levelOne.addContent((GameObject) enemyDAO.findById(29L));
 
-        levelOne.addContent((Loot) itemsDAO.findById(30));
+        levelOne.addContent((Loot) itemsDAO.findById(32));
         levelOne.addContent((Loot) itemsDAO.findById(31));
 
         return levelOne;
@@ -73,12 +73,12 @@ public class LevelGenerator {
         levelTwo.addContent(new Wall(7, 5, wallImage));
         levelTwo.addContent(new Wall(7, 6, wallImage));
 
-        levelTwo.addContent((GameObject) enemyDAO.findById(26L));
+        levelTwo.addContent((GameObject) enemyDAO.findById(30L));
         levelTwo.addContent((GameObject) enemyDAO.findById(27L));
         levelTwo.addContent((GameObject) enemyDAO.findById(28L));
         levelTwo.addContent((GameObject) enemyDAO.findById(29L));
 
-        levelTwo.addContent((Loot) itemsDAO.findById(30));
+        levelTwo.addContent((Loot) itemsDAO.findById(31));
 
         return levelTwo;
     }
